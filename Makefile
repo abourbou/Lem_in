@@ -57,6 +57,7 @@ $(PATH_OBJ)/%.o		: 	%.c    $(INC)
 	@ $(CC) $(FLAGS) $(HEADER) -c  -o $@ $<
 
 clean			:
+				@ rm -rf ${obj}
 				@ rm -rf obj
 
 fclean	:	clean
@@ -70,5 +71,14 @@ leaks	:
 
 run		:
 	@ make && ./$(NAME)
+
+help	:
+	@ printf "$(RESET)Welcom to Lem_in a project of algorithmic. \n$(RESET)"
+	@ printf "$(RESET)\nCommand of the Makefile : \n\n$(RESET)"
+	@ printf "$(RESET) - clean :        clean objs \n$(RESET)"
+	@ printf "$(RESET) - fclean :       clean exec and objs\n$(RESET)"
+	@ printf "$(RESET) - re :           clean and recompile\n$(RESET)"
+	@ printf "$(RESET) - leaks :        recompile run and check leaks atExit\n$(RESET)"
+	@ printf "$(RESET) - run :          recompile and run\n\n$(RESET)"
 
 .PHONY: all compil clean fclean re run
