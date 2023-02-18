@@ -16,9 +16,7 @@ t_room	*lstnew_room(char *name, int cord_x, int cord_y)
 {
 	t_room	*lst;
 
-	puts("0");
 	lst = wrmalloc(sizeof(t_room));
-	puts("1");
 	if (!lst)
 		return (NULL);
 	lst->name = name;
@@ -26,7 +24,6 @@ t_room	*lstnew_room(char *name, int cord_x, int cord_y)
 	lst->cord_y = cord_y;
 	lst->next = NULL;
 	lst->prev = NULL;
-	puts("2");
 	return (lst);
 }
 

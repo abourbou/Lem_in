@@ -1,6 +1,6 @@
 
 # Compilation
-NAME		=	ft_ping
+NAME		=	lem_in
 CC			=	clang
 FLAGS		=	-Wall -Werror -Wextra
 HEADER		=	-I$(PATH_INC)
@@ -57,13 +57,16 @@ $(PATH_OBJ)/%.o		: 	%.c    $(INC)
 	@ $(CC) $(FLAGS) $(HEADER) -c  -o $@ $<
 
 clean			:
-				@ rm -rf $(OBJ)
+				@ rm -rf obj
 
 fclean	:	clean
 	@ rm -rf $(NAME)
 	@ printf "$(CYAN)'$(NAME)'$(RESET) and all .o has been $(RED)deleted. 🗑️\n$(RESET)"
 
 re		:	fclean all
+
+leaks	:
+	@ make && leaks --atExit -- ./${NAME}
 
 run		:
 	@ make && ./$(NAME)

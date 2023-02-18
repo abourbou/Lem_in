@@ -18,7 +18,6 @@ int	main(int ac, char **av)
 
 	(void)ac;
 	(void)av;
-	printf("HEllO 0\n");
 	init_data(&data);
 	if(pars_args(&data))
 		return (EXIT_FAILURE);
