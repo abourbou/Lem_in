@@ -81,4 +81,4 @@ help	:
 	@ printf "$(RESET) - leaks :        recompile run and check leaks atExit\n$(RESET)"
 	@ printf "$(RESET) - run :          recompile and run\n\n$(RESET)"
 
-.PHONY: all compil clean fclean re run
+.PHONY: all compil clean fclean re leaks run help
