@@ -36,6 +36,7 @@ struct s_random
 typedef struct s_data
 {
 	int		numb_ants;
+	t_room	*list_room;
 	t_room	*start_room;
 	t_room	*end_room;
 }t_data;
@@ -55,13 +56,16 @@ typedef struct	s_list
 */
 short	ft_isnumber(int c);
 bool	pars_args(t_data *data);
+bool	process_line(t_data *data, char **map, int *index);
 int		ft_strlen(char *str);
 int		print_error(char *strError);
-int		atoi_numb(char *str, int *i)
+int		atoi_numb(char *str, int *i);
 char	**ft_split(char const *s, char c);
 int		ft_strcmp(char *s1, char *s2);
 int		check_space_end(char *str, size_t *i);
 void	skip_space_i(char *str, int *i);
+int		ft_substrlen(char **str);
+char	*ft_strjoin_sp(char *s1, char *s2);
 
 /*
 ** Function for get_next_line package
