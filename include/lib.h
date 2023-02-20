@@ -1,10 +1,11 @@
 #ifndef LIB_H
 # define LIB_H
 
+# include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include <unistd.h>
 # include <stdbool.h>
+# include <fcntl.h>
 
 # define BUFFER_SIZE 1
 
@@ -12,7 +13,7 @@
 ******************** Struct ********************
 */
 
-typedef struct s_room t_room;
+typedef struct s_room t_room; // vertex - room || edge pour les lien
 typedef struct s_random t_random;
 
 struct s_room
@@ -26,8 +27,8 @@ struct s_room
 
 struct s_random
 {
-	char	*name;
-	int		direction;
+	char		*name;
+	int			direction;
 	t_random	*next;
 	t_random	*prev;
 };
@@ -52,8 +53,15 @@ typedef struct	s_list
 /*
 ** Function for parsing
 */
+short	ft_isnumber(int c);
 bool	pars_args(t_data *data);
 int		ft_strlen(char *str);
+int		print_error(char *strError);
+int		atoi_numb(char *str, int *i)
+char	**ft_split(char const *s, char c);
+int		ft_strcmp(char *s1, char *s2);
+int		check_space_end(char *str, size_t *i);
+void	skip_space_i(char *str, int *i);
 
 /*
 ** Function for get_next_line package

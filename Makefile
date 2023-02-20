@@ -35,6 +35,8 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/get_next_line_utils.c \
 				utils/function_lst_random.c \
 				utils/function_lst_room.c \
+				utils/atoi_numb.c \
+				utils/ft_split.c \
 				parsing.c)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))

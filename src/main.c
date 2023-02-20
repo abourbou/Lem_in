@@ -12,6 +12,18 @@ void free_and_exit()
 	wrdestroy();
 }
 
+// int	check_arg(int ac, char **av)
+// {
+// 	printf("test ac = %d\n", ac);
+// 	if (ac < 2 || ac > 3)
+// 		return (print_error("Error : numbers of argument not valide\n"));
+// 	if (ac == 3)
+// 		print_error("fichier\n");
+// 	if (ac == 2)
+// 		print_error("entrer standart\n");
+// 	return 0;
+// }
+
 int	main(int ac, char **av)
 {
 	t_data	data;
@@ -19,6 +31,8 @@ int	main(int ac, char **av)
 	(void)ac;
 	(void)av;
 	init_data(&data);
+	// if (check_arg(ac, av))
+	// 	return (EXIT_FAILURE);
 	if(pars_args(&data))
 		return (EXIT_FAILURE);
 

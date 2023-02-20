@@ -1,14 +1,19 @@
 #include "../../include/lib.h"
 
-int ft_strlen(char *str){
+int	ft_strlen(char *str)
+{
 	int i = 0;
+
+	if (!str)
+		return 0;
 	while (str[i])
 		i++;
 	return (i);
 }
 
-void print_error(char *strError){
-	write(2, strError, ft_strlen(strError));
+int	print_error(char *strError)
+{
+	return(write(2, strError, ft_strlen(strError)));
 }
 
 static void	ft_bzero(void *s, size_t n)
