@@ -12,28 +12,30 @@
 
 #include "../../include/lib.h"
 
-t_random	*lstnew_random(char *name)
+t_vertex	*lstnew_vertex(char *name, int cord_x, int cord_y)
 {
-	t_random	*lst;
+	t_vertex	*lst;
 
-	lst = wrmalloc(sizeof(t_random));
+	lst = wrmalloc(sizeof(t_vertex));
 	if (!lst)
 		return (NULL);
-	lst->name = name;
+	lst->name = ft_strdup(name);
+	lst->cord_x = cord_x;
+	lst->cord_y = cord_y;
 	lst->next = NULL;
 	lst->prev = NULL;
 	return (lst);
 }
 
-void	lstadd_front_random(t_random **alst, t_random *new)
+void	lstadd_front_vertex(t_vertex **alst, t_vertex *new)
 {
 	new->next = *alst;
 	*alst = new;
 }
 
-void	lstadd_back_random(t_random **alst, t_random *new)
+void	lstadd_back_vertex(t_vertex **alst, t_vertex *new)
 {
-	t_random	*p;
+	t_vertex	*p;
 
 	p = *alst;
 	if (!alst)
@@ -48,9 +50,9 @@ void	lstadd_back_random(t_random **alst, t_random *new)
 	}
 }
 
-t_random	*lstlast_random(t_random *lstt)
+t_vertex	*lstlast_vertex(t_vertex *lstt)
 {
-	t_random	*lst;
+	t_vertex	*lst;
 
 	if (!lstt)
 		return (lstt);

@@ -8,7 +8,7 @@ void	skip_space_i(char *str, int *i)
 	}
 }
 
-int	check_space_end(char *str, size_t *i)
+int	check_space_end(char *str, int *i)
 {
 	while (str[*i])
 	{
@@ -62,5 +62,6 @@ char	*ft_strjoin_sp(char *s1, char *s2)
 			str[x++] = s2[i];
 	str[x] = '\0';
 	free(s1);
+	free(s2);
 	return (str);
 }

@@ -12,30 +12,30 @@
 
 #include "../../include/lib.h"
 
-t_room	*lstnew_room(char *name, int cord_x, int cord_y)
+t_edge	*lstnew_edge(char *vertex1, char *vertex2 , int direction)
 {
-	t_room	*lst;
+	t_edge	*lst;
 
-	lst = wrmalloc(sizeof(t_room));
+	lst = wrmalloc(sizeof(t_edge));
 	if (!lst)
 		return (NULL);
-	lst->name = name;
-	lst->cord_x = cord_x;
-	lst->cord_y = cord_y;
+	lst->vertex1 = ft_strdup(vertex1);
+	lst->vertex2 = ft_strdup(vertex2);
+	lst->direction = direction;
 	lst->next = NULL;
 	lst->prev = NULL;
 	return (lst);
 }
 
-void	lstadd_front_room(t_room **alst, t_room *new)
+void	lstadd_front_edge(t_edge **alst, t_edge *new)
 {
 	new->next = *alst;
 	*alst = new;
 }
 
-void	lstadd_back_room(t_room **alst, t_room *new)
+void	lstadd_back_edge(t_edge **alst, t_edge *new)
 {
-	t_room	*p;
+	t_edge	*p;
 
 	p = *alst;
 	if (!alst)
@@ -50,9 +50,9 @@ void	lstadd_back_room(t_room **alst, t_room *new)
 	}
 }
 
-t_room	*lstlast_room(t_room *lstt)
+t_edge	*lstlast_edge(t_edge *lstt)
 {
-	t_room	*lst;
+	t_edge	*lst;
 
 	if (!lstt)
 		return (lstt);

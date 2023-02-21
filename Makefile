@@ -32,11 +32,12 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/utils.c \
 				utils/utils2.c \
 				utils/utils3.c \
+				utils/utils4.c \
+				utils/utils5.c \
 				utils/get_next_line.c \
 				utils/get_next_line_utils.c \
-				utils/function_lst_random.c \
-				utils/function_lst_room.c \
-				utils/ft_atoi.c \
+				utils/function_lst_edge.c \
+				utils/function_lst_vertex.c \
 				utils/ft_split.c \
 				parsing/process_lines.c \
 				parsing/add_data.c \
@@ -72,10 +73,10 @@ fclean	:	clean
 re		:	fclean all
 
 leaks	:
-	@ make && leaks --atExit -- ./${NAME}
+	@ make && leaks --atExit -- ./${NAME} < test.txt
 
 run		:
-	@ make && ./$(NAME)
+	@ make && ./$(NAME) < test.txt
 
 help	:
 	@ printf "$(RESET)Welcom to Lem_in a project of algorithmic. \n$(RESET)"

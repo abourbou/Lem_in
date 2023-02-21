@@ -12,7 +12,7 @@
 
 #include "../../include/lib.h"
 
-char	**free_all(char **dest, int i)
+static char	**free_tab_split(char **dest, int i)
 {
 	while (i > 0)
 	{
@@ -23,7 +23,7 @@ char	**free_all(char **dest, int i)
 	return (NULL);
 }
 
-size_t	count_split(char const *s, char c)
+static size_t	count_split(char const *s, char c)
 {
 	size_t	i;
 	size_t	count;
@@ -42,7 +42,7 @@ size_t	count_split(char const *s, char c)
 	return (count);
 }
 
-char	**malloc_dest(char **dest, char const *s, char c, size_t count)
+static char	**malloc_dest(char **dest, char const *s, char c, size_t count)
 {
 	size_t	i;
 	size_t	t_malloc;
@@ -50,7 +50,7 @@ char	**malloc_dest(char **dest, char const *s, char c, size_t count)
 
 	i = 0;
 	re_count = 0;
-	dest = (char **)ft_calloc((count + 1), sizeof(char *));
+	dest = (char **)wrmalloc_parsing((count + 1) * sizeof(char *));
 	if (!dest)
 		return (0);
 	while (s[i] && re_count < count)
@@ -63,15 +63,15 @@ char	**malloc_dest(char **dest, char const *s, char c, size_t count)
 			t_malloc++;
 			i++;
 		}
-		dest[re_count] = ft_calloc((t_malloc + 1), sizeof(char));
+		dest[re_count] = wrmalloc_parsing((t_malloc + 1) * sizeof(char));
 		if (!dest)
-			return (free_all(dest, re_count));
+			return (free_tab_split(dest, re_count));
 		re_count++;
 	}
 	return (dest);
 }
 
-char	**split_split(char const *s, char c, char **dest, size_t count)
+static char	**split_split(char const *s, char c, char **dest, size_t count)
 {
 	size_t	i;
 	size_t	x;
