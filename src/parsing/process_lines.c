@@ -50,7 +50,7 @@ bool	process_line(t_data *data, char **map, int *index)
 		if (process_command(data, map, index))
 			return (EXIT_FAILURE);
 	}
-	else if (map[*index][0] == '#' && map[*index][1] != '#')
+	else if (map[*index][0] == '#')
 		return (EXIT_SUCCESS);
 	else if (process_basic_line(data, map, index))
 		return (EXIT_FAILURE);

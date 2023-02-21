@@ -29,11 +29,11 @@ PATH_OBJ	=	obj
 
 # Source
 SRC			=	$(addprefix $(PATH_SRC)/, main.c \
-				utils/utils.c \
-				utils/utils2.c \
+				utils/utils_memory.c \
+				utils/wrmalloc.c \
 				utils/utils3.c \
 				utils/utils4.c \
-				utils/utils5.c \
+				utils/wrmalloc_parsing.c \
 				utils/get_next_line.c \
 				utils/get_next_line_utils.c \
 				utils/function_lst_edge.c \

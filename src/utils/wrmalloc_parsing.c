@@ -43,6 +43,7 @@ void	*wrmalloc_parsing(unsigned long size)
 	return (buffer);
 }
 
+//? Not used
 int	wrfree_parsing(void *ptr)
 {
 	t_list	*prev;

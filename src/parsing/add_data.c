@@ -40,6 +40,7 @@ int	process_basic_line(t_data *data, char **map, int *index)
 
 	arg = ft_split(map[*index], ' ');
 	room_or_link = ft_substrlen(arg);
+	//! Check first room then link, not at the same time!
 	if (room_or_link == 3)
 	{
 		if (add_vertex(data, map[*index]))

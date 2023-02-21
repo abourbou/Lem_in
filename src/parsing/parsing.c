@@ -33,12 +33,14 @@ static int	parse_stdin(t_data *data, char **map)
 	int	i;
 
 	i = 0;
+	//! Doesn't work if first line is a comment
 	if (first_line(data, map[i]))
 		return (EXIT_FAILURE);
 	printf("number of ant = %d\n", data->numb_ants);
 	i++;
 	while (map[i])
 	{
+		//! You can't process room and link at the same time
 		if (process_line(data, map, &i))
 			return (EXIT_FAILURE);
 		if (map[i])
