@@ -56,10 +56,17 @@ typedef struct	s_list
 /*
 ** Function for parsing
 */
+int	add_vertex(t_data *data, char *line);
+int	add_edge(t_data *data, char *line);
+
 short	ft_isnumber(int c);
 bool	pars_args(t_data *data);
 bool	process_line(t_data *data, char **map, int *index);
 int		process_basic_line(t_data *data, char **map, int *index);
+bool	is_comment(char *line);
+bool	is_edge(char *line);
+bool	is_vertex(char *line);
+bool	is_cmd(char *line);
 int		ft_strlen(char *str);
 int		print_error(char *strError);
 int		atoi_sp(char *str, int *i);
@@ -107,6 +114,7 @@ void	*wrmalloc_parsing(unsigned long size);
 int		wrfree(void *ptr);
 void	wrdestroy(void);
 void	wrdestroy_parsing(void);
+int		wrfree_parsing(void *ptr);
 void	ft_lstadd_back(t_list **alst, t_list *new);
 
 #endif

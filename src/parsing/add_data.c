@@ -1,8 +1,8 @@
 #include "../../include/lib.h"
 
-static int	add_vertex(t_data *data, char *line)
+int	add_vertex(t_data *data, char *line)
 {
-	char	**arg;
+	char		**arg;
 	t_vertex	*new_vertex;
 
 	arg = ft_split(line, ' ');
@@ -17,7 +17,7 @@ static int	add_vertex(t_data *data, char *line)
 	return (EXIT_SUCCESS);
 }
 
-static int	add_link(t_data *data, char *line)
+int	add_edge(t_data *data, char *line)
 {
 	char	**arg;
 	t_edge	*new_edge;
@@ -33,25 +33,54 @@ static int	add_link(t_data *data, char *line)
 	return (EXIT_SUCCESS);
 }
 
-int	process_basic_line(t_data *data, char **map, int *index)
-{
-	char	**arg;
-	int		room_or_link;
+// int	process_basic_line(t_data *data, char **map, int *index)
+// {
+// 	char	**arg;
+// 	int		room_or_link;
 
-	arg = ft_split(map[*index], ' ');
-	room_or_link = ft_substrlen(arg);
-	//! Check first room then link, not at the same time!
-	if (room_or_link == 3)
-	{
-		if (add_vertex(data, map[*index]))
-			return (EXIT_FAILURE);
-	}
-	else if (room_or_link == 1)
-	{
-		if (add_link(data, map[*index]))
-			return (EXIT_FAILURE);
-	}
-	else
-		return (print_error("Error : one line is incorrect.\n"));
-	return (EXIT_SUCCESS);
+// 	arg = ft_split(map[*index], ' ');
+// 	room_or_link = ft_substrlen(arg);
+// 	if (room_or_link == 3)
+// 	{
+// 		if (add_vertex(data, map[*index]))
+// 			return (EXIT_FAILURE);
+// 	}
+// 	else if (room_or_link == 1)
+// 	{
+// 		if (add_edge(data, map[*index]))
+// 			return (EXIT_FAILURE);
+// 	}
+// 	else if (map[*index][0] != '#'){
+// 		printf("test line = %s | size = %d\n", map[*index], room_or_link);
+// 		return (print_error("Error : one line is incorrect.\n"));
+// 	}
+// 	return (EXIT_SUCCESS);
+// }
+
+process_line(int* step, line, start, end, data)
+{
+    if ((start || end) && step != 1)
+        return EXIT_FAILURE;
+    if (step == 0)
+        process_nbr_ant();
+    if (step == 1)
+        process_room();
+    if (step == 2)
+        process_link();
+}
+
+parse_line()
+{
+    int isStart; // previous line was ##start
+    int isEnd;   // previous line was ##end
+    int step; //0 nbr_ant 1 room 2 edge
+
+    while(map)
+    {
+        if (command)
+            process_command();
+        if (comment)
+            continue;
+        process_command(&step, line);
+    }
 }
