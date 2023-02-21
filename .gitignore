@@ -1,6 +1,9 @@
 # Prerequisites
 *.d
 
+#executable
+lem_in
+
 # Object files
 *.o
 *.ko
