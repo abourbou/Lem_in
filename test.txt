@@ -1,4 +1,3 @@
-#test
 5
 #Here is the number of lines required: 31
 ##start
@@ -13,6 +12,6 @@ Ram4-Nqs5
 STAR-Ram4
 C_a6-Nqs5
 Nqs5-ENDD
-ZAA-ZOOO
+#ZAA-ZOOO
 #asddas 0 0
 #Here is the number of lines required: 31

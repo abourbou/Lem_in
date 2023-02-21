@@ -6,23 +6,33 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:56:16 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 10:56:42 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:04:41 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
 
-static void	print_free_map(t_data *data)
+void	print_map(t_map *list_map)
 {
-	t_map	*save;
-
-	while (data->list_map)
+	while(list_map)
 	{
-		save = data->list_map;
-		ft_putstrln(data->list_map->line);
-		free(data->list_map->line);
-		data->list_map = data->list_map->next;
-		free(save);
+		ft_putstrln(list_map->line);
+		list_map = list_map->next;
+	}
+}
+
+void	free_map(t_data *data)
+{
+	t_map	*next_map;
+	t_map	*current_map;
+
+	current_map = data->list_map;
+	while (current_map)
+	{
+		next_map = current_map->next;
+		free(current_map->line);
+		free(current_map);
+		current_map = next_map;
 	}
 	data->list_map = NULL;
 }
@@ -52,6 +62,5 @@ bool	pars_args(t_data *data)
 		free_exit(data, "Error : command start not found.\n", NULL);
 	if (data->end_vertex == NULL)
 		free_exit(data, "Error : command end not found.\n", NULL);
-	print_free_map(data);
 	return (EXIT_SUCCESS);
 }

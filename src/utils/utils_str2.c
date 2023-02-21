@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:02:08 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 11:02:34 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 12:36:44 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,9 @@ void	ft_putstrln(char *line)
 {
 	write(1, line, ft_strlen(line));
 	write(1, "\n", 1);
+}
+
+void	print_error(char *error_msg)
+{
+	write(2, error_msg, ft_strlen(error_msg));
 }

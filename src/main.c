@@ -1,4 +1,17 @@
-#include "../include/lib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 13:13:12 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lib.h"
+#include "graph.h"
 
 void	init_data(t_data *data)
 {
@@ -14,8 +27,7 @@ void	init_data(t_data *data)
 	data->pars.step = 1;
 }
 
-
-void print_data(t_data *data)
+void	print_data(t_data *data)
 {
 	if (data->start_vertex != NULL)
 		printf("start vertex = vertex : %s | cord x : %d | cord y : %d\n", data->start_vertex->name, data->start_vertex->cord_x, data->start_vertex->cord_y);
@@ -36,13 +48,58 @@ void print_data(t_data *data)
 	}
 }
 
+void	print_graph(t_graph *graph)
+{
+	t_node *source = graph->source->content;
+	t_node *sink = graph->sink->content;
+	printf("source : %s, sink : %s\n", source->name, sink->name);
+
+	t_dlist *current = graph->lnode;
+	while (current)
+	{
+		t_node *node = current->content;
+		printf("node %s\n", node->name);
+		t_dlist *current_llink = node->l_links;
+		while (current_llink)
+		{
+			t_link *link = current_llink->content;
+			printf("\t- link with %s\n", link->terminal->name);
+			current_llink = current_llink->next;
+		}
+		current = current->next;
+	}
+}
+
 int	main(void)
 {
 	t_data	data;
+	t_graph	graph;
+	clock_t	start;
+	double	cpu_time_used;
 
 	init_data(&data);
+
+	start = clock();
 	pars_args(&data);
-	print_data(&data);
+	cpu_time_used = (double)(clock() - start) / CLOCKS_PER_SEC;
+	printf("pars_args took %lfs\n", cpu_time_used);
+
+	start = clock();
+	if (convert_data_graph(&data, &graph))
+	{
+		free_data(&data);
+		print_error("Error converting the data to a graph");
+		return (EXIT_FAILURE);
+	}
+	cpu_time_used = (double)(clock() - start) / CLOCKS_PER_SEC;
+	printf("convert_data_graph took %lfs\n", cpu_time_used);
+
+	// print_data(&data);
+	print_map(data.list_map);
 	free_data(&data);
-	return 0;
+	// print_graph(&graph);
+	//TODO check if a path exist between source and sink
+	//TODO erase node with less or equal to 1 link for opti purpose
+
+	return(EXIT_SUCCESS);
 }

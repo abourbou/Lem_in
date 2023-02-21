@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:02:03 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 11:02:03 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:07:58 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void	lstclear_map(t_data *data)
 		free(temp->line);
 		free(temp);
 	}
+	data->list_map = NULL;
 }
