@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 12:24:04 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:20:15 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct s_link
 typedef struct s_graph
 {
 	t_dlist	*lnode;
-	t_dlist	*source;
-	t_dlist	*sink;
+	t_node	*source;
+	t_node	*sink;
 }	t_graph;
 
 typedef struct s_path
@@ -76,9 +76,10 @@ typedef struct s_flow
 short	convert_data_graph(t_data *data, t_graph *graph);
 
 // Utils for graph construction
-void	create_link(t_node *node1, t_node *node2);
+short	create_link(t_node *node1, t_node *node2);
 short	find_nodes(t_edge *edge, t_graph *graph, t_node **first_node,
 			t_node **second_node);
 t_node	*convert_vertex_to_node(t_vertex *vertex);
-
+void	free_graph(t_graph *graph);
+short	check_edge_already_exist(t_node *node1, t_node *node2);
 #endif

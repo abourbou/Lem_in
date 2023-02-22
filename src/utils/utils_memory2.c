@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:00:51 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 11:01:01 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:21:40 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,17 @@ void	free_tab(char **str)
 	}
 	free(str);
 	str = NULL;
+}
+
+void		free_if_not_empty(void *ptr)
+{
+	if (ptr)
+		free(ptr);
+}
+
+int			print_error_return(char *msg, int signal)
+{
+	print_error("ERROR : ");
+	print_error(msg);
+	return (signal);
 }

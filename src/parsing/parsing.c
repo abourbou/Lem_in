@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:56:16 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:04:41 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:23:15 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_map(t_map *list_map)
 {
-	while(list_map)
+	while (list_map)
 	{
 		ft_putstrln(list_map->line);
 		list_map = list_map->next;

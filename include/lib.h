@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:53:02 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:12:18 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:22:57 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,10 +159,13 @@ void		lstclear_map(t_data *data);
 /*
 ** Function for dico vertex node
 */
-t_btnode		*new_vertex(char *name);
-t_btnode		*add_node(t_btnode *node, char *name);
+t_btnode	*new_vertex(char *name);
+t_btnode	*add_node(t_btnode *node, char *name);
 bool		is_exist(t_btnode *node, char *name);
 void		free_dico_vertex(t_btnode *node);
+
+int			print_error_return(char *msg, int signal);
+void		free_if_not_empty(void *ptr);
 
 /**
  * Double linked functions

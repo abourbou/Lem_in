@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:13:12 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:21:01 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	print_data(t_data *data)
 
 void	print_graph(t_graph *graph)
 {
-	t_node *source = graph->source->content;
-	t_node *sink = graph->sink->content;
+	t_node *source = graph->source;
+	t_node *sink = graph->sink;
 	printf("source : %s, sink : %s\n", source->name, sink->name);
 
 	t_dlist *current = graph->lnode;
@@ -101,5 +101,6 @@ int	main(void)
 	//TODO check if a path exist between source and sink
 	//TODO erase node with less or equal to 1 link for opti purpose
 
-	return(EXIT_SUCCESS);
+	free_graph(&graph);
+	return (0);
 }
