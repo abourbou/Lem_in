@@ -41,27 +41,16 @@ short	ft_isnumber(int c)
 		return (0);
 }
 
-char	*ft_strjoin_sp(char *s1, char *s2)
+int is_interger(char *line)
 {
-	char	*str;
-	size_t	i;
-	size_t	x;
+	int	i;
 
-	str = ft_calloc((ft_strlen(s1) + ft_strlen(s2) + 2), sizeof(char));
-	if (!str)
-		return (NULL);
-	i = -1;
-	x = 0;
-	if (s1)
-		while (s1[++i])
-			str[x++] = s1[i];
-	str[x++] = '\n';
-	i = -1;
-	if (s2)
-		while (s2[++i])
-			str[x++] = s2[i];
-	str[x] = '\0';
-	free(s1);
-	free(s2);
-	return (str);
+	i = 0 ;
+	while (line[i])
+	{
+		if (ft_isnumber(line[i]) == 0)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return EXIT_SUCCESS;
 }

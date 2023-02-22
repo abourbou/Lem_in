@@ -50,7 +50,7 @@ static char	**malloc_dest(char **dest, char const *s, char c, size_t count)
 
 	i = 0;
 	re_count = 0;
-	dest = (char **)wrmalloc_parsing((count + 1) * sizeof(char *));
+	dest = (char **)malloc((count + 1) * sizeof(char *));
 	if (!dest)
 		return (0);
 	while (s[i] && re_count < count)
@@ -63,7 +63,7 @@ static char	**malloc_dest(char **dest, char const *s, char c, size_t count)
 			t_malloc++;
 			i++;
 		}
-		dest[re_count] = wrmalloc_parsing((t_malloc + 1) * sizeof(char));
+		dest[re_count] = malloc((t_malloc + 1) * sizeof(char));
 		if (!dest)
 			return (free_tab_split(dest, re_count));
 		re_count++;

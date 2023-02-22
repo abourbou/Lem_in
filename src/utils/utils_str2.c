@@ -24,8 +24,6 @@ int	ft_substrlen(char **str)
 	return (i);
 }
 
-
-
 char	*ft_strdup(char *src)
 {
 	char	*dest;
@@ -36,7 +34,7 @@ char	*ft_strdup(char *src)
 	y = 0;
 	while (src[x])
 		x++;
-	dest = wrmalloc((x + 1) * sizeof(char));
+	dest = malloc((x + 1) * sizeof(char));
 	if (!dest)
 		return (0);
 	while (src[y])
@@ -46,4 +44,10 @@ char	*ft_strdup(char *src)
 	}
 	dest[y] = '\0';
 	return (dest);
+}
+
+void	ft_putstrln(char *line)
+{
+	write(1, line, ft_strlen(line));
+	write(1, "\n", 1);
 }

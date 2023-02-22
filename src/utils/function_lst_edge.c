@@ -16,50 +16,52 @@ t_edge	*lstnew_edge(char *vertex1, char *vertex2 , int direction)
 {
 	t_edge	*lst;
 
-	lst = wrmalloc(sizeof(t_edge));
+	lst = malloc(sizeof(t_edge));
 	if (!lst)
 		return (NULL);
 	lst->vertex1 = ft_strdup(vertex1);
 	lst->vertex2 = ft_strdup(vertex2);
 	lst->direction = direction;
+	lst->last = NULL;
 	lst->next = NULL;
 	lst->prev = NULL;
 	return (lst);
 }
 
-void	lstadd_front_edge(t_edge **alst, t_edge *new)
-{
-	new->next = *alst;
-	*alst = new;
-}
-
 void	lstadd_back_edge(t_edge **alst, t_edge *new)
 {
 	t_edge	*p;
+	t_edge	*save;
 
 	p = *alst;
+	save = *alst;
 	if (!alst)
 		return ;
 	if (!*alst)
+	{
+		new->last = new;
 		*alst = new;
+	}
 	else if (p)
 	{
-		while (p->next)
-			p = p->next;
+		p = p->last;
 		p->next = new;
+		save->last = p->next;
 	}
 }
 
-t_edge	*lstlast_edge(t_edge *lstt)
+void	lstclear_edge(t_data *data)
 {
+	t_edge	*p;
 	t_edge	*lst;
 
-	if (!lstt)
-		return (lstt);
-	lst = lstt;
-	while (lst->next)
+	lst = data->list_edge;
+	while (lst)
 	{
-		lst = lst->next;
+		p = lst->next;
+		free(lst->vertex1);
+		free(lst->vertex2);
+		free(lst);
+		lst = p;
 	}
-	return (lst);
 }

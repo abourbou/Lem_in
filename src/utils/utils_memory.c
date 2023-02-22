@@ -11,9 +11,26 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	print_error(char *strError)
+void	free_data(t_data *data)
 {
-	return(write(2, strError, ft_strlen(strError)));
+	if (data->list_edge)
+		lstclear_edge(data);
+	if (data->list_map)
+		lstclear_map(data);
+	if (data->list_vertex)
+		lstclear_vertex(data);
+}
+
+void	free_exit(t_data *data, char *msg_error, char **tab)
+{
+	if (tab)
+		free_tab(tab);
+	free_data(data);
+	// if (data->start_vertex)
+	// 	free(data->start_vertex);
+	// if (data->end_vertex)
+	// 	free(data->end_vertex);
+	exit(write(2, msg_error, ft_strlen(msg_error)));
 }
 
 static void	ft_bzero(void *s, size_t n)
@@ -41,19 +58,15 @@ void	*ft_calloc(size_t count, size_t size)
 	return (dest);
 }
 
-void	ft_lstadd_back(t_list **alst, t_list *new)
+void	free_tab(char **str)
 {
-	t_list	*p;
+	int	i;
 
-	p = *alst;
-	if (!alst)
-		return ;
-	if (!*alst)
-		*alst = new;
-	else if (p)
+	i = 0;
+	while (str[i])
 	{
-		while (p->next)
-			p = p->next;
-		p->next = new;
+		free(str[i]);
+		i++;
 	}
+	free(str);
 }

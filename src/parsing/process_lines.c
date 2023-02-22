@@ -1,95 +1,109 @@
 #include "../../include/lib.h"
 
-int is_interger(char *line)
+static void	process_ants(t_data *data, char *line)
 {
 	int	i;
 
-	i = 0 ;
-	while (line[i])
-	{
-		if (ft_isnumber(line[i]) == 0)
-			return (print_error("Error : coordinates need always be integers.\n"));
-		i++;
-	}
-	return EXIT_SUCCESS;
+	i = 0;
+	data->pars.step++;
+	skip_space_i(line, &i);
+	data->numb_ants = atoi_sp(line, &i);
+	if (check_space_end(line, &i))
+		free_exit(data, "Error : number of ants is in incorrect format.\n", NULL);
+	if (data->numb_ants == 0)
+		free_exit(data, "Error : [numbers of ants] cant be 0.\n", NULL);
 }
 
-static int	process_command(t_data *data, char **map, int *index)
+void	process_vertex(t_data *data, char *line)
+{
+	char		**arg;
+
+	if (data->pars.step != 2)
+		free_exit(data, "Error : bad order of arguments\n", NULL);
+	arg = ft_split(line, ' ');
+	if (arg[0][0] == 'L' || arg[0][0] == '#')
+		free_exit(data, "Error : room name cant start by # or 'L'.\n", NULL);
+	if (is_interger(arg[1]))
+	{
+		free_tab(arg);
+		free_exit(data, "Error : bad forma coordone\n", NULL);
+	}
+	if (is_interger(arg[2]))
+	{
+		free_tab(arg);
+		free_exit(data, "Error : bad forma coordone\n", NULL);
+	}
+	lstadd_back_vertex(&data->list_vertex, lstnew_vertex(arg[0], atoi(arg[1]), atoi(arg[2])));
+	free_tab(arg);
+}
+
+static void	process_command(t_data *data, t_map	*cursor)
 {
 	bool		start;
 	char		**arg;
 	t_vertex	*new_vertex;
 
 	start = false;
-	if (ft_strcmp(map[*index], "##start") == 0)
+	if (data->pars.step != 2)
+		free_exit(data, "Error : bad order of arguments\n", NULL);
+	if (ft_strcmp(cursor->line, "##start") == 0)
 		start = true;
-	*index += 1;
-	arg = ft_split(map[*index], ' ');
+	cursor = cursor->next;
+	arg = ft_split(cursor->line, ' ');
 	if (ft_substrlen(arg) != 3)
-		return (print_error("Error : bad number of argument in line\n"));
+		free_exit(data, "Error : bad number of argument in line\n", arg);
 	if (arg[0][0] == 'L' || arg[0][0] == '#')
-		return (print_error("Error : room name cant start by # or 'L'\n"));
+		free_exit(data, "Error : room name cant start by # or 'L'\n", arg);
 	if (is_interger(arg[1]))
-		return (EXIT_FAILURE);
+		free_exit(data, "Error : bad forma for coordone\n", arg);
 	if (is_interger(arg[2]))
-		return (EXIT_FAILURE);
+		free_exit(data, "Error : bad forma for coordone\n", arg);
 	new_vertex = lstnew_vertex(arg[0], atoi(arg[1]), atoi(arg[2]));
-	lstadd_back_vertex(&data->list_vertex, new_vertex);
 	if (start)
 		data->start_vertex = new_vertex;
 	else
 		data->end_vertex = new_vertex;
-	return (EXIT_SUCCESS);
+	free_tab(arg);
 }
 
-int	process_vertex(t_data *data, char **map, int *index)
+static void	process_edgr(t_data *data, char *line)
 {
-	if (is_cmd(map[*index]))
-	{
-		if (process_command(data, map, index))
-			return (EXIT_FAILURE);
-	}
-	else if (is_comment(map[*index]))
-		*index += 1;
-	if (map[*index])
-	{
-		if (is_vertex(map[*index]))
-			if (add_vertex(data, map[*index]))
-				return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+	char	**arg;
+
+	arg = ft_split(line, '-');
+	if (data->pars.step == 2)
+		data->pars.step++;
+	if (data->pars.step != 3)
+		free_exit(data, "Error : bad order of arguments\n", NULL);
+	if (ft_substrlen(arg) != 2)
+		free_exit(data, "Error : line link bad format.\n", arg);
+	if ((arg[0][0] == 'L' || arg[0][0] == '#') ||
+		(arg[1][0] == 'L' || arg[1][0] == '#'))
+		free_exit(data, "Error : room name cant start by # or 'L'.\n", arg);
+	lstadd_back_edge(&data->list_edge, lstnew_edge(arg[0], arg[1], 0));
+	free_tab(arg);
 }
 
-int	process_edge(t_data *data, char **map, int *index)
+void	parse_stdin(t_data *data)
 {
-	if (is_comment(map[*index]))
-		*index += 1;
-	if (map[*index])
-	{
-		if (is_edge(map[*index]))
-			if (add_edge(data, map[*index]))
-				return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
+	t_map	*cursor;
+	int		code;
 
-bool	process_line(t_data *data, char **map, int *index)
-{
-	while (map[*index] && (is_cmd(map[*index]) ||
-		is_comment(map[*index]) || is_vertex(map[*index])))
+	cursor = data->list_map;
+	while (cursor != NULL)
 	{
-		printf("DEBUG in while vertex | line = %s\n", map[*index]);
-		printf("cmd ? %d | comment ? %d | vertex ? %d\n", is_cmd(map[*index]) , is_comment(map[*index]) , is_vertex(map[*index]));
-		process_vertex(data, map, index);
-		*index += 1;
+		code = define_line(cursor->line);
+		if (code == COM)
+			;
+		else if (data->pars.step == 1 && code != COM)
+			process_ants(data, cursor->line);
+		else if (code == VERTEX)
+			process_vertex(data, cursor->line);
+		else if (code == CMD)
+			process_command(data, cursor);
+		else if (code == EDGE)
+			process_edgr(data, cursor->line);
+		cursor = cursor->next;
 	}
-	while (map[*index] && (is_comment(map[*index]) ||
-		is_edge(map[*index])))
-	{
-		printf("DEBUG in while edge | line = %s\n", map[*index]);
-		printf("comment ? %d | edge ? %d\n", is_comment(map[*index]) , is_edge(map[*index]));
-
-		process_edge(data, map, index);
-		*index += 1;
-	}
+	return ;
 }
