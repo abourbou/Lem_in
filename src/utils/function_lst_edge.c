@@ -24,7 +24,6 @@ t_edge	*lstnew_edge(char *vertex1, char *vertex2 , int direction)
 	lst->direction = direction;
 	lst->last = NULL;
 	lst->next = NULL;
-	lst->prev = NULL;
 	return (lst);
 }
 
@@ -55,6 +54,8 @@ void	lstclear_edge(t_data *data)
 	t_edge	*p;
 	t_edge	*lst;
 
+	if (!data->list_edge)
+		return ;
 	lst = data->list_edge;
 	while (lst)
 	{

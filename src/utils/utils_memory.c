@@ -2,8 +2,9 @@
 
 int	ft_strlen(char *str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (!str)
 		return 0;
 	while (str[i])
@@ -19,6 +20,8 @@ void	free_data(t_data *data)
 		lstclear_map(data);
 	if (data->list_vertex)
 		lstclear_vertex(data);
+	if (data->dico_vertex)
+		free_dico_vertex(data->dico_vertex);
 }
 
 void	free_exit(t_data *data, char *msg_error, char **tab)
@@ -26,10 +29,6 @@ void	free_exit(t_data *data, char *msg_error, char **tab)
 	if (tab)
 		free_tab(tab);
 	free_data(data);
-	// if (data->start_vertex)
-	// 	free(data->start_vertex);
-	// if (data->end_vertex)
-	// 	free(data->end_vertex);
 	exit(write(2, msg_error, ft_strlen(msg_error)));
 }
 
@@ -66,7 +65,9 @@ void	free_tab(char **str)
 	while (str[i])
 	{
 		free(str[i]);
+		str[i] = NULL;
 		i++;
 	}
 	free(str);
+	str = NULL;
 }

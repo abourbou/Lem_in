@@ -5,6 +5,7 @@ void	init_data(t_data *data)
 	data->numb_ants = 0;
 	data->start_vertex = NULL;
 	data->end_vertex = NULL;
+	data->dico_vertex = NULL;
 	data->list_vertex = NULL;
 	data->list_edge = NULL;
 	data->list_map = NULL;
@@ -16,14 +17,17 @@ void	init_data(t_data *data)
 
 void print_data(t_data *data)
 {
-	printf("start vertex = vertex : %s | cord x : %d | cord y : %d\n", data->start_vertex->name, data->start_vertex->cord_x, data->start_vertex->cord_y);
-	printf("end vertex = vertex : %s | cord x : %d | cord y : %d\n\n", data->end_vertex->name, data->end_vertex->cord_x, data->end_vertex->cord_y);
+	if (data->start_vertex != NULL)
+		printf("start vertex = vertex : %s | cord x : %d | cord y : %d\n", data->start_vertex->name, data->start_vertex->cord_x, data->start_vertex->cord_y);
+	if (data->end_vertex  != NULL)
+		printf("end vertex = vertex : %s | cord x : %d | cord y : %d\n\n", data->end_vertex->name, data->end_vertex->cord_x, data->end_vertex->cord_y);
 
 	printf("list vertex :\n");
-	for (t_vertex *cursor = data->list_vertex; cursor; cursor = cursor->next)
-	{
-		printf("name of vertex : %s | cord x : %d | cord y : %d\n", cursor->name, cursor->cord_x, cursor->cord_y);
-	}
+	if (data->list_vertex)
+		for (t_vertex *cursor = data->list_vertex; cursor; cursor = cursor->next)
+		{
+			printf("name of vertex : %s | cord x : %d | cord y : %d\n", cursor->name, cursor->cord_x, cursor->cord_y);
+		}
 
 	printf("\nlist edge :\n");
 	for (t_edge *cursor = data->list_edge; cursor; cursor = cursor->next)

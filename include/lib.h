@@ -27,7 +27,6 @@ struct s_vertex
 	int		cord_x;
 	int		cord_y;
 	t_vertex	*next;
-	t_vertex	*prev;
 	t_vertex	*last;
 };
 
@@ -38,15 +37,7 @@ struct s_edge
 	int		direction;
 	t_edge	*last;
 	t_edge	*next;
-	t_edge	*prev;
 };
-
-typedef struct	s_list
-{
-	void			*content;
-	struct s_list	*last;
-	struct s_list	*next;
-}t_list;
 
 typedef struct	s_map
 {
@@ -62,10 +53,18 @@ typedef struct	s_pars
 	int		end;
 }t_pars;
 
+typedef struct	s_node
+{
+	char			*name;
+	struct s_node	*left;
+	struct s_node	*right;
+}t_node;
+
 typedef struct s_data
 {
 	int			numb_ants;
 	t_vertex	*list_vertex;
+	t_node		*dico_vertex;
 	t_vertex	*start_vertex;
 	t_vertex	*end_vertex;
 	t_edge		*list_edge;
@@ -80,11 +79,12 @@ typedef struct s_data
 void	free_data(t_data *data);
 void	free_exit(t_data *data, char *msg_error, char **tab);
 void	ft_putstrln(char *line);
+
 /*
 ** Function for parsing
 */
 void	parse_stdin(t_data *data);
-
+void	set_vertex(t_data *data, t_vertex *new_vertex, int code);
 
 short	ft_isnumber(int c);
 bool	pars_args(t_data *data);
@@ -137,5 +137,13 @@ t_map	*lstnew_map(char *line);
 t_map	*lstlast_map(t_map *lstt);
 void	lstadd_back_map(t_map **alst, t_map *new);
 void	lstclear_map(t_data *data);
+
+/*
+** Function for dico vertex node
+*/
+t_node	*new_vertex(char *name);
+t_node	*add_node(t_node *node, char *name);
+bool	is_existe(t_node *node, char *name);
+void	free_dico_vertex(t_node *node);
 
 #endif

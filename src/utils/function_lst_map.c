@@ -51,15 +51,17 @@ t_map	*lstlast_map(t_map *lstt)
 
 void	lstclear_map(t_data *data)
 {
-	t_map	*p;
+	t_map	*temp;
 	t_map	*lst;
 
+	if (data->list_map == NULL)
+		return ;
 	lst = data->list_map;
 	while (lst)
 	{
-		p = lst->next;
-		free(lst->line);
-		free(lst);
-		lst = p;
+		temp = lst;
+		lst = lst->next;
+		free(temp->line);
+		free(temp);
 	}
 }

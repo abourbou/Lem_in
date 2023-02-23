@@ -12,7 +12,6 @@ t_vertex	*lstnew_vertex(char *name, int cord_x, int cord_y)
 	lst->cord_x = cord_x;
 	lst->cord_y = cord_y;
 	lst->next = NULL;
-	lst->prev = NULL;
 	lst->last = NULL;
 	return (lst);
 }
@@ -41,15 +40,30 @@ void	lstadd_back_vertex(t_vertex **alst, t_vertex *new)
 
 void	lstclear_vertex(t_data *data)
 {
-	t_vertex	*p;
+	t_vertex	*temp;
 	t_vertex	*lst;
 
-	lst = data->end_vertex;
+	if (data->list_vertex == NULL)
+		return ;
+	lst = data->list_vertex;
 	while (lst)
 	{
-		p = lst->next;
-		free(lst->name);
-		free(lst);
-		lst = p;
+		temp = lst;
+		lst = lst->next;
+		free(temp->name);
+		free(temp);
 	}
+	free(data->start_vertex->name);
+	free(data->start_vertex);
+	free(data->end_vertex->name);
+	free(data->end_vertex);
+}
+
+void	set_vertex(t_data *data, t_vertex *new_vertex, int code)
+{
+	data->dico_vertex = add_node(data->dico_vertex, new_vertex->name);
+	if (code == 0)
+		data->start_vertex = new_vertex;
+	else
+		data->end_vertex = new_vertex;
 }

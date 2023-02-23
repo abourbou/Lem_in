@@ -33,6 +33,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/function_lst_map.c \
 				utils/function_lst_edge.c \
 				utils/function_lst_vertex.c \
+				utils/function_node.c \
 				utils/get_next_line.c \
 				utils/get_next_line_utils.c \
 				utils/utils_memory.c \
