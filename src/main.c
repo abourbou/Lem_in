@@ -6,12 +6,13 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:21:01 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:25:07 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
 #include "graph.h"
+#include "queue.h"
 
 void	init_data(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:53:02 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:22:57 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:25:03 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void		free_if_not_empty(void *ptr);
  * Double linked functions
 */
 t_dlist		*dlist_new(void *content);
+void		dlist_pushfront(t_dlist **start, t_dlist *new_elem);
 void		dlist_pushback(t_dlist **start, t_dlist *new_elem);
 void		dlist_addafter(t_dlist *current_elem, t_dlist *new_elem);
 
