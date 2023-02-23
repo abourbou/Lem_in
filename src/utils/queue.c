@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "queue.h"
 
-void queue_init(t_queue *queue)
+void	queue_init(t_queue *queue)
 {
 	queue->start = 0;
 	queue->end = 0;
 }
 
-void free_queue(t_queue *queue, free_fct deallocator)
+void	free_queue(t_queue *queue, void deallocator(void*))
 {
-	void *content;
+	void	*content;
 
 	content = queue_pop(queue);
 	while (content)
@@ -32,14 +31,14 @@ void free_queue(t_queue *queue, free_fct deallocator)
 	}
 }
 
-short is_queue_empty(t_queue *queue)
+short	is_queue_empty(t_queue *queue)
 {
 	return (!queue->start || !queue->end);
 }
 
-short queue_push(t_queue *queue, void *content)
+short	queue_push(t_queue *queue, void *content)
 {
-	t_dlist *new_elem;
+	t_dlist	*new_elem;
 
 	new_elem = dlist_new(content);
 	if (!new_elem)
@@ -54,9 +53,9 @@ short queue_push(t_queue *queue, void *content)
 	return (EXIT_SUCCESS);
 }
 
-void *queue_pop(t_queue *queue)
+void	*queue_pop(t_queue *queue)
 {
-	t_dlist *prev;
+	t_dlist	*prev;
 	void	*content;
 
 	if (!queue->start)
