@@ -53,15 +53,10 @@ void	lstclear_vertex(t_data *data)
 		free(temp->name);
 		free(temp);
 	}
-	free(data->start_vertex->name);
-	free(data->start_vertex);
-	free(data->end_vertex->name);
-	free(data->end_vertex);
 }
 
-void	set_vertex(t_data *data, t_vertex *new_vertex, int code)
+void	set_start_or_end(t_data *data, t_vertex *new_vertex, int code)
 {
-	data->dico_vertex = add_node(data->dico_vertex, new_vertex->name);
 	if (code == 0)
 		data->start_vertex = new_vertex;
 	else

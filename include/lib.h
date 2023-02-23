@@ -84,7 +84,7 @@ void	ft_putstrln(char *line);
 ** Function for parsing
 */
 void	parse_stdin(t_data *data);
-void	set_vertex(t_data *data, t_vertex *new_vertex, int code);
+void	set_start_or_end(t_data *data, t_vertex *new_vertex, int code);
 
 short	ft_isnumber(int c);
 bool	pars_args(t_data *data);

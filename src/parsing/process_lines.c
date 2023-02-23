@@ -41,6 +41,7 @@ static void	process_command(t_data *data, t_map	*cursor)
 {
 	int			code;
 	char		**arg;
+	t_vertex	*new_vertex;
 
 	if (data->pars.step != 2)
 		free_exit(data, "Error : bad order of arguments\n", NULL);
@@ -54,7 +55,12 @@ static void	process_command(t_data *data, t_map	*cursor)
 	if (is_interger(arg[1]) || is_interger(arg[2]))
 		free_exit(data, "Error : bad forma for coordone\n", arg);
 	if (is_existe(data->dico_vertex, arg[0]) == 0)
-		set_vertex(data, lstnew_vertex(arg[0], atoi(arg[1]), atoi(arg[2])), code);
+	{
+		new_vertex = lstnew_vertex(arg[0], atoi(arg[1]), atoi(arg[2]));
+		lstadd_back_vertex(&data->list_vertex, new_vertex);
+		data->dico_vertex = add_node(data->dico_vertex, arg[0]);
+		set_start_or_end(data, new_vertex, code);
+	}
 	else
 		free_exit(data, "Error : 2 Room cant have same name.\n", arg);
 	free_tab(arg);

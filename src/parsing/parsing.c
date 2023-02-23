@@ -36,6 +36,10 @@ bool	pars_args(t_data *data)
 {
 	read_stdin(data);
 	parse_stdin(data);
+	if (data->start_vertex == NULL)
+		free_exit(data, "Error : Commande Start not found.\n", NULL);
+	if (data->end_vertex == NULL)
+		free_exit(data, "Error : Commande End not found.\n", NULL);
 	print_free_map(data);
 	return EXIT_SUCCESS;
 }
