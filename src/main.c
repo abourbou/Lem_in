@@ -6,13 +6,14 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:25:07 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:28:25 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
 #include "graph.h"
 #include "queue.h"
+#include "algo.h"
 
 void	init_data(t_data *data)
 {
@@ -99,8 +100,16 @@ int	main(void)
 	print_map(data.list_map);
 	free_data(&data);
 	// print_graph(&graph);
-	//TODO check if a path exist between source and sink
+
+	if (check_path_exists(&graph))
+	{
+		print_error("No path exist from start to end");
+		free_graph(&graph);
+		return (EXIT_FAILURE);
+	};
+
 	//TODO erase node with less or equal to 1 link for opti purpose
+	erase_useless_nodes(&graph);
 
 	free_graph(&graph);
 	return (0);
