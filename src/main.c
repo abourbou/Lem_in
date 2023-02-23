@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:28:25 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:32:15 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ int	main(void)
 		return (EXIT_FAILURE);
 	}
 	cpu_time_used = (double)(clock() - start) / CLOCKS_PER_SEC;
+	// print_graph(&graph);
 	printf("convert_data_graph took %lfs\n", cpu_time_used);
 
 	// print_data(&data);
@@ -108,8 +109,13 @@ int	main(void)
 		return (EXIT_FAILURE);
 	};
 
-	//TODO erase node with less or equal to 1 link for opti purpose
-	erase_useless_nodes(&graph);
+	// Erase nodes with less or equal to 1 link for opti purpose
+	erase_dead_end_nodes(&graph);
+	// print_graph(&graph);
+
+	// TODO change system of links, not very good think about a better one
+	// TODO erase isolated nodes using level graph
+	// erase_isolated_nodes(&graph);
 
 	free_graph(&graph);
 	return (0);

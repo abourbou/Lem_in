@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:17:25 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:23:28 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 13:31:03 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,31 @@ void	free_graph(t_graph *graph)
 		free(current_lnode);
 		current_lnode = next_lnode;
 	}
+}
+
+void	erase_node(t_node *node)
+{
+	t_dlist	*current;
+	t_node *other_node;
+	t_dlist *other_node_l_links;
+	t_link *current_link;
+
+	current = node->l_links;
+	while (current)
+	{
+		other_node = ((t_link*)current->content)->terminal;
+		other_node_l_links = other_node->l_links;
+		while (other_node_l_links)
+		{
+			current_link = other_node_l_links->content;
+			if (current_link->terminal == node)
+			{
+				dlist_erase(&((t_node*)current->content)->l_links, other_node_l_links);
+				break ;
+			}
+			other_node_l_links = other_node_l_links->next;
+		}
+		current = current->next;
+	}
+	free_node(node);
 }

@@ -30,6 +30,7 @@ PATH_OBJ	=	obj
 # Source
 SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/ft_dlist.c \
+				utils/ft_dlist2.c \
 				utils/ft_split.c \
 				utils/function_lst_map.c \
 				utils/function_lst_edge.c \
@@ -42,6 +43,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/utils_parsing.c \
 				utils/utils_str.c \
 				utils/utils_str2.c \
+				utils/queue.c \
 				parsing/process_lines.c \
 				parsing/parsing.c \
 				graph/data_to_graph.c \

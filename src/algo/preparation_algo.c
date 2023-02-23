@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 10:59:45 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/23 11:22:37 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/23 16:52:17 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,32 @@ short	check_path_exists(t_graph *graph)
 	return (DFS_find_end(graph->source, graph->sink));
 }
 
-void	erase_useless_nodes(t_graph *graph)
+/**
+ * Erase nodes that have less than 2 connections
+ * because they will never be usefull for the graph
+*/
+void	erase_dead_end_nodes(t_graph *graph)
 {
-	(void)graph;
+	short	is_change;
+	t_dlist	*lnode;
+	t_node	*node;
+
+	is_change = true;
+	while (is_change)
+	{
+		is_change = false;
+		lnode = graph->lnode;
+		while (lnode)
+		{
+			node = lnode->content;
+			if (node != graph->source && node != graph->sink
+				&& dlist_compt(node->l_links) < 2)
+			{
+				erase_node(node);
+				dlist_erase(&graph->lnode, lnode);
+				is_change = true;
+			}
+			lnode = lnode->next;
+		}
+	}
 }
