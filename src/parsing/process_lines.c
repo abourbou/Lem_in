@@ -41,7 +41,6 @@ static void	process_command(t_data *data, t_map	*cursor)
 {
 	int			code;
 	char		**arg;
-	t_vertex	*new_vertex;
 
 	if (data->pars.step != 2)
 		free_exit(data, "Error : bad order of arguments\n", NULL);
@@ -56,10 +55,8 @@ static void	process_command(t_data *data, t_map	*cursor)
 		free_exit(data, "Error : bad forma for coordone\n", arg);
 	if (is_existe(data->dico_vertex, arg[0]) == 0)
 	{
-		new_vertex = lstnew_vertex(arg[0], atoi(arg[1]), atoi(arg[2]));
-		lstadd_back_vertex(&data->list_vertex, new_vertex);
-		data->dico_vertex = add_node(data->dico_vertex, arg[0]);
-		set_start_or_end(data, new_vertex, code);
+		if (set_start_or_end(data, lstnew_vertex(arg[0], atoi(arg[1]), atoi(arg[2])), code))
+			free_exit(data, NULL, arg);
 	}
 	else
 		free_exit(data, "Error : 2 Room cant have same name.\n", arg);
@@ -80,6 +77,8 @@ static void	process_edgr(t_data *data, char *line)
 	if ((arg[0][0] == 'L' || arg[0][0] == '#') ||
 		(arg[1][0] == 'L' || arg[1][0] == '#'))
 		free_exit(data, "Error : room name cant start by # or 'L'.\n", arg);
+	if (ft_strcmp(arg[0], arg[1]) == 0)
+		free_exit(data, "Error : link cant have same room name.\n", arg);
 	lstadd_back_edge(&data->list_edge, lstnew_edge(arg[0], arg[1], 0));
 	free_tab(arg);
 }

@@ -29,7 +29,10 @@ void	free_exit(t_data *data, char *msg_error, char **tab)
 	if (tab)
 		free_tab(tab);
 	free_data(data);
-	exit(write(2, msg_error, ft_strlen(msg_error)));
+	if (msg_error != NULL)
+		exit(write(2, msg_error, ft_strlen(msg_error)));
+	else
+		exit(EXIT_FAILURE);
 }
 
 static void	ft_bzero(void *s, size_t n)

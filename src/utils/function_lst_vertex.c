@@ -55,10 +55,29 @@ void	lstclear_vertex(t_data *data)
 	}
 }
 
-void	set_start_or_end(t_data *data, t_vertex *new_vertex, int code)
+bool	set_start_or_end(t_data *data, t_vertex *new_vertex, int code)
 {
 	if (code == 0)
+	{
+		if (data->start_vertex != NULL)
+		{
+			free(new_vertex->name);
+			free(new_vertex);
+			return (write(2, "Error : start cant be 2 time.\n", 31));
+		}
 		data->start_vertex = new_vertex;
+	}
 	else
+	{
+		if (data->end_vertex != NULL)
+		{
+			free(new_vertex->name);
+			free(new_vertex);
+			return (write(2, "Error : end cant be 2 time.\n", 29));
+		}
 		data->end_vertex = new_vertex;
+	}
+	lstadd_back_vertex(&data->list_vertex, new_vertex);
+	data->dico_vertex = add_node(data->dico_vertex, new_vertex->name);
+	return (EXIT_SUCCESS);
 }
