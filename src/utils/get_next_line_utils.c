@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:56:22 by faherrau          #+#    #+#             */
-/*   Updated: 2021/08/31 14:16:18 by sbaranes         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 10:42:36 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lib.h"
+#include "lib.h"
 
 size_t	fh_strlen(const char *s)
 {

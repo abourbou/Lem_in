@@ -8,8 +8,11 @@ ENDD 4 4
 Ram4 7 7
 Nqs5 11 11
 C_a6 13 13
+#STAR 0 0
 Ram4-Nqs5
 STAR-Ram4
 C_a6-Nqs5
 Nqs5-ENDD
+ZAA-ZOOO
+#asddas 0 0
 #Here is the number of lines required: 31

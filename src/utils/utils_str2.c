@@ -1,4 +1,16 @@
-#include "../../include/lib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_str2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/24 11:02:08 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 11:02:34 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lib.h"
 
 int	atoi_sp(char *str, int *i)
 {
@@ -15,16 +27,15 @@ int	atoi_sp(char *str, int *i)
 
 int	ft_substrlen(char **str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (!str)
-		return 0;
+		return (0);
 	while (str[i])
 		i++;
 	return (i);
 }
-
-
 
 char	*ft_strdup(char *src)
 {
@@ -36,7 +47,7 @@ char	*ft_strdup(char *src)
 	y = 0;
 	while (src[x])
 		x++;
-	dest = wrmalloc((x + 1) * sizeof(char));
+	dest = malloc((x + 1) * sizeof(char));
 	if (!dest)
 		return (0);
 	while (src[y])
@@ -46,4 +57,10 @@ char	*ft_strdup(char *src)
 	}
 	dest[y] = '\0';
 	return (dest);
+}
+
+void	ft_putstrln(char *line)
+{
+	write(1, line, ft_strlen(line));
+	write(1, "\n", 1);
 }

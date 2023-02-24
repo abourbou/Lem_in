@@ -1,58 +1,126 @@
-#include "../../include/lib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_lines.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/24 10:56:51 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 10:57:39 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
-int is_interger(char *line)
+#include "lib.h"
+
+static void	process_ants(t_data *data, char *line)
 {
 	int	i;
 
-	i = 0 ;
-	while (line[i])
-	{
-		if (ft_isnumber(line[i]) == 0)
-			return (print_error("Error : coordinates need always be integers.\n"));
-		i++;
-	}
-	return EXIT_SUCCESS;
+	i = 0;
+	data->pars.step++;
+	skip_space_i(line, &i);
+	data->numb_ants = atoi_sp(line, &i);
+	if (check_space_end(line, &i))
+		free_exit(data, "Error : numbers of ants incorrect format.\n", NULL);
+	if (data->numb_ants == 0)
+		free_exit(data, "Error : numbers of ants cant be 0.\n", NULL);
 }
 
-static int	process_command(t_data *data, char **map, int *index)
+void	process_vertex(t_data *data, char *line)
 {
-	bool		start;
-	char		**arg;
-	t_vertex	*new_vertex;
+	char	**arg;
 
-	start = false;
-	if (ft_strcmp(map[*index], "##start") == 0)
-		start = true;
-	*index += 1;
-	arg = ft_split(map[*index], ' ');
-	if (ft_substrlen(arg) != 3)
-		return (print_error("Error : bad number of argument in line\n"));
+	arg = NULL;
+	if (data->pars.step != 2)
+		free_exit(data, "Error : bad order of arguments\n", NULL);
+	arg = ft_split(line, ' ');
 	if (arg[0][0] == 'L' || arg[0][0] == '#')
-		return (print_error("Error : room name cant start by # or 'L'\n"));
-	if (is_interger(arg[1]))
-		return (EXIT_FAILURE);
-	if (is_interger(arg[2]))
-		return (EXIT_FAILURE);
-	new_vertex = lstnew_vertex(arg[0], atoi(arg[1]), atoi(arg[2]));
-	lstadd_back_vertex(&data->list_vertex, new_vertex);
-	if (start)
-		data->start_vertex = new_vertex;
+		free_exit(data, "Error : room name cant start by # or 'L'.\n", arg);
+	if (is_interger(arg[1]) || is_interger(arg[2]))
+		free_exit(data, "Error : bad format coordinates.\n", arg);
+	if (is_exist(data->dico_vertex, arg[0]) == 0)
+	{
+		lstadd_back_vertex(&data->list_vertex, lstnew_vertex(arg[0],
+				atoi(arg[1]), atoi(arg[2])));
+		data->dico_vertex = add_node(data->dico_vertex, arg[0]);
+	}
 	else
-		data->end_vertex = new_vertex;
-	return (EXIT_SUCCESS);
+		free_exit(data, "Error : 2 rooms cant have same name.\n", arg);
+	free_tab(arg);
 }
 
-bool	process_line(t_data *data, char **map, int *index)
+static void	process_command(t_data *data, t_map	*cursor)
 {
-	if (ft_strcmp(map[*index], "##start") == 0 ||
-		ft_strcmp(map[*index], "##end") == 0)
+	int			code;
+	char		**arg;
+
+	if (data->pars.step != 2)
+		free_exit(data, "Error : bad order of arguments\n", NULL);
+	code = ft_strcmp(cursor->line, "##start");
+	cursor = cursor->next;
+	arg = ft_split(cursor->line, ' ');
+	if (ft_substrlen(arg) != 3)
+		free_exit(data, "Error : bad numbers of argument in line\n", arg);
+	if (arg[0][0] == 'L' || arg[0][0] == '#')
+		free_exit(data, "Error : room name cant start by # or 'L'\n", arg);
+	if (is_interger(arg[1]) || is_interger(arg[2]))
+		free_exit(data, "Error : bad format for coordinates\n", arg);
+	if (is_exist(data->dico_vertex, arg[0]) == 0)
 	{
-		if (process_command(data, map, index))
-			return (EXIT_FAILURE);
+		if (set_start_or_end(data, lstnew_vertex(arg[0], atoi(arg[1]),
+					atoi(arg[2])), code))
+			free_exit(data, NULL, arg);
 	}
-	else if (map[*index][0] == '#')
-		return (EXIT_SUCCESS);
-	else if (process_basic_line(data, map, index))
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+	else
+		free_exit(data, "Error : 2 rooms cant have same name.\n", arg);
+	free_tab(arg);
+}
+
+static void	process_edgr(t_data *data, char *line)
+{
+	char	**arg;
+
+	arg = ft_split(line, '-');
+	if (data->pars.step == 2)
+		data->pars.step++;
+	if (data->pars.step != 3)
+		free_exit(data, "Error : bad order of arguments\n", NULL);
+	if (ft_substrlen(arg) != 2)
+		free_exit(data, "Error : line link bad format.\n", arg);
+	if ((arg[0][0] == 'L' || arg[0][0] == '#') ||
+		(arg[1][0] == 'L' || arg[1][0] == '#'))
+		free_exit(data, "Error : room name cant start by # or 'L'.\n", arg);
+	if (ft_strcmp(arg[0], arg[1]) == 0)
+		free_exit(data, "Error : link cant have same room name.\n", arg);
+	lstadd_back_edge(&data->list_edge, lstnew_edge(arg[0], arg[1], 0));
+	free_tab(arg);
+}
+
+void	parse_stdin(t_data *data)
+{
+	t_map	*cursor;
+	int		code;
+
+	cursor = data->list_map;
+	while (cursor != NULL)
+	{
+		code = define_line(cursor->line);
+		if (code == COM)
+			;
+		else if (data->pars.step == 1 && code != COM)
+			process_ants(data, cursor->line);
+		else if (code == CMD)
+		{
+			process_command(data, cursor);
+			cursor = cursor->next;
+		}
+		else if (code == VERTEX)
+			process_vertex(data, cursor->line);
+		else if (code == EDGE)
+			process_edgr(data, cursor->line);
+		else if (code == UNKNOWN)
+			free_exit(data, "Error : unknown line format.\n", NULL);
+		cursor = cursor->next;
+	}
+	return ;
 }

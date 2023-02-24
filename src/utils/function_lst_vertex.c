@@ -1,65 +1,94 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   function_lst.c                                     :+:      :+:    :+:   */
+/*   function_lst_vertex.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 21:07:57 by sbaranes          #+#    #+#             */
-/*   Updated: 2021/07/20 10:28:49 by sbaranes         ###   ########lyon.fr   */
+/*   Created: 2023/02/24 11:02:38 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 11:02:45 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lib.h"
+#include "lib.h"
 
 t_vertex	*lstnew_vertex(char *name, int cord_x, int cord_y)
 {
 	t_vertex	*lst;
 
-	lst = wrmalloc(sizeof(t_vertex));
+	lst = malloc(sizeof(t_vertex));
 	if (!lst)
 		return (NULL);
 	lst->name = ft_strdup(name);
 	lst->cord_x = cord_x;
 	lst->cord_y = cord_y;
 	lst->next = NULL;
-	lst->prev = NULL;
+	lst->last = NULL;
 	return (lst);
-}
-
-void	lstadd_front_vertex(t_vertex **alst, t_vertex *new)
-{
-	new->next = *alst;
-	*alst = new;
 }
 
 void	lstadd_back_vertex(t_vertex **alst, t_vertex *new)
 {
 	t_vertex	*p;
+	t_vertex	*save;
 
 	p = *alst;
+	save = *alst;
 	if (!alst)
 		return ;
 	if (!*alst)
+	{
+		new->last = new;
 		*alst = new;
+	}
 	else if (p)
 	{
-		while (p->next)
-			p = p->next;
+		p = p->last;
 		p->next = new;
+		save->last = p->next;
 	}
 }
 
-t_vertex	*lstlast_vertex(t_vertex *lstt)
+void	lstclear_vertex(t_data *data)
 {
+	t_vertex	*temp;
 	t_vertex	*lst;
 
-	if (!lstt)
-		return (lstt);
-	lst = lstt;
-	while (lst->next)
+	if (data->list_vertex == NULL)
+		return ;
+	lst = data->list_vertex;
+	while (lst)
 	{
+		temp = lst;
 		lst = lst->next;
+		free(temp->name);
+		free(temp);
 	}
-	return (lst);
+}
+
+bool	set_start_or_end(t_data *data, t_vertex *new_vertex, int code)
+{
+	if (code == 0)
+	{
+		if (data->start_vertex != NULL)
+		{
+			free(new_vertex->name);
+			free(new_vertex);
+			return (write(2, "Error : start cant be 2 time.\n", 31));
+		}
+		data->start_vertex = new_vertex;
+	}
+	else
+	{
+		if (data->end_vertex != NULL)
+		{
+			free(new_vertex->name);
+			free(new_vertex);
+			return (write(2, "Error : end cant be 2 time.\n", 29));
+		}
+		data->end_vertex = new_vertex;
+	}
+	lstadd_back_vertex(&data->list_vertex, new_vertex);
+	data->dico_vertex = add_node(data->dico_vertex, new_vertex->name);
+	return (EXIT_SUCCESS);
 }

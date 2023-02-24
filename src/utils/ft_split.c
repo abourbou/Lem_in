@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/23 13:42:59 by sbaranes          #+#    #+#             */
-/*   Updated: 2021/03/24 15:49:35 by sbaranes         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 10:42:16 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lib.h"
+#include "lib.h"
 
 static char	**free_tab_split(char **dest, int i)
 {
@@ -50,7 +50,7 @@ static char	**malloc_dest(char **dest, char const *s, char c, size_t count)
 
 	i = 0;
 	re_count = 0;
-	dest = (char **)wrmalloc_parsing((count + 1) * sizeof(char *));
+	dest = (char **)malloc((count + 1) * sizeof(char *));
 	if (!dest)
 		return (0);
 	while (s[i] && re_count < count)
@@ -63,7 +63,7 @@ static char	**malloc_dest(char **dest, char const *s, char c, size_t count)
 			t_malloc++;
 			i++;
 		}
-		dest[re_count] = wrmalloc_parsing((t_malloc + 1) * sizeof(char));
+		dest[re_count] = malloc((t_malloc + 1) * sizeof(char));
 		if (!dest)
 			return (free_tab_split(dest, re_count));
 		re_count++;
