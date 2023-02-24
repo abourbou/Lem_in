@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_memory2.c                                    :+:      :+:    :+:   */
+/*   algo.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/24 11:00:51 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:59:03 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/02/23 10:24:35 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/23 16:45:21 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib.h"
+#ifndef ALGO_H
+# define ALGO_H
 
-void	free_tab(char **str)
-{
-	int	i;
+# include "graph.h"
+# include "queue.h"
 
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		str[i] = NULL;
-		i++;
-	}
-	free(str);
-	str = NULL;
-}
+short	check_path_exists(t_graph *graph);
+void	erase_dead_end_nodes(t_graph *graph);
+void	construct_level_graph(t_graph *graph);
 
-int	print_error_return(char *msg, int signal)
-{
-	print_error("ERROR : ");
-	print_error(msg);
-	return (signal);
-}
+#endif

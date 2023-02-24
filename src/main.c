@@ -1,4 +1,19 @@
-#include "../include/lib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 18:12:38 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lib.h"
+#include "graph.h"
+#include "queue.h"
+#include "algo.h"
 
 void	init_data(t_data *data)
 {
@@ -14,8 +29,7 @@ void	init_data(t_data *data)
 	data->pars.step = 1;
 }
 
-
-void print_data(t_data *data)
+void	print_data(t_data *data)
 {
 	if (data->start_vertex != NULL)
 		printf("start vertex = vertex : %s | cord x : %d | cord y : %d\n", data->start_vertex->name, data->start_vertex->cord_x, data->start_vertex->cord_y);
@@ -36,13 +50,72 @@ void print_data(t_data *data)
 	}
 }
 
+void	print_graph(t_graph *graph)
+{
+	t_node *source = graph->source;
+	t_node *sink = graph->sink;
+	printf("source : %s, sink : %s\n", source->name, sink->name);
+
+	t_dlist *current = graph->lnode;
+	while (current)
+	{
+		t_node *node = current->content;
+		printf("node %s\n", node->name);
+		t_dlist *current_llink = node->l_links;
+		while (current_llink)
+		{
+			t_link *link = current_llink->content;
+			t_node *other_node = find_opposite_node(link, node);
+			printf("\t- link with %s\n", other_node->name);
+			current_llink = current_llink->next;
+		}
+		current = current->next;
+	}
+}
+
+# define START_CLOCK(start) {start = clock();}
+# define EVALUATE_CLOCK(start, name) {double cpu_time_used = (double)(clock() - start) / CLOCKS_PER_SEC; \
+										printf("%s took %lfs\n", name, cpu_time_used);}
+
 int	main(void)
 {
 	t_data	data;
+	t_graph	graph;
+	clock_t	start;
 
 	init_data(&data);
+
+	START_CLOCK(start);
 	pars_args(&data);
-	print_data(&data);
+	EVALUATE_CLOCK(start, "pars_args");
+
+	START_CLOCK(start);
+	if (convert_data_graph(&data, &graph))
+	{
+		free_graph(&graph);
+		free_data(&data);
+		return (EXIT_FAILURE);
+	}
+	EVALUATE_CLOCK(start, "pars_args");
+
+	// print_graph(&graph);
+	// print_data(&data);
+	// print_map(data.list_map);
 	free_data(&data);
-	return 0;
+
+	if (check_path_exists(&graph))
+	{
+		print_error("No path exists from start to end\n");
+		free_graph(&graph);
+		return (EXIT_FAILURE);
+	};
+
+	START_CLOCK(start);
+	// Erase nodes with less or equal to 1 link for opti purpose
+	erase_dead_end_nodes(&graph);
+	// print_graph(&graph);
+	EVALUATE_CLOCK(start, "erase dead end nodes");
+
+	free_graph(&graph);
+	return (0);
 }

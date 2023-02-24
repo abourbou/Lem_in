@@ -6,24 +6,24 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:02:50 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 11:04:08 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 12:25:15 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
 
-static t_node	*new_node(char *name)
+static t_btnode	*new_node(char *name)
 {
-	t_node	*new_node;
+	t_btnode	*new_node;
 
-	new_node = ft_calloc(1, sizeof(t_node));
+	new_node = ft_calloc(1, sizeof(t_btnode));
 	new_node->name = ft_strdup(name);
 	new_node->left = NULL;
 	new_node->right = NULL;
 	return (new_node);
 }
 
-t_node	*add_node(t_node *node, char *name)
+t_btnode	*add_node(t_btnode *node, char *name)
 {
 	if (node == NULL)
 		return (new_node(name));
@@ -34,7 +34,7 @@ t_node	*add_node(t_node *node, char *name)
 	return (node);
 }
 
-bool	is_exist(t_node *node, char *name)
+bool	is_exist(t_btnode *node, char *name)
 {
 	int		som;
 
@@ -49,7 +49,7 @@ bool	is_exist(t_node *node, char *name)
 		return (is_exist(node->right, name));
 }
 
-void	free_dico_vertex(t_node *node)
+void	free_dico_vertex(t_btnode *node)
 {
 	if (node == NULL)
 		return ;

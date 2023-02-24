@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_memory2.c                                    :+:      :+:    :+:   */
+/*   queue.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/24 11:00:51 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:59:03 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/02/23 07:57:13 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/23 10:13:33 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib.h"
+#ifndef QUEUE_H
+# define QUEUE_H
 
-void	free_tab(char **str)
+# include <stdlib.h>
+
+# include "graph.h"
+
+typedef struct s_queue
 {
-	int	i;
+	t_dlist	*start;
+	t_dlist	*end;
+}	t_queue;
 
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		str[i] = NULL;
-		i++;
-	}
-	free(str);
-	str = NULL;
-}
+void	queue_init(t_queue *queue);
+void	free_queue(t_queue *queue, void deallocator(void*));
+short	is_queue_empty(t_queue *queue);
+short	queue_push(t_queue *queue, void *content);
+void	*queue_pop(t_queue *queue);
 
-int	print_error_return(char *msg, int signal)
-{
-	print_error("ERROR : ");
-	print_error(msg);
-	return (signal);
-}
+#endif
