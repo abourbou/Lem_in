@@ -1,4 +1,16 @@
-#include "../../include/lib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_str.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/24 11:01:29 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 11:01:58 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lib.h"
 
 void	skip_space_i(char *str, int *i)
 {
@@ -41,7 +53,7 @@ short	ft_isnumber(int c)
 		return (0);
 }
 
-int is_interger(char *line)
+int	is_interger(char *line)
 {
 	int	i;
 
@@ -52,5 +64,5 @@ int is_interger(char *line)
 			return (EXIT_FAILURE);
 		i++;
 	}
-	return EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }

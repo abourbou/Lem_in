@@ -1,14 +1,23 @@
-#include "../../include/lib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_parsing.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/24 10:59:00 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 10:59:43 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lib.h"
 
 static bool	is_comment(char *line)
 {
-	if (line[0] != '#')
-		return false;
-	if (ft_strlen(line) == 1)
-		return true;
-	else if (line[1] == '#')
-		return false;
-	return (true);
+	if (line[0] == '#' && ft_strcmp(line, "##start")
+		&& ft_strcmp(line, "##end"))
+		return (true);
+	return (false);
 }
 
 static bool	is_vertex(char *line)
@@ -53,8 +62,8 @@ static bool	is_edge(char *line)
 
 static bool	is_cmd(char *line)
 {
-	if (ft_strcmp(line, "##start") == 0 ||
-		ft_strcmp(line, "##end") == 0)
+	if (ft_strcmp(line, "##start") == 0
+		|| ft_strcmp(line, "##end") == 0)
 	{
 		return (true);
 	}
@@ -64,12 +73,12 @@ static bool	is_cmd(char *line)
 int	define_line(char *line)
 {
 	if (is_comment(line))
-		return COM;
+		return (COM);
 	else if (is_cmd(line))
-		return CMD;
+		return (CMD);
 	else if (is_edge(line))
-		return EDGE;
+		return (EDGE);
 	else if (is_vertex(line))
-		return VERTEX;
-	return UNKNOWN;
+		return (VERTEX);
+	return (UNKNOWN);
 }

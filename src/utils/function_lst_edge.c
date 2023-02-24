@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   function_lst.c                                     :+:      :+:    :+:   */
+/*   function_lst_edge.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/21 21:07:57 by sbaranes          #+#    #+#             */
-/*   Updated: 2021/07/20 10:28:49 by sbaranes         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 10:58:43 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lib.h"
+#include "lib.h"
 
-t_edge	*lstnew_edge(char *vertex1, char *vertex2 , int direction)
+t_edge	*lstnew_edge(char *vertex1, char *vertex2, int direction)
 {
 	t_edge	*lst;
 

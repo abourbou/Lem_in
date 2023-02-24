@@ -37,6 +37,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/get_next_line.c \
 				utils/get_next_line_utils.c \
 				utils/utils_memory.c \
+				utils/utils_memory2.c \
 				utils/utils_parsing.c \
 				utils/utils_str.c \
 				utils/utils_str2.c \

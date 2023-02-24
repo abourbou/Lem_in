@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: faherrau <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:56:28 by faherrau          #+#    #+#             */
-/*   Updated: 2021/05/21 17:59:18 by faherrau         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 10:42:36 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/lib.h"
+#include "lib.h"
 
 char	*get_first_part(char *str)
 {

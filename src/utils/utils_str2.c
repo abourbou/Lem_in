@@ -1,4 +1,16 @@
-#include "../../include/lib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_str2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/24 11:02:08 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 11:02:34 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lib.h"
 
 int	atoi_sp(char *str, int *i)
 {
@@ -15,10 +27,11 @@ int	atoi_sp(char *str, int *i)
 
 int	ft_substrlen(char **str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (!str)
-		return 0;
+		return (0);
 	while (str[i])
 		i++;
 	return (i);

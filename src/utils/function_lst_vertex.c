@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   function_lst_vertex.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/24 11:02:38 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 11:02:45 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../../include/lib.h"
+#include "lib.h"
 
 t_vertex	*lstnew_vertex(char *name, int cord_x, int cord_y)
 {

@@ -1,4 +1,16 @@
-#include "../../include/lib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_lines.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/24 10:56:51 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 10:57:39 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lib.h"
 
 static void	process_ants(t_data *data, char *line)
 {
@@ -11,7 +23,7 @@ static void	process_ants(t_data *data, char *line)
 	if (check_space_end(line, &i))
 		free_exit(data, "Error : numbers of ants incorrect format.\n", NULL);
 	if (data->numb_ants == 0)
-		free_exit(data, "Error : [numbers of ants] cant be 0.\n", NULL);
+		free_exit(data, "Error : numbers of ants cant be 0.\n", NULL);
 }
 
 void	process_vertex(t_data *data, char *line)
@@ -25,15 +37,15 @@ void	process_vertex(t_data *data, char *line)
 	if (arg[0][0] == 'L' || arg[0][0] == '#')
 		free_exit(data, "Error : room name cant start by # or 'L'.\n", arg);
 	if (is_interger(arg[1]) || is_interger(arg[2]))
-		free_exit(data, "Error : bad format coordone.\n", arg);
-	if (is_existe(data->dico_vertex, arg[0]) == 0)
+		free_exit(data, "Error : bad format coordinates.\n", arg);
+	if (is_exist(data->dico_vertex, arg[0]) == 0)
 	{
 		lstadd_back_vertex(&data->list_vertex, lstnew_vertex(arg[0],
-			atoi(arg[1]), atoi(arg[2])));
+				atoi(arg[1]), atoi(arg[2])));
 		data->dico_vertex = add_node(data->dico_vertex, arg[0]);
 	}
 	else
-		free_exit(data, "Error : 2 Room cant have same name.\n", arg);
+		free_exit(data, "Error : 2 rooms cant have same name.\n", arg);
 	free_tab(arg);
 }
 
@@ -52,14 +64,15 @@ static void	process_command(t_data *data, t_map	*cursor)
 	if (arg[0][0] == 'L' || arg[0][0] == '#')
 		free_exit(data, "Error : room name cant start by # or 'L'\n", arg);
 	if (is_interger(arg[1]) || is_interger(arg[2]))
-		free_exit(data, "Error : bad forma for coordone\n", arg);
-	if (is_existe(data->dico_vertex, arg[0]) == 0)
+		free_exit(data, "Error : bad format for coordinates\n", arg);
+	if (is_exist(data->dico_vertex, arg[0]) == 0)
 	{
-		if (set_start_or_end(data, lstnew_vertex(arg[0], atoi(arg[1]), atoi(arg[2])), code))
+		if (set_start_or_end(data, lstnew_vertex(arg[0], atoi(arg[1]),
+					atoi(arg[2])), code))
 			free_exit(data, NULL, arg);
 	}
 	else
-		free_exit(data, "Error : 2 Room cant have same name.\n", arg);
+		free_exit(data, "Error : 2 rooms cant have same name.\n", arg);
 	free_tab(arg);
 }
 
@@ -106,7 +119,7 @@ void	parse_stdin(t_data *data)
 		else if (code == EDGE)
 			process_edgr(data, cursor->line);
 		else if (code == UNKNOWN)
-			free_exit(data, "Eroor : bad unknow line format.\n", NULL);
+			free_exit(data, "Error : unknown line format.\n", NULL);
 		cursor = cursor->next;
 	}
 	return ;

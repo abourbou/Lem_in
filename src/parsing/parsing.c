@@ -1,4 +1,16 @@
-#include "../../include/lib.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/24 10:56:16 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/24 10:56:42 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "lib.h"
 
 static void	print_free_map(t_data *data)
 {
@@ -37,9 +49,9 @@ bool	pars_args(t_data *data)
 	read_stdin(data);
 	parse_stdin(data);
 	if (data->start_vertex == NULL)
-		free_exit(data, "Error : Commande Start not found.\n", NULL);
+		free_exit(data, "Error : command start not found.\n", NULL);
 	if (data->end_vertex == NULL)
-		free_exit(data, "Error : Commande End not found.\n", NULL);
+		free_exit(data, "Error : command end not found.\n", NULL);
 	print_free_map(data);
-	return EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }
