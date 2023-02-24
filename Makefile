@@ -2,7 +2,7 @@
 # Compilation
 NAME		=	lem_in
 CC			=	clang
-FLAGS		=	-Wall -Werror -Wextra -g3 -flto -march=native -Ofast
+FLAGS		=	-Wall -Werror -Wextra -g3 #-flto -march=native -Ofast
 HEADER		=	-I$(PATH_INC)
 
 # Color Code and template code
@@ -30,7 +30,6 @@ PATH_OBJ	=	obj
 # Source
 SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/ft_dlist.c \
-				utils/ft_dlist2.c \
 				utils/ft_split.c \
 				utils/function_lst_map.c \
 				utils/function_lst_edge.c \
@@ -49,7 +48,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				graph/data_to_graph.c \
 				graph/utils_graph.c \
 				graph/free_graph.c \
-				algo/preparation_algo.c \
+				algo/preprocessing.c \
 				)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))

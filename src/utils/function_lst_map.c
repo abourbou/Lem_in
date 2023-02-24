@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:02:03 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:07:58 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 17:57:57 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,6 @@ void	lstadd_back_map(t_map **alst, t_map *new)
 		p->next = new;
 		save->last = p->next;
 	}
-}
-
-t_map	*lstlast_map(t_map *lstt)
-{
-	t_map	*lst;
-
-	if (!lstt)
-		return (lstt);
-	lst = lstt;
-	while (lst->next)
-	{
-		lst = lst->next;
-	}
-	return (lst);
 }
 
 void	lstclear_map(t_data *data)

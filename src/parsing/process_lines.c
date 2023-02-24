@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:56:51 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 10:57:39 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 18:11:42 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static void	process_edgr(t_data *data, char *line)
 		(arg[1][0] == 'L' || arg[1][0] == '#'))
 		free_exit(data, "Error : room name cant start by # or 'L'.\n", arg);
 	if (ft_strcmp(arg[0], arg[1]) == 0)
-		free_exit(data, "Error : link cant have same room name.\n", arg);
+		free_exit(data, "Error : link cannot connect a room to itself.\n", arg);
 	lstadd_back_edge(&data->list_edge, lstnew_edge(arg[0], arg[1], 0));
 	free_tab(arg);
 }

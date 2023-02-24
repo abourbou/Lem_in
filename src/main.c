@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:32:15 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 18:12:38 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,57 +65,56 @@ void	print_graph(t_graph *graph)
 		while (current_llink)
 		{
 			t_link *link = current_llink->content;
-			printf("\t- link with %s\n", link->terminal->name);
+			t_node *other_node = find_opposite_node(link, node);
+			printf("\t- link with %s\n", other_node->name);
 			current_llink = current_llink->next;
 		}
 		current = current->next;
 	}
 }
 
+# define START_CLOCK(start) {start = clock();}
+# define EVALUATE_CLOCK(start, name) {double cpu_time_used = (double)(clock() - start) / CLOCKS_PER_SEC; \
+										printf("%s took %lfs\n", name, cpu_time_used);}
+
 int	main(void)
 {
 	t_data	data;
 	t_graph	graph;
 	clock_t	start;
-	double	cpu_time_used;
 
 	init_data(&data);
 
-	start = clock();
+	START_CLOCK(start);
 	pars_args(&data);
-	cpu_time_used = (double)(clock() - start) / CLOCKS_PER_SEC;
-	printf("pars_args took %lfs\n", cpu_time_used);
+	EVALUATE_CLOCK(start, "pars_args");
 
-	start = clock();
+	START_CLOCK(start);
 	if (convert_data_graph(&data, &graph))
 	{
+		free_graph(&graph);
 		free_data(&data);
-		print_error("Error converting the data to a graph");
 		return (EXIT_FAILURE);
 	}
-	cpu_time_used = (double)(clock() - start) / CLOCKS_PER_SEC;
-	// print_graph(&graph);
-	printf("convert_data_graph took %lfs\n", cpu_time_used);
+	EVALUATE_CLOCK(start, "pars_args");
 
-	// print_data(&data);
-	print_map(data.list_map);
-	free_data(&data);
 	// print_graph(&graph);
+	// print_data(&data);
+	// print_map(data.list_map);
+	free_data(&data);
 
 	if (check_path_exists(&graph))
 	{
-		print_error("No path exist from start to end");
+		print_error("No path exists from start to end\n");
 		free_graph(&graph);
 		return (EXIT_FAILURE);
 	};
 
+	START_CLOCK(start);
 	// Erase nodes with less or equal to 1 link for opti purpose
 	erase_dead_end_nodes(&graph);
 	// print_graph(&graph);
-
-	// TODO change system of links, not very good think about a better one
-	// TODO erase isolated nodes using level graph
-	// erase_isolated_nodes(&graph);
+	EVALUATE_CLOCK(start, "erase dead end nodes");
 
 	free_graph(&graph);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 10:14:27 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/23 15:16:55 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 17:59:52 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,44 +37,10 @@ void	dlist_pushfront(t_dlist **start, t_dlist *new_elem)
 	*start = new_elem;
 }
 
-void	dlist_pushback(t_dlist **start, t_dlist *new_elem)
-{
-	t_dlist	*current;
-
-	if (!start)
-		return ;
-	new_elem->prev = 0;
-	new_elem->next = 0;
-	if (!*start)
-	{
-		*start = new_elem;
-		return ;
-	}
-	current = *start;
-	while (current->next)
-		current = current->next;
-	current->next = new_elem;
-	new_elem->prev = current;
-}
-
-void	dlist_addafter(t_dlist *current_elem, t_dlist *new_elem)
-{
-	t_dlist	*next_elem;
-
-	if (!current_elem || !new_elem)
-		return ;
-	next_elem = current_elem->next;
-	current_elem->next = new_elem;
-	new_elem->prev = current_elem;
-	new_elem->next = next_elem;
-	if (next_elem)
-		next_elem->prev = new_elem;
-}
-
-void		dlist_erase(t_dlist **start, t_dlist *elem)
+void	dlist_erase(t_dlist **start, t_dlist *elem)
 {
 	t_dlist	*prev;
-	t_dlist *next;
+	t_dlist	*next;
 
 	if (!start || !*start)
 		return ;
@@ -87,4 +53,17 @@ void		dlist_erase(t_dlist **start, t_dlist *elem)
 		prev->next = next;
 	if (next)
 		next->prev = prev;
+}
+
+size_t	dlist_compt(t_dlist *list)
+{
+	size_t	compt;
+
+	compt = 0;
+	while (list)
+	{
+		++compt;
+		list = list->next;
+	}
+	return (compt);
 }

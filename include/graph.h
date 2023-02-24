@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:30:52 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/24 17:47:15 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ typedef struct s_node
  * Link structure containing:
  * - terminal : node where it goes
  * - flow : status of the link
- *   (0 = blocked, 1 = available, 2 = used)
+ *   (0 = unused, 1 = node1->node2, 2 = node2->node1)
 */
 typedef struct s_link
 {
-	t_node	*terminal;
+	t_node	*node1;
+	t_node	*node2;
 	int		flow;
 }	t_link;
 
@@ -70,6 +71,7 @@ typedef struct s_path
 typedef struct s_flow
 {
 	t_dlist	*t_path;
+	int		max_flow;
 }	t_flow;
 
 // Prototypes
@@ -79,9 +81,9 @@ short	convert_data_graph(t_data *data, t_graph *graph);
 short	create_link(t_node *node1, t_node *node2);
 short	find_nodes(t_edge *edge, t_graph *graph, t_node **first_node,
 			t_node **second_node);
+t_node	*find_opposite_node(t_link *link, t_node *tail);
 t_node	*convert_vertex_to_node(t_vertex *vertex);
-void	free_node(t_node *node);
 void	free_graph(t_graph *graph);
 void	erase_node(t_node *node);
-short	check_edge_already_exist(t_node *node1, t_node *node2);
+short	check_link_already_exist(t_node *node1, t_node *node2);
 #endif
