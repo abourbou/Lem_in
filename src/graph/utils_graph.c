@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:31:24 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:52:46 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 13:46:08 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_node	*convert_vertex_to_node(t_vertex *vertex)
 	node->name = ft_strdup(vertex->name);
 	node->l_links = 0;
 	node->is_used = false;
-	node->dist_source = 4294967295;
+	node->level = 4294967295;
 	node->ant_nb = 0;
 	return (node);
 }
@@ -32,7 +32,7 @@ short	find_nodes(t_edge *edge, t_graph *graph, t_node **first_node,
 	t_dlist	*current_lnode;
 	t_node	*node;
 
-	current_lnode = graph->lnode;
+	current_lnode = graph->l_node;
 	*first_node = 0;
 	*second_node = 0;
 	while (current_lnode && (!*first_node || !*second_node))

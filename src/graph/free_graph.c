@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:17:25 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:52:28 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 16:44:01 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	free_graph(t_graph *graph)
 	t_dlist	*next_lnode;
 	t_node	*node;
 
-	graph->source = 0;
-	graph->sink = 0;
-	current_lnode = graph->lnode;
+	graph->start_node = 0;
+	graph->end_node = 0;
+	current_lnode = graph->l_node;
 	while (current_lnode)
 	{
 		next_lnode = current_lnode->next;

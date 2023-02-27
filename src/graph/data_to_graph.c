@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:50:29 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:53:17 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 16:44:01 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	reset_graph(t_graph *graph)
 {
-	graph->lnode = 0;
-	graph->source = 0;
-	graph->sink = 0;
+	graph->l_node = 0;
+	graph->start_node = 0;
+	graph->end_node = 0;
 }
 
 short	create_nodes(t_data *data, t_graph *graph)
@@ -30,7 +30,7 @@ short	create_nodes(t_data *data, t_graph *graph)
 		new_lnode = dlist_new(convert_vertex_to_node(current_vertex));
 		if (!new_lnode)
 			return (print_error_return("failed creating node\n", EXIT_FAILURE));
-		dlist_pushfront(&graph->lnode, new_lnode);
+		dlist_pushfront(&graph->l_node, new_lnode);
 		current_vertex = current_vertex->next;
 	}
 	return (EXIT_SUCCESS);
@@ -43,16 +43,16 @@ void	add_start_end(t_data *data, t_graph *graph)
 	char	*end_name;
 	t_node	*node;
 
-	lcurrent = graph->lnode;
+	lcurrent = graph->l_node;
 	start_name = data->start_vertex->name;
 	end_name = data->end_vertex->name;
 	while (lcurrent)
 	{
 		node = lcurrent->content;
 		if (!ft_strcmp(start_name, node->name))
-			graph->source = lcurrent->content;
+			graph->start_node = lcurrent->content;
 		else if (!ft_strcmp(end_name, node->name))
-			graph->sink = lcurrent->content;
+			graph->end_node = lcurrent->content;
 		lcurrent = lcurrent->next;
 	}
 }

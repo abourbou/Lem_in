@@ -12,12 +12,6 @@
 
 #include "queue.h"
 
-void	queue_init(t_queue *queue)
-{
-	queue->start = 0;
-	queue->end = 0;
-}
-
 void	free_queue(t_queue *queue, void deallocator(void*))
 {
 	void	*content;

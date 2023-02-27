@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 10:14:27 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:59:52 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 08:54:32 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_dlist	*dlist_new(void *content)
 	t_dlist	*new;
 
 	new = malloc(sizeof(t_dlist));
+	if (!new)
+		return (0);
 	new->content = content;
 	new->next = 0;
 	new->prev = 0;

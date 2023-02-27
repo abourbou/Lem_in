@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   queue.h                                            :+:      :+:    :+:   */
+/*   utils_flow.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 07:57:13 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/27 15:28:07 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/02/27 08:48:34 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/27 12:29:54 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUEUE_H
-# define QUEUE_H
+#include "graph.h"
 
-# include <stdlib.h>
-
-# include "graph.h"
-
-typedef struct s_queue
+t_flow	*create_tflow(void)
 {
-	t_dlist	*start;
-	t_dlist	*end;
-}	t_queue;
+	t_flow *flow;
 
-void	free_queue(t_queue *queue, void deallocator(void*));
-short	is_queue_empty(t_queue *queue);
-short	queue_push(t_queue *queue, void *content);
-void	*queue_pop(t_queue *queue);
-
-#endif
+	flow = malloc(sizeof(t_flow));
+	if (!flow)
+		return (0);
+	flow->l_path = 0;
+	flow->max_flow = 0;
+	return (flow);
+}

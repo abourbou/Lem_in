@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 10:59:45 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:51:45 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 16:44:01 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ short	check_path_exists(t_graph *graph)
 	t_dlist	*lcurrent;
 	t_node	*node;
 
-	lcurrent = graph->lnode;
+	lcurrent = graph->l_node;
 	while (lcurrent)
 	{
 		node = lcurrent->content;
 		node->is_used = false;
 		lcurrent = lcurrent->next;
 	}
-	return (dfs_find_end(graph->source, graph->sink));
+	return (dfs_find_end(graph->start_node, graph->end_node));
 }
 
 /**
@@ -59,26 +59,26 @@ void	erase_dead_end_nodes(t_graph *graph)
 {
 	short	is_change;
 	t_dlist	*lnode_next;
-	t_dlist	*lnode;
+	t_dlist	*l_node;
 	t_node	*node;
 
 	is_change = true;
 	while (is_change)
 	{
 		is_change = false;
-		lnode = graph->lnode;
-		while (lnode)
+		l_node = graph->l_node;
+		while (l_node)
 		{
-			lnode_next = lnode->next;
-			node = lnode->content;
-			if (node != graph->source && node != graph->sink
+			lnode_next = l_node->next;
+			node = l_node->content;
+			if (node != graph->start_node && node != graph->end_node
 				&& dlist_compt(node->l_links) < 2)
 			{
 				erase_node(node);
-				dlist_erase(&graph->lnode, lnode);
+				dlist_erase(&graph->l_node, l_node);
 				is_change = true;
 			}
-			lnode = lnode_next;
+			l_node = lnode_next;
 		}
 	}
 }

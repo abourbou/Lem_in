@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 18:12:38 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 17:16:21 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,15 @@ void	print_data(t_data *data)
 
 void	print_graph(t_graph *graph)
 {
-	t_node *source = graph->source;
-	t_node *sink = graph->sink;
-	printf("source : %s, sink : %s\n", source->name, sink->name);
+	t_node *start_node = graph->start_node;
+	t_node *end_node = graph->end_node;
+	printf("start_node : %s, end_node : %s\n", start_node->name, end_node->name);
 
-	t_dlist *current = graph->lnode;
+	t_dlist *current = graph->l_node;
 	while (current)
 	{
 		t_node *node = current->content;
-		printf("node %s\n", node->name);
+		printf("node %s, level: %u\n", node->name, node->level);
 		t_dlist *current_llink = node->l_links;
 		while (current_llink)
 		{
@@ -82,6 +82,7 @@ int	main(void)
 	t_data	data;
 	t_graph	graph;
 	clock_t	start;
+	int		nb_ants;
 
 	init_data(&data);
 
@@ -96,13 +97,15 @@ int	main(void)
 		free_data(&data);
 		return (EXIT_FAILURE);
 	}
-	EVALUATE_CLOCK(start, "pars_args");
+	EVALUATE_CLOCK(start, "convert_data_graph");
 
 	// print_graph(&graph);
 	// print_data(&data);
 	// print_map(data.list_map);
+	nb_ants = data.numb_ants;
 	free_data(&data);
 
+	START_CLOCK(start);
 	if (check_path_exists(&graph))
 	{
 		print_error("No path exists from start to end\n");
@@ -110,11 +113,16 @@ int	main(void)
 		return (EXIT_FAILURE);
 	};
 
-	START_CLOCK(start);
 	// Erase nodes with less or equal to 1 link for opti purpose
 	erase_dead_end_nodes(&graph);
 	// print_graph(&graph);
-	EVALUATE_CLOCK(start, "erase dead end nodes");
+	EVALUATE_CLOCK(start, "preprocessing algo");
+
+	START_CLOCK(start);
+	t_flow *flow = dinic_algo(nb_ants, &graph);
+	(void)flow;
+	print_graph(&graph);
+	EVALUATE_CLOCK(start, "Dinic algorithm");
 
 	free_graph(&graph);
 	return (0);

@@ -47,8 +47,12 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				parsing/parsing.c \
 				graph/data_to_graph.c \
 				graph/utils_graph.c \
+				graph/utils_flow.c \
 				graph/free_graph.c \
 				algo/preprocessing.c \
+				algo/dinic_algo.c \
+				algo/level_graph.c \
+				algo/utils_algo.c \
 				)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))

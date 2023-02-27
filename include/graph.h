@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:47:15 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 16:44:01 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ typedef struct s_node
 	char			*name;
 	t_dlist			*l_links;
 	short			is_used;
-	unsigned int	dist_source;
+	unsigned int	level;
 	int				ant_nb;
 }	t_node;
 
@@ -38,7 +38,7 @@ typedef struct s_node
  * Link structure containing:
  * - terminal : node where it goes
  * - flow : status of the link
- *   (0 = unused, 1 = node1->node2, 2 = node2->node1)
+ *   (0 = unused, 1 = node1->node2, -1 = node2->node1)
 */
 typedef struct s_link
 {
@@ -55,23 +55,25 @@ typedef struct s_link
 */
 typedef struct s_graph
 {
-	t_dlist	*lnode;
-	t_node	*source;
-	t_node	*sink;
+	t_dlist	*l_node;
+	t_node	*start_node;
+	t_node	*end_node ;
 }	t_graph;
 
 typedef struct s_path
 {
-	t_node			*arr_node;
+	t_dlist			*l_start;
+	t_dlist			*l_end;
 	unsigned int	length;
+	unsigned int	nbr_ants;
 }	t_path;
 
-// flow of a graph from source to sink
+// flow of a graph from start_node to end_node
 // containing a list of path sorted by size
 typedef struct s_flow
 {
-	t_dlist	*t_path;
-	int		max_flow;
+	t_dlist	*l_path;
+	size_t	max_flow;
 }	t_flow;
 
 // Prototypes
@@ -86,4 +88,8 @@ t_node	*convert_vertex_to_node(t_vertex *vertex);
 void	free_graph(t_graph *graph);
 void	erase_node(t_node *node);
 short	check_link_already_exist(t_node *node1, t_node *node2);
+
+// Utils for flow construction
+t_flow	*create_tflow(void);
+
 #endif
