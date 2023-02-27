@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:56:16 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:23:15 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 13:47:10 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

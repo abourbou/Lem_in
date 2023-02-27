@@ -2,7 +2,7 @@
 # Compilation
 NAME		=	lem_in
 CC			=	clang
-FLAGS		=	-Wall -Wextra -g3 #-fsanitize=address #-flto -march=native -Ofast
+FLAGS		=	-Wall -Werror -Wextra -g3 #-fsanitize=address #-flto -march=native -Ofast
 HEADER		=	-I$(PATH_INC)
 
 # Color Code and template code
@@ -58,6 +58,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				algo/level_graph.c \
 				algo/utils_algo.c \
 				algo/find_blocking_path.c \
+				algo/process_dispatch_ants.c \
 				)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))

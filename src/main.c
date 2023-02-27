@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 15:42:47 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:11:34 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,10 @@ int	main(void)
 	START_CLOCK(start);
 	t_flow *flow = dinic_algo(&graph);
 	EVALUATE_CLOCK(start, "Dinic algorithm");
+
+	START_CLOCK(start);
+	dispatch_ants(flow);
+	EVALUATE_CLOCK(start, "dispatch_ants");
 
 	free_graph(&graph);
 	return (0);
