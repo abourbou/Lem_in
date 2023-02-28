@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/27 17:16:21 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 16:49:46 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ void	print_graph(t_graph *graph)
 		{
 			t_link *link = current_llink->content;
 			t_node *other_node = find_opposite_node(link, node);
-			printf("\t- link with %s\n", other_node->name);
+			int flow = link->flow;
+			if (link->node2 == node)
+				flow *= -1;
+			printf("\t- link with %s, flow : %d\n", other_node->name, flow);
 			current_llink = current_llink->next;
 		}
 		current = current->next;
@@ -121,7 +124,7 @@ int	main(void)
 	START_CLOCK(start);
 	t_flow *flow = dinic_algo(nb_ants, &graph);
 	(void)flow;
-	print_graph(&graph);
+	// print_graph(&graph);
 	EVALUATE_CLOCK(start, "Dinic algorithm");
 
 	free_graph(&graph);

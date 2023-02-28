@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:23:55 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/27 16:51:49 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 17:11:09 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ short	can_access_node(t_link *link, t_node *head)
 	if (head == link->node1 && link->flow != 1)
 		return (EXIT_SUCCESS);
 	else if (head == link->node2 && link->flow != -1)
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
+}
+
+short	can_access_residual_node(t_link *link, t_node *head)
+{
+	if (head == link->node1 && link->flow != -1)
+		return (EXIT_SUCCESS);
+	else if (head == link->node2 && link->flow != 1)
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
 }

@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   queue.h                                            :+:      :+:    :+:   */
+/*   stack.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 07:57:13 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/28 08:05:18 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/02/28 08:05:38 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/28 13:15:40 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUEUE_H
-# define QUEUE_H
+#ifndef STACK_H
+# define STACK_H
 
-# include <stdlib.h>
+#include "lib.h"
 
-# include "lib.h"
-
-typedef struct s_queue
+typedef struct s_stack
 {
 	t_dlist	*start;
 	t_dlist	*end;
-}	t_queue;
+}	t_stack;
 
-void	free_queue(t_queue *queue, void deallocator(void*));
-short	is_queue_empty(t_queue *queue);
-short	queue_push(t_queue *queue, void *content);
-void	*queue_pop(t_queue *queue);
+void	free_stack(t_stack *stack, void deallocator(void*));
+short	is_stack_empty(t_stack *stack);
+short	stack_push(t_stack *stack, void *content);
+void	*stack_pop(t_stack *stack);
 
 #endif

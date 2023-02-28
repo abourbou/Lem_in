@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 09:54:29 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/27 17:18:24 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 17:17:10 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_node	*examinate_level(t_node *prev_node, t_link *link)
 
 	node = find_opposite_node(link, prev_node);
 	if (node->is_used || node->level <= prev_node->level
-		|| can_access_node(link, node))
+		|| can_access_residual_node(link, node))
 		return (0);
 	return (node);
 }
@@ -62,10 +62,7 @@ short	propagate_level(t_queue *queue_node, t_node *node, t_node *end)
 			if (opposite_node != end)
 			{
 				if (queue_push(queue_node, opposite_node))
-				{
-					free_queue(queue_node, 0);
 					return (-1);
-				}
 			}
 		}
 		current_llink = current_llink->next;
@@ -88,6 +85,7 @@ int	construct_level_graph(t_graph *graph)
 		if (propagate_level(&queue_node, node, graph->end_node) == -1)
 		{
 			print_error("can not malloc in construct_level_graph");
+			free_queue(&queue_node, 0);
 			free_graph(graph);
 			exit(1);
 		}

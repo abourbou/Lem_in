@@ -2,7 +2,7 @@
 # Compilation
 NAME		=	lem_in
 CC			=	clang
-FLAGS		=	-Wall -Werror -Wextra -g3 #-flto -march=native -Ofast
+FLAGS		=	-Wall -Wextra -g3 #-flto -march=native -Ofast
 HEADER		=	-I$(PATH_INC)
 
 # Color Code and template code
@@ -37,6 +37,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/function_node.c \
 				utils/get_next_line.c \
 				utils/get_next_line_utils.c \
+				utils/stack.c \
 				utils/utils_memory.c \
 				utils/utils_memory2.c \
 				utils/utils_parsing.c \
@@ -53,6 +54,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				algo/dinic_algo.c \
 				algo/level_graph.c \
 				algo/utils_algo.c \
+				algo/find_blocking_path.c \
 				)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))

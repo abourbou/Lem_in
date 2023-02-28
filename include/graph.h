@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/27 16:44:01 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 16:19:41 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_flow
 {
 	t_dlist	*l_path;
 	size_t	max_flow;
+	size_t	nb_steps;
 }	t_flow;
 
 // Prototypes
@@ -91,5 +92,8 @@ short	check_link_already_exist(t_node *node1, t_node *node2);
 
 // Utils for flow construction
 t_flow	*create_tflow(void);
+
+//TODO delete it
+void	print_graph(t_graph *graph);
 
 #endif

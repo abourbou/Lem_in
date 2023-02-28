@@ -1,65 +1,72 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   queue.c                                           :+:      :+:    :+:   */
+/*   stack.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 08:05:19 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/23 08:12:43 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/02/28 08:04:55 by abourbou          #+#    #+#             */
+/*   Updated: 2023/02/28 13:15:36 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "queue.h"
+#include "lib.h"
 
-void	free_queue(t_queue *queue, void deallocator(void*))
+
+#include "stack.h"
+
+void	free_stack(t_stack *stack, void deallocator(void*))
 {
 	void	*content;
 
-	content = queue_pop(queue);
+	content = stack_pop(stack);
 	while (content)
 	{
 		if (deallocator)
 			deallocator(content);
-		content = queue_pop(queue);
+		content = stack_pop(stack);
 	}
 }
 
-short	is_queue_empty(t_queue *queue)
+short	is_stack_empty(t_stack *stack)
 {
-	return (!queue->start || !queue->end);
+	return (!stack->start || !stack->end);
 }
 
-short	queue_push(t_queue *queue, void *content)
+short	stack_push(t_stack *stack, void *content)
 {
 	t_dlist	*new_elem;
 
 	new_elem = dlist_new(content);
 	if (!new_elem)
 		return (EXIT_FAILURE);
-	if (!queue->start)
+	if (!stack->end)
 	{
-		queue->start = new_elem;
-		queue->end = new_elem;
+		stack->start = new_elem;
+		stack->end = new_elem;
 	}
 	else
-		dlist_pushfront(&queue->start, new_elem);
+	{
+		stack->end->next = new_elem;
+		new_elem->prev = stack->end;
+		stack->end = new_elem;
+	}
 	return (EXIT_SUCCESS);
 }
 
-void	*queue_pop(t_queue *queue)
+void	*stack_pop(t_stack *stack)
 {
 	t_dlist	*prev;
 	void	*content;
 
-	if (!queue->start)
+	if (!stack->end)
 		return (0);
-	if (queue->start == queue->end)
-		queue->start = 0;
-	content = queue->end->content;
-	prev = queue->end->prev;
-	free(queue->end);
-	queue->end = prev;
+	content = stack->end->content;
+	if (stack->start == stack->end)
+		stack->start = 0;
+	prev = stack->end->prev;
+	free(stack->end);
+	stack->end = prev;
 	if (prev)
 		prev->next = 0;
 	return (content);
