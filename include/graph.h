@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:07:54 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:14:25 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_path
 	t_dlist			*l_end;
 	unsigned int	length;
 	unsigned int	nbr_ants;
+	unsigned int	real_capasity_ants;
 }	t_path;
 
 // flow of a graph from start_node to end_node

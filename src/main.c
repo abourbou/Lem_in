@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:11:34 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:15:11 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int	main(void)
 	EVALUATE_CLOCK(start, "Dinic algorithm");
 
 	START_CLOCK(start);
-	dispatch_ants(flow);
+	dispatch_ants(flow, graph.nb_ants);
 	EVALUATE_CLOCK(start, "dispatch_ants");
 
 	free_graph(&graph);

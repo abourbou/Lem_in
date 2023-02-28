@@ -6,18 +6,11 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:17:25 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 14:32:02 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:16:29 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
-
-void	reset_graph(t_graph *graph)
-{
-	graph->l_node = 0;
-	graph->start_node = 0;
-	graph->end_node = 0;
-}
 
 void	free_graph(t_graph *graph)
 {

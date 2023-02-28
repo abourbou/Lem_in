@@ -6,11 +6,19 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:50:29 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 14:31:48 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:15:48 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
+
+void	reset_graph(t_graph *graph)
+{
+	graph->l_node = 0;
+	graph->start_node = 0;
+	graph->end_node = 0;
+	graph->nb_ants = 0;
+}
 
 short	create_nodes(t_data *data, t_graph *graph)
 {
@@ -39,6 +47,7 @@ void	add_start_end(t_data *data, t_graph *graph)
 	lcurrent = graph->l_node;
 	start_name = data->start_vertex->name;
 	end_name = data->end_vertex->name;
+	graph->nb_ants = data->numb_ants;
 	while (lcurrent)
 	{
 		node = lcurrent->content;
