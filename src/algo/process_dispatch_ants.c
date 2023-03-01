@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 13:46:52 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/02 19:16:08 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:18:25 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,33 @@ int	check_path_to_use(t_flow *flow, unsigned int nb_ants)
 	return (nb_path_to_use);
 }
 
-// void	distibute_last_ants(t_flow *flow, unsigned int nb_ants)
-// {
+void	distibute_last_ants(t_flow *flow, unsigned int nb_ants, int nb_path_used)
+{
+	int i = 0;
+	t_dlist	*cursor;
+	t_path	*current;
 
-// }
+	cursor = flow->l_path;
+	while (nb_ants != 0)
+	{
+		current = cursor->content;
+		current->real_capasity_ants = current->length;
+		if (cursor->next != NULL && i < nb_path_used - 1)
+		{
+			t_path	*next = cursor->next->content;
+			current->real_capasity_ants = current->length + (next->length - current->length);
+			printf("real_capasity_ants for path num %d = %d\n", i, current->real_capasity_ants);
+		}
+		while (current->real_capasity_ants > current->nbr_ants && nb_ants != 0)
+		{
+			current->nbr_ants++;
+			nb_ants--;
+		}
+		printf("path nb %d = %d nb of ants\n", i, current->nbr_ants);
+		i++;
+		cursor = cursor->next;
+	}
+}
 
 void	dispatch_ants(t_flow *flow, int nb_ants)
 {
@@ -105,8 +128,8 @@ void	dispatch_ants(t_flow *flow, int nb_ants)
 		cursor = cursor->next;
 	}
 	printf("nm ants rest = %d\n", nb_ants);
-	// distibute_last_ants(flow, nb_ants);
-	// printf("nm ants rest final = %d\n", nb_ants);
+	distibute_last_ants(flow, nb_ants, nb_path_used);
+	printf("nm ants rest final = %d\n", nb_ants);
 	// for (size_t i = 0; i < count; i++)
 	// {
 	// 	/* code */
