@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:45:10 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/01 10:53:34 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 18:03:02 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,13 @@ t_flow	*dinic_algo(t_graph *graph)
 		++i;
 	}
 	printf("Final flow is : %lu\n", current_flow);
-	// tflow = create_tflow(graph);
+	tflow = create_tflow(graph);
+	if (!tflow)
+	{
+		print_error("can not create the t_flow");
+		free_graph(graph);
+		exit(1);
+	}
 	// return (save_tflow);
-	return (0);
+	return (tflow);
 }

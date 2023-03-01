@@ -6,23 +6,11 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:48:34 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/28 15:04:52 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 18:04:07 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
-
-t_flow	*create_tflow(void)
-{
-	t_flow *flow;
-
-	flow = malloc(sizeof(t_flow));
-	if (!flow)
-		return (0);
-	flow->l_path = 0;
-	flow->max_flow = 0;
-	return (flow);
-}
 
 void	increment_flow(t_link *link, t_node *source, t_node *dest)
 {
@@ -37,4 +25,52 @@ void	increment_flow(t_link *link, t_node *source, t_node *dest)
 		exit(1);
 	}
 	link->flow += val;
+}
+
+t_flow	*init_tflow(void)
+{
+	t_flow	*tflow;
+
+	tflow = malloc(sizeof(t_flow));
+	if (!tflow)
+	{
+		print_error("can not malloc in create_tflow");
+		return (0);
+	}
+	tflow->l_path = 0;
+	tflow->max_flow = 0;
+	tflow->nb_steps = 0;
+	return (tflow);
+}
+
+void	free_tflow(t_flow *tflow)
+{
+	t_dlist	*l_path;
+	t_dlist	*l_next_path;
+	t_path	*path;
+	t_dlist	*l_current_room;
+	t_dlist	*l_next_room;
+
+	l_path = tflow->l_path;
+	while (l_path)
+	{
+		path = l_path->content;
+		l_current_room = path->l_start;
+		while (l_current_room)
+		{
+			l_next_room = l_current_room->next;
+			free(l_current_room);
+			l_current_room = l_next_room;
+		}
+		free(path);
+		l_next_path = l_path->next;
+		free(l_path);
+		l_path = l_next_path;
+	}
+}
+
+short	tflow_insert_path(t_flow *tflow, t_path *path)
+{
+	(void)tflow; (void)path;
+	return (EXIT_SUCCESS);
 }

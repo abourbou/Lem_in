@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/28 16:49:46 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 20:58:01 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	main(void)
 	t_data	data;
 	t_graph	graph;
 	clock_t	start;
-	int		nb_ants;
 
 	init_data(&data);
 
@@ -105,7 +104,7 @@ int	main(void)
 	// print_graph(&graph);
 	// print_data(&data);
 	// print_map(data.list_map);
-	nb_ants = data.numb_ants;
+	graph.nb_ants = data.numb_ants;
 	free_data(&data);
 
 	START_CLOCK(start);
@@ -116,13 +115,13 @@ int	main(void)
 		return (EXIT_FAILURE);
 	};
 
-	// Erase nodes with less or equal to 1 link for opti purpose
+	//Erase nodes with less or equal to 1 link for opti purpose
 	erase_dead_end_nodes(&graph);
 	// print_graph(&graph);
 	EVALUATE_CLOCK(start, "preprocessing algo");
 
 	START_CLOCK(start);
-	t_flow *flow = dinic_algo(nb_ants, &graph);
+	t_flow *flow = dinic_algo(&graph);
 	(void)flow;
 	// print_graph(&graph);
 	EVALUATE_CLOCK(start, "Dinic algorithm");

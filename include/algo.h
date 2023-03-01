@@ -15,7 +15,6 @@
 
 # include "graph.h"
 # include "queue.h"
-# include "stack.h"
 
 # define MAX_UNSIGN_INT 4294967295
 
@@ -35,8 +34,8 @@ void	increment_flow(t_link *link, t_node *source, t_node *dest);
 size_t	find_theory_maxflow(t_graph *graph);
 t_flow	*dinic_algo(t_graph *graph);
 
-// Dinic algorithm
-size_t	find_theory_maxflow(int nb_ants, t_graph *graph);
-t_flow	*dinic_algo(int nb_ants, t_graph *graph);
+// t_flow utils
+t_flow	*create_tflow(t_graph *graph);
+short	is_node_accessible(t_link *link, t_node *tail, t_node *head);
 
 #endif

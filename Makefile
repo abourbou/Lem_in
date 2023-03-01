@@ -37,12 +37,12 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/function_node.c \
 				utils/get_next_line.c \
 				utils/get_next_line_utils.c \
-				utils/stack.c \
 				utils/utils_memory.c \
 				utils/utils_memory2.c \
 				utils/utils_parsing.c \
 				utils/utils_str.c \
 				utils/utils_str2.c \
+				utils/utils_str3.c \
 				utils/queue.c \
 				parsing/process_lines.c \
 				parsing/parsing.c \
@@ -52,6 +52,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				graph/free_graph.c \
 				algo/preprocessing.c \
 				algo/dinic_algo.c \
+				algo/handle_tflow.c \
 				algo/level_graph.c \
 				algo/utils_algo.c \
 				algo/find_blocking_path.c \

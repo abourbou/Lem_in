@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:50:29 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/27 16:44:01 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 20:55:56 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ short	create_nodes(t_data *data, t_graph *graph)
 	current_vertex = data->list_vertex;
 	while (current_vertex)
 	{
-		new_lnode = dlist_new(convert_vertex_to_node(current_vertex));
+		new_lnode = dlist_new(convert_vertex_to_node(current_vertex->name));
 		if (!new_lnode)
 			return (print_error_return("failed creating node\n", EXIT_FAILURE));
 		dlist_pushfront(&graph->l_node, new_lnode);

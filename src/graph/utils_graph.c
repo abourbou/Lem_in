@@ -6,18 +6,18 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:31:24 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/27 13:46:08 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 20:56:14 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-t_node	*convert_vertex_to_node(t_vertex *vertex)
+t_node	*convert_vertex_to_node(char *name)
 {
 	t_node	*node;
 
 	node = malloc(sizeof(t_node));
-	node->name = ft_strdup(vertex->name);
+	node->name = ft_strdup(name);
 	node->l_links = 0;
 	node->is_used = false;
 	node->level = 4294967295;
