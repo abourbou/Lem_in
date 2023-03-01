@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 10:24:35 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:13:32 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:19:19 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ t_flow	*dinic_algo(t_graph *graph);
 t_flow	*create_tflow(t_graph *graph, t_flow *tflow);
 short	is_node_accessible(t_link *link, t_node *tail, t_node *head);
 
+// function for ants mooving
 void	dispatch_ants(t_flow *l_flow, unsigned int nb_ants);
+void	moove_all_by_one(t_flow *flow, t_path *path);
+void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb);
+void	print_path(t_path *path);
+
 t_flow	init_path(int path_nb); // temps
+void	print_flow(t_flow *flow); // temps
 
 #endif

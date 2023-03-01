@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:48:34 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 15:51:52 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:21:16 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_flow	*init_tflow(void)
 		return (0);
 	}
 	tflow->l_path = 0;
-	tflow->nbr_path = 0;
+	tflow->max_flow = 0;
 	return (tflow);
 }
 
@@ -77,7 +77,7 @@ short	tflow_insert_path(t_flow *tflow, t_path *path)
 	new_lpath = dlist_new(path);
 	if (!new_lpath)
 		return (EXIT_FAILURE);
-	++tflow->nbr_path;
+	++tflow->max_flow;
 	lpath = tflow->l_path;
 	if (!lpath)
 		return (tflow_insert_first(tflow, new_lpath));

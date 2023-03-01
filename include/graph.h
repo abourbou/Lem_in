@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:14:25 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:22:54 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,18 @@ typedef struct s_path
 	t_dlist			*l_end;
 	unsigned int	length;
 	unsigned int	nbr_ants;
-	unsigned int	real_capasity_ants;
+	unsigned int	capacity;
 }	t_path;
 
 // flow of a graph from start_node to end_node
 // containing a list of path sorted by size
 typedef struct s_flow
 {
-	t_dlist	*l_path;
-	size_t	nbr_path;
+	t_dlist			*l_path;
+	int				max_flow;
+	unsigned int	ants_distrub;
+	unsigned int	ants_left;
+	unsigned int	path_necessary;
 }	t_flow;
 
 // Prototypes
@@ -101,5 +104,10 @@ short	tflow_insert_path(t_flow *tflow, t_path *path);
 
 //TODO delete it
 void	print_graph(t_graph *graph);
+
+// utils or distrib ants in paths
+bool	set_roolback(t_dlist *cursor, t_path *current, unsigned int rest_ants);
+void	resize_capacity(t_dlist *cursor, t_path *current);
+int		get_nb_laps(t_flow *flow);
 
 #endif

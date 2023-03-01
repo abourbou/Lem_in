@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:30:53 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:05:44 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:21:16 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ t_flow	*create_tflow(t_graph *graph, t_flow *tflow)
 		}
 		llink = llink->next;
 	}
-	// printf("nbr path : %lu\n", tflow->nbr_path);
+	// printf("nbr path : %lu\n", tflow->max_flow);
 	// display_flow(tflow);
 	return (tflow);
 }

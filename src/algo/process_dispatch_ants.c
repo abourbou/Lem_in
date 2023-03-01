@@ -5,67 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 13:46:52 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/02 19:18:25 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
+/*   Updated: 2023/03/02 19:27:26 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
+// TODO : SBR - kick ca a la fin
 void	print_flow(t_flow *flow)
 {
-	puts("test flow\n");
 	int y = 1;
 	for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
 	{
-		printf("Path num %d : \n", y);
 		int i = 0;
 		y++;
 		t_path	*current = cursor->content;
 		for (t_dlist *lst_room = current->l_start; lst_room ; lst_room = lst_room->next)
 		{
 			t_node *room = lst_room->content;
-			printf("Room %d : %s\n", i,room->name);
+			printf("Room %d : %s have and num %d\n", i, room->name, room->ant_nb);
 			i++;
 		}
-		puts("");
 	}
 }
 
-int	check_path_to_use(t_flow *flow, unsigned int nb_ants)
+static void	dispatch_last_ants(t_flow *flow, unsigned int nb_ants)
 {
-	int	nb_path_to_use;
-
-	nb_path_to_use = 1;
-	t_dlist *cursor = flow->l_path;
-	while (cursor && nb_ants != 0)
-	{
-		t_path	*current = cursor->content;
-		if (current->length <= nb_ants)
-		{
-			if (current->length == nb_ants)
-				break;
-			if (cursor->next != NULL)
-			{
-				t_path	*next = cursor->next->content;
-				nb_ants = (nb_ants - (current->length + (next->length - current->length)));
-			}
-			else
-				nb_ants = (nb_ants - current->length);
-		}
-		else if (current->length > nb_ants )
-			break;
-		if (nb_ants == 0)
-			break ;
-		nb_path_to_use++;
-		cursor = cursor->next;
-	}
-	return (nb_path_to_use);
-}
-
-void	distibute_last_ants(t_flow *flow, unsigned int nb_ants, int nb_path_used)
-{
-	int i = 0;
 	t_dlist	*cursor;
 	t_path	*current;
 
@@ -73,66 +39,88 @@ void	distibute_last_ants(t_flow *flow, unsigned int nb_ants, int nb_path_used)
 	while (nb_ants != 0)
 	{
 		current = cursor->content;
-		current->real_capasity_ants = current->length;
-		if (cursor->next != NULL && i < nb_path_used - 1)
-		{
-			t_path	*next = cursor->next->content;
-			current->real_capasity_ants = current->length + (next->length - current->length);
-			printf("real_capasity_ants for path num %d = %d\n", i, current->real_capasity_ants);
-		}
-		while (current->real_capasity_ants > current->nbr_ants && nb_ants != 0)
-		{
-			current->nbr_ants++;
-			nb_ants--;
-		}
-		printf("path nb %d = %d nb of ants\n", i, current->nbr_ants);
-		i++;
-		cursor = cursor->next;
+		current->nbr_ants++;
+		nb_ants--;
+		if (!cursor->next)
+			cursor = flow->l_path;
+		else
+			cursor = cursor->next;
 	}
 }
 
-void	dispatch_ants(t_flow *flow, int nb_ants)
+static int	check_path_to_use(t_flow *flow, unsigned int nb_ants)
 {
-	print_flow(flow);
-	puts("dispatch_ants start\n");
+	int				path_necessary;
+	unsigned int	rest_ant;
+	t_dlist			*cursor;
+	t_path			*current;
 
-	// fonction pour le remplisage des paths :
-	// option 1 renvoyer un tableau d'int qui va permettre de savoir combien
-	// de fourmie on va envoye par chemin
-
-	int nb_path_used = check_path_to_use(flow, nb_ants);
-	printf("nb_path_used %d for %d ants\n", nb_path_used , nb_ants);
-
-	int i = 0;
-	t_dlist	*cursor;
-	t_path	*current;
-
+	path_necessary = 0;
+	rest_ant = nb_ants;
 	cursor = flow->l_path;
+	while (cursor && rest_ant != 0)
+	{
+		current = cursor->content;
+		path_necessary++;
+		if (current->capacity < rest_ant)
+			resize_capacity(cursor, current);
+		if (set_roolback(cursor, current, nb_ants))
+			check_path_to_use(flow, nb_ants);
+		if (current->capacity <= rest_ant)
+			rest_ant = rest_ant - current->capacity;
+		cursor = cursor->next;
+	}
+	return (path_necessary);
+}
+
+void	distib_in_path(t_flow *flow, unsigned int nb_ants)
+{
+	unsigned int		i;
+	unsigned int		nb_path_used;
+	t_dlist				*cursor;
+	t_path				*current;
+
+	i = 0;
+	cursor = flow->l_path;
+	nb_path_used = flow->path_necessary;
 	while (i < nb_path_used)
 	{
 		current = cursor->content;
-		current->real_capasity_ants = current->length;
-		if (cursor->next != NULL && i < nb_path_used - 1)
-		{
-			t_path	*next = cursor->next->content;
-			current->real_capasity_ants = current->length + (next->length - current->length);
-			printf("real_capasity_ants for path num %d = %d\n", i, current->real_capasity_ants);
-		}
-		while (current->real_capasity_ants > current->nbr_ants && nb_ants != 0)
+		while (current->capacity > current->nbr_ants && nb_ants != 0)
 		{
 			current->nbr_ants++;
 			nb_ants--;
 		}
-		printf("path nb %d = %d nb of ants\n", i, current->nbr_ants);
 		i++;
 		cursor = cursor->next;
 	}
-	printf("nm ants rest = %d\n", nb_ants);
-	distibute_last_ants(flow, nb_ants, nb_path_used);
-	printf("nm ants rest final = %d\n", nb_ants);
-	// for (size_t i = 0; i < count; i++)
-	// {
-	// 	/* code */
-	// }
+	dispatch_last_ants(flow, nb_ants);
+}
+
+void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
+{
+	int	i;
+
+	print_flow(flow);
+
+	flow->path_necessary = check_path_to_use(flow, nb_ants);
+	distib_in_path(flow, nb_ants);
+
+	// TODO : SBR - kick ca a la fin
+	puts("print flow\n");
+	t_dlist	*cursor;
+	cursor = flow->l_path;
+	i = 0;
+	while (cursor)
+	{
+		t_path	*current = cursor->content;
+		printf("flow %d content %d ants for size = %d | real capacity = %d\n",
+			i , current->nbr_ants, current->length, current->capacity);
+		cursor = cursor->next;
+		i++;
+	}
+
+	// TODO : SBR - kick ca a la fin
+	printf("is will take %d laps\n", get_nb_laps(flow));
 
 }

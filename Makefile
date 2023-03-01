@@ -43,6 +43,8 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/utils_str.c \
 				utils/utils_str2.c \
 				utils/utils_str3.c \
+				utils/fonction_dispatch.c \
+				utils/utils_ants_simulation.c \
 				utils/queue.c \
 				parsing/process_lines.c \
 				parsing/parsing.c \
@@ -59,6 +61,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				algo/utils_algo.c \
 				algo/find_blocking_path.c \
 				algo/process_dispatch_ants.c \
+				algo/process_simulation.c \
 				)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))
