@@ -1,22 +1,38 @@
 5
 #Here is the number of lines required: 31
 ##start
-STAR 0 0
+Start 0 0
 ##end
-ENDD 4 4
-Ram4 7 7
-Nqs5 11 11
-C_a6 13 13
-# Useless nodes
-test14 13 13
-test15 13 13
-test16 13 13
+End 4 4
+1 7 7
+2 11 11
+3 13 13
+4 13 13
 ########
 ########
-Ram4-Nqs5
-STAR-Ram4
-C_a6-Nqs5
-Nqs5-ENDD
+Start-1
+1-End
+Start-2
+2-3
+3-4
+4-End
 #ZAA-ZOOO
 #asddas 0 0
 #Here is the number of lines required: 31
+#
+#
+#     Start							Start
+#    /     \					   /     \
+#   2       \		              2       \
+#   |        |		              |        1
+#   3        1		             2 [out]    \
+#    \       |		              |          |
+#     4     /		              3          |
+#      \   /		              |          1out
+#       End			             3 [out]     |
+#						           \         |
+#						            4        |
+#						             \       |
+#						              4out  /
+#						               \   /
+#						                End

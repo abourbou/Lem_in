@@ -2,7 +2,7 @@
 # Compilation
 NAME		=	lem_in
 CC			=	clang
-FLAGS		=	-Wall -Werror -Wextra -g3 #-flto -march=native -Ofast
+FLAGS		=	-Wall -Wextra -g3 #-fsanitize=address #-flto -march=native -Ofast
 HEADER		=	-I$(PATH_INC)
 
 # Color Code and template code
@@ -42,13 +42,22 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/utils_parsing.c \
 				utils/utils_str.c \
 				utils/utils_str2.c \
+				utils/utils_str3.c \
 				utils/queue.c \
 				parsing/process_lines.c \
 				parsing/parsing.c \
+				graph/create_link.c \
 				graph/data_to_graph.c \
 				graph/utils_graph.c \
+				graph/utils_flow.c \
+				graph/utils_flow2.c \
 				graph/free_graph.c \
 				algo/preprocessing.c \
+				algo/dinic_algo.c \
+				algo/handle_tflow.c \
+				algo/level_graph.c \
+				algo/utils_algo.c \
+				algo/find_blocking_path.c \
 				)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))

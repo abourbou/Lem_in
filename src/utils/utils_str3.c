@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   queue.h                                            :+:      :+:    :+:   */
+/*   utils_str3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/23 07:57:13 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/28 08:05:18 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/03/02 08:24:04 by abourbou          #+#    #+#             */
+/*   Updated: 2023/03/02 14:29:50 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef QUEUE_H
-# define QUEUE_H
+#include "lib.h"
 
-# include <stdlib.h>
-
-# include "lib.h"
-
-typedef struct s_queue
+char	*ft_strconcat(char *str1, char *str2)
 {
-	t_dlist	*start;
-	t_dlist	*end;
-}	t_queue;
+	size_t	len;
+	char	*result;
+	int		i;
+	int		j;
 
-void	free_queue(t_queue *queue, void deallocator(void*));
-short	is_queue_empty(t_queue *queue);
-short	queue_push(t_queue *queue, void *content);
-void	*queue_pop(t_queue *queue);
-
-#endif
+	len = ft_strlen(str1) + ft_strlen(str2) + 1;
+	result = malloc(sizeof(char) * len);
+	i = 0;
+	while (str1[i])
+	{
+		result[i] = str1[i];
+		++i;
+	}
+	j = 0;
+	while (str2[j])
+	{
+		result[i + j] = str2[j];
+		++j;
+	}
+	result[i + j] = 0;
+	return (result);
+}

@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 18:12:38 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 15:42:47 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,40 @@ void	print_data(t_data *data)
 
 void	print_graph(t_graph *graph)
 {
-	t_node *source = graph->source;
-	t_node *sink = graph->sink;
-	printf("source : %s, sink : %s\n", source->name, sink->name);
+	t_node *start_node = graph->start_node;
+	t_node *end_node = graph->end_node;
+	printf("start_node : %s, end_node : %s\n", start_node->name, end_node->name);
 
-	t_dlist *current = graph->lnode;
+	t_dlist *current = graph->l_node;
+	t_dlist *llast;
 	while (current)
 	{
+		if (!current->next)
+			llast = current;
 		t_node *node = current->content;
-		printf("node %s\n", node->name);
+		printf("node %s, level: %u\n", node->name, node->level);
 		t_dlist *current_llink = node->l_links;
 		while (current_llink)
 		{
 			t_link *link = current_llink->content;
 			t_node *other_node = find_opposite_node(link, node);
-			printf("\t- link with %s\n", other_node->name);
+			int flow = link->flow;
+			if (link->node1 == node)
+				printf("\t-> %s, flow : %d\n", other_node->name, flow);
+			else
+				printf("\t<- %s, flow : %d\n", other_node->name, flow);
 			current_llink = current_llink->next;
 		}
 		current = current->next;
 	}
+	printf("backward : ");
+	while (llast)
+	{
+		t_node *node = llast->content;
+		printf("%s - ", node->name);
+		llast = llast->prev;
+	}
+	printf("\n");
 }
 
 # define START_CLOCK(start) {start = clock();}
@@ -96,13 +111,14 @@ int	main(void)
 		free_data(&data);
 		return (EXIT_FAILURE);
 	}
-	EVALUATE_CLOCK(start, "pars_args");
-
+	EVALUATE_CLOCK(start, "convert_data_graph");
 	// print_graph(&graph);
 	// print_data(&data);
 	// print_map(data.list_map);
-	free_data(&data);
-
+	graph.nb_ants = data.numb_ants;
+	// free_data(&data);
+	// free_graph(&graph);
+	START_CLOCK(start);
 	if (check_path_exists(&graph))
 	{
 		print_error("No path exists from start to end\n");
@@ -110,11 +126,16 @@ int	main(void)
 		return (EXIT_FAILURE);
 	};
 
-	START_CLOCK(start);
-	// Erase nodes with less or equal to 1 link for opti purpose
-	erase_dead_end_nodes(&graph);
+	//Erase nodes with less or equal to 1 link for opti purpose
+	// free_graph(&graph);
+	// TODO debug it later
+	// erase_dead_end_nodes(&graph, true);
+	EVALUATE_CLOCK(start, "preprocessing algo");
 	// print_graph(&graph);
-	EVALUATE_CLOCK(start, "erase dead end nodes");
+
+	START_CLOCK(start);
+	t_flow *flow = dinic_algo(&graph);
+	EVALUATE_CLOCK(start, "Dinic algorithm");
 
 	free_graph(&graph);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:53:02 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:59:34 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 18:51:51 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int			ft_substrlen(char **str);
 void		free_tab(char **str);
 int			is_interger(char *line);
 char		*ft_strdup(char *src);
+char	*ft_strconcat(char *str1, char *str2);
 
 /*
 ** Function for get_next_line package
@@ -166,6 +167,7 @@ int			print_error_return(char *msg, int signal);
 t_dlist		*dlist_new(void *content);
 void		dlist_pushfront(t_dlist **start, t_dlist *new_elem);
 void		dlist_erase(t_dlist **start, t_dlist *elem);
+void		dlist_pushafter(t_dlist *elem, t_dlist *new_elem);
 size_t		dlist_compt(t_dlist *list);
 
 #endif

@@ -6,22 +6,23 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:31:24 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:52:46 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 11:41:16 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-t_node	*convert_vertex_to_node(t_vertex *vertex)
+t_node	*convert_vertex_to_node(char *name)
 {
 	t_node	*node;
 
 	node = malloc(sizeof(t_node));
-	node->name = ft_strdup(vertex->name);
+	node->name = ft_strdup(name);
 	node->l_links = 0;
 	node->is_used = false;
-	node->dist_source = 4294967295;
+	node->level = 4294967295;
 	node->ant_nb = 0;
+	node->node_out = 0;
 	return (node);
 }
 
@@ -32,7 +33,7 @@ short	find_nodes(t_edge *edge, t_graph *graph, t_node **first_node,
 	t_dlist	*current_lnode;
 	t_node	*node;
 
-	current_lnode = graph->lnode;
+	current_lnode = graph->l_node;
 	*first_node = 0;
 	*second_node = 0;
 	while (current_lnode && (!*first_node || !*second_node))
@@ -49,29 +50,39 @@ short	find_nodes(t_edge *edge, t_graph *graph, t_node **first_node,
 	return (EXIT_SUCCESS);
 }
 
-// Create a link in both direction
-short	create_link(t_node *node1, t_node *node2)
+short	create_node_out(t_node *node)
 {
-	t_link	*link;
+	t_node	*node_out;
+	char	*name;
 
-	link = malloc(sizeof(t_link));
-	if (!link)
+	name = ft_strconcat(node->name, " [out]");
+	if (!name)
 		return (EXIT_FAILURE);
-	link->flow = 0;
-	link->node1 = node1;
-	link->node2 = node2;
-	dlist_pushfront(&node1->l_links, dlist_new(link));
-	dlist_pushfront(&node2->l_links, dlist_new(link));
+	node_out = convert_vertex_to_node(name);
+	if (!node_out)
+		return (EXIT_FAILURE);
+	free(name);
+	node->node_out = node_out;
+	node_out->node_out = node_out;
 	return (EXIT_SUCCESS);
 }
 
 // Check if a link already exist between node1 and node2
-short	check_link_already_exist(t_node *node1, t_node *node2)
+short	check_link_already_exist(t_graph *graph, t_node *node1, t_node *node2)
 {
 	t_dlist	*current_llink;
 	t_link	*link;
+	t_node	*buffer;
 
-	current_llink = node1->l_links;
+	if (!node1->node_out || !node2->node_out)
+		return (EXIT_SUCCESS);
+	if (node1 == graph->end_node || node2 == graph->start_node)
+	{
+		buffer = node1;
+		node1 = node2;
+		node2 = buffer;
+	}
+	current_llink = node1->node_out->l_links;
 	while (current_llink)
 	{
 		link = current_llink->content;
