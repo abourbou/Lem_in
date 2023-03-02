@@ -2,7 +2,7 @@
 # Compilation
 NAME		=	lem_in
 CC			=	clang
-FLAGS		=	-Wall -Wextra -g3 #-flto -march=native -Ofast
+FLAGS		=	-Wall -Wextra -g3 #-fsanitize=address #-flto -march=native -Ofast
 HEADER		=	-I$(PATH_INC)
 
 # Color Code and template code
@@ -46,9 +46,11 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/queue.c \
 				parsing/process_lines.c \
 				parsing/parsing.c \
+				graph/create_link.c \
 				graph/data_to_graph.c \
 				graph/utils_graph.c \
 				graph/utils_flow.c \
+				graph/utils_flow2.c \
 				graph/free_graph.c \
 				algo/preprocessing.c \
 				algo/dinic_algo.c \

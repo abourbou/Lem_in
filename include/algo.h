@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 10:24:35 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/01 10:41:20 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 18:48:00 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 // Preprocessing algo
 short	check_path_exists(t_graph *graph);
-void	erase_dead_end_nodes(t_graph *graph);
 
 // Level graph functions
 int		construct_level_graph(t_graph *graph);
@@ -35,7 +34,7 @@ size_t	find_theory_maxflow(t_graph *graph);
 t_flow	*dinic_algo(t_graph *graph);
 
 // t_flow utils
-t_flow	*create_tflow(t_graph *graph);
+t_flow	*create_tflow(t_graph *graph, t_flow *tflow);
 short	is_node_accessible(t_link *link, t_node *tail, t_node *head);
 
 #endif

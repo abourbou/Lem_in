@@ -1,14 +1,14 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   utils_algo.c                                       :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2023/02/27 09:23:55 by abourbou          #+#    #+#             */
-// /*   Updated: 2023/03/01 10:41:20 by abourbou         ###   ########lyon.fr   */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_algo.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/02 15:54:21 by abourbou          #+#    #+#             */
+/*   Updated: 2023/03/02 15:54:51 by abourbou         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "algo.h"
 
@@ -30,26 +30,21 @@ size_t	find_theory_maxflow(t_graph *graph)
 
 short	is_node_accessible(t_link *link, t_node *tail, t_node *head)
 {
-	if (link->flow == 3)
-		return (EXIT_FAILURE);
 	if (link->flow == 1 && tail == link->node1 && head == link->node2)
-		return (EXIT_SUCCESS);
-	if (link->flow == -1 && tail == link->node2 && head == link->node1)
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
 }
 
 // Can the node be accessed in the residual graph
 // from the link
+// Valid if the flow can pass or reverse
 // return EXIT_SUCCESS if it is the case
 // or EXIT_FAILURE if it is blocked
 short	can_access_residual_node(t_link *link, t_node *head)
 {
-	if (link->flow == 3)
-		return (EXIT_FAILURE);
-	if (head == link->node1 && link->flow != -1)
+	if (head == link->node2 && link->flow == 0)
 		return (EXIT_SUCCESS);
-	else if (head == link->node2 && link->flow != 1)
+	else if (head == link->node1 && link->flow == 1)
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
 }

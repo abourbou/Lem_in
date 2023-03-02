@@ -6,26 +6,11 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:48:34 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/01 18:04:07 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 15:51:52 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
-
-void	increment_flow(t_link *link, t_node *source, t_node *dest)
-{
-	int	val;
-	if (link->node1 == source && link->node2 == dest)
-		val = 1;
-	else if (link->node2 == source && link->node1 == dest)
-		val = -1;
-	else
-	{
-		print_error("error incrementing flow");
-		exit(1);
-	}
-	link->flow += val;
-}
 
 t_flow	*init_tflow(void)
 {
@@ -38,8 +23,7 @@ t_flow	*init_tflow(void)
 		return (0);
 	}
 	tflow->l_path = 0;
-	tflow->max_flow = 0;
-	tflow->nb_steps = 0;
+	tflow->nbr_path = 0;
 	return (tflow);
 }
 
@@ -69,8 +53,44 @@ void	free_tflow(t_flow *tflow)
 	}
 }
 
+short	tflow_insert_first(t_flow *tflow, t_dlist *new_lpath)
+{
+	tflow->l_path = new_lpath;
+	return (EXIT_SUCCESS);
+}
+
+short	tflow_insert_front(t_flow *tflow, t_dlist *new_lpath)
+{
+	dlist_pushfront(&tflow->l_path, new_lpath);
+	return (EXIT_SUCCESS);
+}
+
+// Insert by ordered size
+// Small first
 short	tflow_insert_path(t_flow *tflow, t_path *path)
 {
-	(void)tflow; (void)path;
+	t_dlist	*lpath;
+	t_dlist	*new_lpath;
+	t_path	*new_path;
+	size_t	size_path;
+
+	new_lpath = dlist_new(path);
+	if (!new_lpath)
+		return (EXIT_FAILURE);
+	++tflow->nbr_path;
+	lpath = tflow->l_path;
+	if (!lpath)
+		return (tflow_insert_first(tflow, new_lpath));
+	new_path = lpath->content;
+	size_path = new_path->length;
+	if (size_path > path->length)
+		return (tflow_insert_front(tflow, new_lpath));
+	while (lpath->next && size_path < path->length)
+	{
+		lpath = lpath->next;
+		new_path = lpath->content;
+		size_path = new_path->length;
+	}
+	dlist_pushafter(lpath, new_lpath);
 	return (EXIT_SUCCESS);
 }

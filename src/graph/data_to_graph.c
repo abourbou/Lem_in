@@ -6,18 +6,11 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 14:50:29 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/01 20:55:56 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 14:31:48 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
-
-void	reset_graph(t_graph *graph)
-{
-	graph->l_node = 0;
-	graph->start_node = 0;
-	graph->end_node = 0;
-}
 
 short	create_nodes(t_data *data, t_graph *graph)
 {
@@ -55,6 +48,8 @@ void	add_start_end(t_data *data, t_graph *graph)
 			graph->end_node = lcurrent->content;
 		lcurrent = lcurrent->next;
 	}
+	graph->start_node->node_out = graph->start_node;
+	graph->end_node->node_out = graph->end_node;
 }
 
 short	create_links(t_data *data, t_graph *graph)
@@ -68,12 +63,35 @@ short	create_links(t_data *data, t_graph *graph)
 	{
 		if (find_nodes(current_edge, graph, &node1, &node2))
 			return (print_error_return("link to unknown room\n", EXIT_FAILURE));
-		if (check_link_already_exist(node1, node2))
+		if (check_link_already_exist(graph, node1, node2))
 			return (print_error_return("link already exist\n", EXIT_FAILURE));
-		if (create_link(node1, node2))
+		if (create_unique_room_link(graph, node1, node2))
 			return (print_error_return("malloc failed creating link\n",
 					EXIT_FAILURE));
 		current_edge = current_edge->next;
+	}
+	return (EXIT_SUCCESS);
+}
+
+short	add_node_out(t_graph *graph)
+{
+	t_dlist	*lnode;
+	t_node	*node;
+	t_dlist	*new_lnode;
+
+	lnode = graph->l_node;
+	while (lnode)
+	{
+		node = lnode->content;
+		if (node != graph->start_node && node != graph->end_node
+			&& node->node_out && node != node->node_out)
+		{
+			new_lnode = dlist_new(node->node_out);
+			if (!new_lnode)
+				return (EXIT_FAILURE);
+			dlist_pushafter(lnode, new_lnode);
+		}
+		lnode = lnode->next;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -85,6 +103,8 @@ short	convert_data_graph(t_data *data, t_graph *graph)
 		return (EXIT_FAILURE);
 	add_start_end(data, graph);
 	if (create_links(data, graph))
+		return (EXIT_FAILURE);
+	if (add_node_out(graph))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

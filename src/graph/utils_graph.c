@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:31:24 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/01 20:56:14 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 11:41:16 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_node	*convert_vertex_to_node(char *name)
 	node->is_used = false;
 	node->level = 4294967295;
 	node->ant_nb = 0;
+	node->node_out = 0;
 	return (node);
 }
 
@@ -49,29 +50,39 @@ short	find_nodes(t_edge *edge, t_graph *graph, t_node **first_node,
 	return (EXIT_SUCCESS);
 }
 
-// Create a link in both direction
-short	create_link(t_node *node1, t_node *node2)
+short	create_node_out(t_node *node)
 {
-	t_link	*link;
+	t_node	*node_out;
+	char	*name;
 
-	link = malloc(sizeof(t_link));
-	if (!link)
+	name = ft_strconcat(node->name, " [out]");
+	if (!name)
 		return (EXIT_FAILURE);
-	link->flow = 0;
-	link->node1 = node1;
-	link->node2 = node2;
-	dlist_pushfront(&node1->l_links, dlist_new(link));
-	dlist_pushfront(&node2->l_links, dlist_new(link));
+	node_out = convert_vertex_to_node(name);
+	if (!node_out)
+		return (EXIT_FAILURE);
+	free(name);
+	node->node_out = node_out;
+	node_out->node_out = node_out;
 	return (EXIT_SUCCESS);
 }
 
 // Check if a link already exist between node1 and node2
-short	check_link_already_exist(t_node *node1, t_node *node2)
+short	check_link_already_exist(t_graph *graph, t_node *node1, t_node *node2)
 {
 	t_dlist	*current_llink;
 	t_link	*link;
+	t_node	*buffer;
 
-	current_llink = node1->l_links;
+	if (!node1->node_out || !node2->node_out)
+		return (EXIT_SUCCESS);
+	if (node1 == graph->end_node || node2 == graph->start_node)
+	{
+		buffer = node1;
+		node1 = node2;
+		node2 = buffer;
+	}
+	current_llink = node1->node_out->l_links;
 	while (current_llink)
 	{
 		link = current_llink->content;
