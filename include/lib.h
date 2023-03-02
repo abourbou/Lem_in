@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:53:02 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:43:28 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 20:42:52 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 20:02:42 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 20:43:32 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,39 @@
 #include "graph.h"
 #include "queue.h"
 #include "algo.h"
+
+void	print_flow(t_flow *flow)
+{
+	// int y = 1;
+	// for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
+	// {
+	// 	int i = 0;
+	// 	y++;
+	// 	t_path	*current = cursor->content;
+	// 	for (t_dlist *lst_room = current->l_start; lst_room ; lst_room = lst_room->next)
+	// 	{
+	// 		t_node *room = lst_room->content;
+	// 		printf("Room %d : %s have and num %d\n", i, room->name, room->ant_nb);
+	// 		i++;
+	// 	}
+	// 	puts("");
+	// }
+
+	int y = 1;
+	for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
+	{
+		int i = 0;
+		y++;
+		t_path	*current = cursor->content;
+		for (t_dlist *lst_room = current->l_end; lst_room ; lst_room = lst_room->prev)
+		{
+			t_node *room = lst_room->content;
+			printf("Room %d : %s have and num %d\n", i, room->name, room->ant_nb);
+			i++;
+		}
+		puts("");
+	}
+}
 
 void	init_data(t_data *data)
 {
@@ -139,7 +172,6 @@ int	main(void)
 
 	START_CLOCK(start);
 	dispatch_ants(flow, graph.nb_ants);
-	// return (0);
 	run_ants_and_print_moove(flow, graph.nb_ants);
 	EVALUATE_CLOCK(start, "dispatch_ants");
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_dispatch_ants.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:52:06 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 20:58:34 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

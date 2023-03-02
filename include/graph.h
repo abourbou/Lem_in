@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graph.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:43:24 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 20:43:01 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ typedef struct s_flow
 }	t_flow;
 
 // Prototypes
+void	print_flow(t_flow *flow);
+
 short	convert_data_graph(t_data *data, t_graph *graph);
 
 // Utils for graph construction
