@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:03:24 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:31:08 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:34:39 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	put_new_ant(t_flow *flow)
 	while (cursor && flow->ants_left != 0 && nb_path_used != 0)
 	{
 		current = cursor->content;
-		node = current->l_start->next->content;
+		node = current->l_start->content;
 		if (current->nbr_ants != 0)
 		{
 			node->ant_nb = i;
@@ -122,5 +122,6 @@ void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb)
 		// printf("DEBUGG %d | %d | %d\n", flow->ants_distrub, flow->ants_left, ants_nb);
 		if (flow->ants_distrub == ants_nb)
 			in_progress = false;
+		// printf("DEBUGGG nb tour = %d\n", nb_tour);
 	}
 }

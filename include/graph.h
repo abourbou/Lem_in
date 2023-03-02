@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:30:07 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:32:35 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_path
 {
 	t_dlist			*l_start;
 	t_dlist			*l_end;
+	t_dlist			*ants_last;
 	unsigned int	length;
 	unsigned int	nbr_ants;
 	unsigned int	capacity;

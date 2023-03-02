@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:30:49 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:33:07 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	print_flow(t_flow *flow)
 			printf("Room %d : %s have and num %d\n", i, room->name, room->ant_nb);
 			i++;
 		}
+		puts("");
 	}
 }
 
