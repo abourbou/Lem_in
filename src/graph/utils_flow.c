@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:48:34 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:21:16 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 22:07:10 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,30 +67,43 @@ short	tflow_insert_front(t_flow *tflow, t_dlist *new_lpath)
 
 // Insert by ordered size
 // Small first
-short	tflow_insert_path(t_flow *tflow, t_path *path)
+short	tflow_insert_path(t_flow *tflow, t_path *new_path)
 {
 	t_dlist	*lpath;
+	t_path	*current_path;
 	t_dlist	*new_lpath;
-	t_path	*new_path;
-	size_t	size_path;
+	size_t	size_current_path;
+	t_dlist	*last_lpath;
 
-	new_lpath = dlist_new(path);
+	new_lpath = dlist_new(new_path);
 	if (!new_lpath)
 		return (EXIT_FAILURE);
 	++tflow->max_flow;
 	lpath = tflow->l_path;
 	if (!lpath)
 		return (tflow_insert_first(tflow, new_lpath));
-	new_path = lpath->content;
-	size_path = new_path->length;
-	if (size_path > path->length)
+	current_path = lpath->content;
+	size_current_path = current_path->length;
+	// Special case of if the new elem is first
+	if (size_current_path > new_path->length)
 		return (tflow_insert_front(tflow, new_lpath));
-	while (lpath->next && size_path < path->length)
+	// Else find the first elem to be larger than new_path
+	while (lpath)
 	{
+		current_path = lpath->content;
+		size_current_path = current_path->length;
+		if (size_current_path > new_path->length)
+			break;
+		if (!lpath->next)
+			last_lpath = lpath;
 		lpath = lpath->next;
-		new_path = lpath->content;
-		size_path = new_path->length;
 	}
-	dlist_pushafter(lpath, new_lpath);
+	if (lpath)
+		dlist_pushbefore(lpath, new_lpath);
+	else
+	{
+		last_lpath->next = new_lpath;
+		new_lpath->prev = last_lpath;
+	}
 	return (EXIT_SUCCESS);
 }

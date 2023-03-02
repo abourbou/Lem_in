@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lib.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:53:02 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 20:42:52 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/02 21:57:28 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int			ft_substrlen(char **str);
 void		free_tab(char **str);
 int			is_interger(char *line);
 char		*ft_strdup(char *src);
-char	*ft_strconcat(char *str1, char *str2);
+char		*ft_strconcat(char *str1, char *str2);
 
 /*
 ** Function for get_next_line package
@@ -171,6 +171,7 @@ void		dlist_pushfront(t_dlist **start, t_dlist *new_elem);
 void		dlist_pushback(t_dlist **end, t_dlist *new_elem);
 void		dlist_erase(t_dlist **start, t_dlist *elem);
 void		dlist_pushafter(t_dlist *elem, t_dlist *new_elem);
+void		dlist_pushbefore(t_dlist *elem, t_dlist *new_elem);
 size_t		dlist_compt(t_dlist *list);
 
 #endif

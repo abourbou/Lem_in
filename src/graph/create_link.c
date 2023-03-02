@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 09:18:05 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 18:49:37 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 22:00:48 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,3 @@ short	create_unique_room_link(t_graph *graph, t_node *node1, t_node *node2)
 			return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
-

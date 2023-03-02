@@ -30,6 +30,7 @@ PATH_OBJ	=	obj
 # Source
 SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/ft_dlist.c \
+				utils/ft_dlist2.c \
 				utils/ft_split.c \
 				utils/function_lst_map.c \
 				utils/function_lst_edge.c \
