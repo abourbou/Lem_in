@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:33:07 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:38:56 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static int	check_path_to_use(t_flow *flow, unsigned int nb_ants)
 	return (path_necessary);
 }
 
-void	distib_in_path(t_flow *flow, unsigned int nb_ants)
+static void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 {
 	unsigned int		i;
 	unsigned int		nb_path_used;
@@ -98,30 +98,17 @@ void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 	dispatch_last_ants(flow, nb_ants);
 }
 
+int	get_nb_laps(t_flow *flow)
+{
+	t_path	*current;
+
+	current = flow->l_path->content;
+	return (current->nbr_ants + current->length);
+}
+
 void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 {
-	int	i;
-
-	print_flow(flow);
 	flow->ants_left = nb_ants;
 	flow->path_necessary = check_path_to_use(flow, nb_ants);
 	distib_in_path(flow, nb_ants);
-
-	// TODO : SBR - kick ca a la fin
-	puts("print flow\n");
-	t_dlist	*cursor;
-	cursor = flow->l_path;
-	i = 0;
-	while (cursor)
-	{
-		t_path	*current = cursor->content;
-		printf("flow %d content %d ants for size = %d | real capacity = %d\n",
-			i , current->nbr_ants, current->length, current->capacity);
-		cursor = cursor->next;
-		i++;
-	}
-
-	// TODO : SBR - kick ca a la fin
-	printf("witc %d path is will take %d laps\n\n", flow->path_necessary, get_nb_laps(flow));
-
 }

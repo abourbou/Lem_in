@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:00:27 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/02 19:33:14 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:38:43 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,27 @@ bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current)
 	return (false);
 }
 
-int	get_nb_laps(t_flow *flow)
+static void	ft_putchar(char c)
 {
-	t_path	*current;
+	write(1, &c, 1);
+}
 
-	current = flow->l_path->content;
-	return (current->nbr_ants + current->length);
+void	ft_putnbr(int n)
+{
+	long int	nb;
+
+	nb = n;
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb *= -1;
+	}
+	if (nb > 9)
+		ft_putnbr(nb / 10);
+	ft_putchar((48 + nb % 10));
+}
+
+void	ft_putstr(char *line)
+{
+	write(1, line, ft_strlen(line));
 }

@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:53:02 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:05:55 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:35:17 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ typedef struct s_dlist
 
 void		free_data(t_data *data);
 void		free_exit(t_data *data, char *msg_error, char **tab);
+void		ft_putstr(char *line);
 void		ft_putstrln(char *line);
+void		ft_putnbr(int n);
 
 /*
 ** Function for parsing

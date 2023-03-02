@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 10:24:35 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:29:59 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:35:14 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,5 @@ void	moove_all_by_one(t_flow *flow, t_path *path);
 void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb);
 void	print_path(t_path *path);
 void	print_node(t_node *node);
-
-t_flow	init_path(int path_nb); // temps
-void	print_flow(t_flow *flow); // temps
 
 #endif
