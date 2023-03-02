@@ -6,7 +6,7 @@
 /*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 20:43:32 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/02 21:16:24 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,10 +171,12 @@ int	main(void)
 	EVALUATE_CLOCK(start, "Dinic algorithm");
 
 	START_CLOCK(start);
+	flow->nb_prev = 0;
 	dispatch_ants(flow, graph.nb_ants);
 	run_ants_and_print_moove(flow, graph.nb_ants);
 	EVALUATE_CLOCK(start, "dispatch_ants");
 
 	free_graph(&graph);
+	printf("\n\n nb tour prevue = %d\n", flow->nb_prev);
 	return (0);
 }

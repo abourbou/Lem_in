@@ -6,7 +6,7 @@
 /*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 20:58:34 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/02 21:18:00 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,13 @@ void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 	flow->ants_left = nb_ants;
 	flow->path_necessary = check_path_to_use(flow, nb_ants);
 	distib_in_path(flow, nb_ants);
+	flow->nb_prev = get_nb_laps(flow);
 	int i = 0;
-	printf("nb fourmie = %d\n", flow->ants_left);
+	printf("nb fourmie = %d\n\n", flow->ants_left);
 	for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
 	{
 		t_path	*current = cursor->content;
-		printf("path %d = %d ants | size %d | capasity%d", i, current->nbr_ants,
+		printf("path %d = %d ants | size %d | capasity %d", i, current->nbr_ants,
 				current->length, current->capacity);
 		puts("");
 		i++;
