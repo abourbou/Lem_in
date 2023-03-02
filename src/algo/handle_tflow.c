@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:30:53 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 22:07:32 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 22:28:51 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ t_path	*create_path(t_node *start, t_node *end, t_node *current_node)
 
 void	display_path(t_path *path)
 {
-	printf("path length : %d, nb : %d\n", path->length, path->nbr_ants);
+	printf("path length : %d, nb : %d, path_capacity : %d\n", path->length, path->nbr_ants, path->capacity);
 	printf("right sens : ");
 	t_dlist *it = path->l_start;
 	while (it)
@@ -135,8 +135,8 @@ void	display_flow(t_flow *tflow)
 	while (lpath)
 	{
 		t_path *path = lpath->content;
-		// display_path(path);
-		printf("path length : %u\n", path->length);
+		display_path(path);
+		// printf("path length : %u\n", path->length);
 		lpath = lpath->next;
 	}
 }
@@ -175,6 +175,5 @@ t_flow	*create_tflow(t_graph *graph, t_flow *tflow)
 	}
 	// printf("nbr path : %lu\n", tflow->max_flow);
 	display_flow(tflow);
-	exit(0);
 	return (tflow);
 }

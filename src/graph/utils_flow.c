@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:48:34 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 22:07:10 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 22:17:42 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,57 +53,18 @@ void	free_tflow(t_flow *tflow)
 	}
 }
 
-short	tflow_insert_first(t_flow *tflow, t_dlist *new_lpath)
+void	increment_flow(t_link *link, t_node *source, t_node *dest)
 {
-	tflow->l_path = new_lpath;
-	return (EXIT_SUCCESS);
-}
+	int	val;
 
-short	tflow_insert_front(t_flow *tflow, t_dlist *new_lpath)
-{
-	dlist_pushfront(&tflow->l_path, new_lpath);
-	return (EXIT_SUCCESS);
-}
-
-// Insert by ordered size
-// Small first
-short	tflow_insert_path(t_flow *tflow, t_path *new_path)
-{
-	t_dlist	*lpath;
-	t_path	*current_path;
-	t_dlist	*new_lpath;
-	size_t	size_current_path;
-	t_dlist	*last_lpath;
-
-	new_lpath = dlist_new(new_path);
-	if (!new_lpath)
-		return (EXIT_FAILURE);
-	++tflow->max_flow;
-	lpath = tflow->l_path;
-	if (!lpath)
-		return (tflow_insert_first(tflow, new_lpath));
-	current_path = lpath->content;
-	size_current_path = current_path->length;
-	// Special case of if the new elem is first
-	if (size_current_path > new_path->length)
-		return (tflow_insert_front(tflow, new_lpath));
-	// Else find the first elem to be larger than new_path
-	while (lpath)
-	{
-		current_path = lpath->content;
-		size_current_path = current_path->length;
-		if (size_current_path > new_path->length)
-			break;
-		if (!lpath->next)
-			last_lpath = lpath;
-		lpath = lpath->next;
-	}
-	if (lpath)
-		dlist_pushbefore(lpath, new_lpath);
+	if (link->node1 == source && link->node2 == dest)
+		val = 1;
+	else if (link->node2 == source && link->node1 == dest)
+		val = -1;
 	else
 	{
-		last_lpath->next = new_lpath;
-		new_lpath->prev = last_lpath;
+		print_error("error incrementing flow");
+		exit(1);
 	}
-	return (EXIT_SUCCESS);
+	link->flow += val;
 }
