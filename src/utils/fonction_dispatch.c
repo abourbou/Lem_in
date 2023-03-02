@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:00:27 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/02 19:38:43 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:41:18 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current)
 	return (false);
 }
 
-static void	ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }

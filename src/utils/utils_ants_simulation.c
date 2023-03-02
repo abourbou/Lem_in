@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:18:05 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:38:13 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:41:23 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	print_node(t_node *node)
 	ft_putnbr(node->ant_nb);
 	ft_putstr("-");
 	ft_putstr(node->name);
+	ft_putstr(" ");
 
 	// printf("L%d-%s ", node->ant_nb, node->name);
 }

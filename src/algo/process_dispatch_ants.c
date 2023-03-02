@@ -6,30 +6,11 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:38:56 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:42:22 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
-
-// TODO : SBR - kick ca a la fin
-void	print_flow(t_flow *flow)
-{
-	int y = 1;
-	for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
-	{
-		int i = 0;
-		y++;
-		t_path	*current = cursor->content;
-		for (t_dlist *lst_room = current->l_start; lst_room ; lst_room = lst_room->next)
-		{
-			t_node *room = lst_room->content;
-			printf("Room %d : %s have and num %d\n", i, room->name, room->ant_nb);
-			i++;
-		}
-		puts("");
-	}
-}
 
 static void	dispatch_last_ants(t_flow *flow, unsigned int nb_ants)
 {
@@ -103,7 +84,7 @@ int	get_nb_laps(t_flow *flow)
 	t_path	*current;
 
 	current = flow->l_path->content;
-	return (current->nbr_ants + current->length);
+	return (current->nbr_ants + current->length - 1);
 }
 
 void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
@@ -111,4 +92,16 @@ void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 	flow->ants_left = nb_ants;
 	flow->path_necessary = check_path_to_use(flow, nb_ants);
 	distib_in_path(flow, nb_ants);
+
+	int i = 0;
+	printf("nb fourmie = %d\n", flow->ants_left);
+	for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
+	{
+		t_path	*current = cursor->content;
+		printf("path %d = %d ants | size %d | capasity%d", i, current->nbr_ants, current->length, current->capacity);
+		puts("");
+		i++;
+	}
+
+	printf("resulte nb tour  = %d\n", get_nb_laps(flow));
 }
