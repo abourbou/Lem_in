@@ -6,33 +6,33 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:00:27 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/02 19:22:45 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:31:13 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-void	resize_capacity(t_dlist *cursor, t_path *current)
+void	resize_capacity(t_flow *flow, t_dlist *cursor, t_path *current)
 {
 	t_path	*next;
 
 	if (cursor->next != NULL)
 	{
 		next = cursor->next->content;
-		current->capacity = next->capacity;
+		if ((current->capacity + 1) != flow->ants_left)
+			current->capacity = next->capacity;
 	}
 }
 
-bool	set_roolback(t_dlist *cursor, t_path *current, unsigned int rest_ants)
+bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current)
 {
 	t_path	*prev;
-
 	if (cursor->prev != NULL)
 	{
 		prev = cursor->prev->content;
 		if (prev->capacity < current->capacity)
 		{
-			if (rest_ants >= (prev->capacity + current->capacity))
+			if (flow->ants_left >= (prev->capacity + current->capacity))
 			{
 				prev->capacity = current->capacity;
 				return (true);

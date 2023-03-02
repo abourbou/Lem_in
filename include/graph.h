@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:22:54 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:30:07 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ short	tflow_insert_path(t_flow *tflow, t_path *path);
 void	print_graph(t_graph *graph);
 
 // utils or distrib ants in paths
-bool	set_roolback(t_dlist *cursor, t_path *current, unsigned int rest_ants);
-void	resize_capacity(t_dlist *cursor, t_path *current);
+bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current);
+void	resize_capacity(t_flow *flow, t_dlist *cursor, t_path *current);
 int		get_nb_laps(t_flow *flow);
 
 #endif

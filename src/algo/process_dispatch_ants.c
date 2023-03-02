@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:27:26 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:30:49 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ static int	check_path_to_use(t_flow *flow, unsigned int nb_ants)
 		current = cursor->content;
 		path_necessary++;
 		if (current->capacity < rest_ant)
-			resize_capacity(cursor, current);
-		if (set_roolback(cursor, current, nb_ants))
+			resize_capacity(flow, cursor, current);
+		if (set_roolback(flow, cursor, current))
 			check_path_to_use(flow, nb_ants);
 		if (current->capacity <= rest_ant)
 			rest_ant = rest_ant - current->capacity;
@@ -102,7 +102,7 @@ void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 	int	i;
 
 	print_flow(flow);
-
+	flow->ants_left = nb_ants;
 	flow->path_necessary = check_path_to_use(flow, nb_ants);
 	distib_in_path(flow, nb_ants);
 
@@ -121,6 +121,6 @@ void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 	}
 
 	// TODO : SBR - kick ca a la fin
-	printf("is will take %d laps\n", get_nb_laps(flow));
+	printf("witc %d path is will take %d laps\n\n", flow->path_necessary, get_nb_laps(flow));
 
 }
