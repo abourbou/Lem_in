@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:40:08 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 20:02:42 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ int	main(void)
 
 	START_CLOCK(start);
 	dispatch_ants(flow, graph.nb_ants);
+	// return (0);
 	run_ants_and_print_moove(flow, graph.nb_ants);
 	EVALUATE_CLOCK(start, "dispatch_ants");
 

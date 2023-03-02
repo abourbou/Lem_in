@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:42:22 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:52:06 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,16 +92,30 @@ void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 	flow->ants_left = nb_ants;
 	flow->path_necessary = check_path_to_use(flow, nb_ants);
 	distib_in_path(flow, nb_ants);
-
 	int i = 0;
 	printf("nb fourmie = %d\n", flow->ants_left);
 	for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
 	{
 		t_path	*current = cursor->content;
-		printf("path %d = %d ants | size %d | capasity%d", i, current->nbr_ants, current->length, current->capacity);
+		printf("path %d = %d ants | size %d | capasity%d", i, current->nbr_ants,
+				current->length, current->capacity);
 		puts("");
 		i++;
 	}
-
 	printf("resulte nb tour  = %d\n", get_nb_laps(flow));
 }
+
+	/**
+	 * juste a decalere en haut si besoin debug
+	 * int i = 0;
+	 * printf("nb fourmie = %d\n", flow->ants_left);
+	 * for (t_dlist *cursor = flow->t_path; cursor; cursor = cursor->next)
+	 * {
+	 * 	t_path	*current = cursor->content;
+	 * 	printf("path %d = %d ants | size %d | capasity%d", i, current->nbr_ants,
+	 * 			current->length, current->capacity);
+	 * 	puts("");
+	 * 	i++;
+	 * }
+	 * printf("resulte nb tour  = %d\n", get_nb_laps(flow));
+	**/

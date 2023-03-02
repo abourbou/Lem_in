@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:30:53 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:21:16 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 20:02:38 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ t_path	*create_path(t_node *start, t_node *end, t_node *current_node)
 		return (0);
 	}
 	path->length = length + 1;
+	path->capacity = path->length;
 	return (path);
 }
 

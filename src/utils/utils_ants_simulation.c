@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:18:05 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:41:23 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 19:44:11 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,11 @@
 
 void	print_node(t_node *node)
 {
-	// TODO : SBR = peut etre a changer si pas printf
 	ft_putstr("L");
 	ft_putnbr(node->ant_nb);
 	ft_putstr("-");
 	ft_putstr(node->name);
 	ft_putstr(" ");
-
-	// printf("L%d-%s ", node->ant_nb, node->name);
 }
 
 void	print_path(t_path *path)
@@ -37,6 +34,18 @@ void	print_path(t_path *path)
 		if (node->ant_nb != 0)
 			print_node(node);
 		cursor = cursor->prev;
+	}
+}
+
+void	process_last_node(t_flow *flow, t_node *node, t_node *prev)
+{
+	node->ant_nb = prev->ant_nb;
+	prev->ant_nb = 0;
+	if (node->ant_nb != 0)
+	{
+		print_node(node);
+		flow->ants_distrub++;
+		node->ant_nb = 0;
 	}
 }
 
@@ -60,16 +69,7 @@ void	moove_all_by_one(t_flow *flow, t_path *path)
 			prev->ant_nb = 0;
 		}
 		else if (cursor == path->l_end)
-		{
-			node->ant_nb = prev->ant_nb;
-			prev->ant_nb = 0;
-			if (node->ant_nb != 0)
-			{
-				print_node(node);
-				flow->ants_distrub++;
-				node->ant_nb = 0;
-			}
-		}
+			process_last_node(flow, node, prev);
 		if (node->ant_nb != 0)
 			print_node(node);
 		cursor = cursor->prev;

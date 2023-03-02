@@ -1,11 +1,3 @@
-
-
-
-je laisse ca la au cas ou ^^
-
-
-
-// TODO : SBR - kick ca a la fin
 void	print_flow(t_flow *flow)
 {
 	// int y = 1;
@@ -38,9 +30,6 @@ void	print_flow(t_flow *flow)
 		puts("");
 	}
 }
-
-
-
 
 
 ///////////////////////////**************************************//////////////////////////////
