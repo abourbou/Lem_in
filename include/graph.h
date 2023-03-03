@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 18:52:14 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/03/03 12:46:13 by sachabarane       #+#    #+#             */
+/*   Updated: 2023/03/03 13:10:26 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,25 @@ typedef struct s_path
 	t_dlist			*l_start;
 	t_dlist			*l_end;
 	unsigned int	length;
-	unsigned int	nb_travelling_ants;
+	unsigned int	nbr_ants;
+	unsigned int	capacity;
 }	t_path;
 
 // flow of a graph from start_node to end_node
 // containing a list of path sorted by size
 typedef struct s_flow
 {
-	t_dlist	*l_path;
-	size_t	nbr_path;
+	t_dlist			*l_path;
+	int				max_flow;
+	int				nb_step;
+	int				nb_prev;
+	unsigned int	ants_distrub;
+	unsigned int	ants_left;
+	unsigned int	path_necessary;
 }	t_flow;
 
 // Prototypes
+
 short	convert_data_graph(t_data *data, t_graph *graph);
 
 // Utils for graph construction
@@ -97,8 +104,15 @@ short	create_unique_room_link(t_graph *graph, t_node *node1, t_node *node2);
 t_flow	*init_tflow(void);
 void	free_tflow(t_flow *tflow);
 short	tflow_insert_path(t_flow *tflow, t_path *path);
+void	free_path(t_path *path);
+short	path_insert(t_path *path, t_node *node);
+t_path	*free_ret_path(t_path *path);
 
-//TODO delete it
-void	print_graph(t_graph *graph);
+// utils or distrib ants in paths
+bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current);
+void	resize_capacity(t_flow *flow, t_dlist *cursor, t_path *current);
+int		get_nb_laps(t_flow *flow);
+void	distrib_in_path(t_flow *flow, unsigned int nb_ants);
+bool	check_path_capacity(t_path *current, t_path *current_next);
 
 #endif

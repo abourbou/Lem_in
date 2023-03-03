@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_lines.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/24 10:56:51 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 18:11:42 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/03/01 15:02:04 by sbaranes          #+#    #+#             */
+/*   Updated: 2023/03/03 12:50:10 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

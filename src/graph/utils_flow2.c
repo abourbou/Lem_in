@@ -6,24 +6,67 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:41:44 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 15:42:31 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:52:54 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-void	increment_flow(t_link *link, t_node *source, t_node *dest)
+short	tflow_insert_first(t_flow *tflow, t_dlist *new_lpath)
 {
-	int	val;
+	tflow->l_path = new_lpath;
+	return (EXIT_SUCCESS);
+}
 
-	if (link->node1 == source && link->node2 == dest)
-		val = 1;
-	else if (link->node2 == source && link->node1 == dest)
-		val = -1;
+short	tflow_insert_front(t_flow *tflow, t_dlist *new_lpath)
+{
+	dlist_pushfront(&tflow->l_path, new_lpath);
+	return (EXIT_SUCCESS);
+}
+
+size_t	get_lpath_length(t_dlist *lpath)
+{
+	t_path	*path;
+
+	path = lpath->content;
+	return (path->length);
+}
+
+short	tflow_insert_it(t_dlist **start, t_dlist *lpath,
+			t_dlist *new_lpath, t_dlist *last_lpath)
+{
+	if (lpath)
+		dlist_pushbefore(start, lpath, new_lpath);
 	else
 	{
-		print_error("error incrementing flow");
-		exit(1);
+		last_lpath->next = new_lpath;
+		new_lpath->prev = last_lpath;
 	}
-	link->flow += val;
+	return (EXIT_SUCCESS);
+}
+
+// Insert by ordered size
+// Small first
+short	tflow_insert_path(t_flow *tflow, t_path *new_path)
+{
+	t_dlist	*lpath;
+	t_dlist	*new_lpath;
+	t_dlist	*last_lpath;
+
+	new_lpath = dlist_new(new_path);
+	if (!new_lpath)
+		return (EXIT_FAILURE);
+	++tflow->max_flow;
+	lpath = tflow->l_path;
+	if (!lpath)
+		return (tflow_insert_first(tflow, new_lpath));
+	if (get_lpath_length(lpath) > new_path->length)
+		return (tflow_insert_front(tflow, new_lpath));
+	while (lpath && get_lpath_length(lpath) < new_path->length)
+	{
+		if (!lpath->next)
+			last_lpath = lpath;
+		lpath = lpath->next;
+	}
+	return (tflow_insert_it(&tflow->l_path, lpath, new_lpath, last_lpath));
 }

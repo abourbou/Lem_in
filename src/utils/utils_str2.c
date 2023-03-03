@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_str2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 11:02:08 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 17:53:58 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 06:55:34 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*ft_strdup(char *src)
 
 void	ft_putstrln(char *line)
 {
-	write(1, line, ft_strlen(line));
+	ft_putstr(line);
 	write(1, "\n", 1);
 }
 

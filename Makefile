@@ -2,7 +2,7 @@
 # Compilation
 NAME		=	lem_in
 CC			=	clang
-FLAGS		=	-Wall -Wextra -g3 #-fsanitize=address #-flto -march=native -Ofast
+FLAGS		=	-Wall -Werror -Wextra -g3 -flto -march=native -Ofast
 HEADER		=	-I$(PATH_INC)
 
 # Color Code and template code
@@ -30,6 +30,7 @@ PATH_OBJ	=	obj
 # Source
 SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/ft_dlist.c \
+				utils/ft_dlist2.c \
 				utils/ft_split.c \
 				utils/function_lst_map.c \
 				utils/function_lst_edge.c \
@@ -43,6 +44,8 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				utils/utils_str.c \
 				utils/utils_str2.c \
 				utils/utils_str3.c \
+				utils/fonction_dispatch.c \
+				utils/utils_ants_simulation.c \
 				utils/queue.c \
 				parsing/process_lines.c \
 				parsing/parsing.c \
@@ -55,9 +58,12 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				algo/preprocessing.c \
 				algo/dinic_algo.c \
 				algo/handle_tflow.c \
+				algo/handle_tflow2.c \
 				algo/level_graph.c \
 				algo/utils_algo.c \
 				algo/find_blocking_path.c \
+				algo/process_dispatch_ants.c \
+				algo/process_simulation.c \
 				)
 
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))

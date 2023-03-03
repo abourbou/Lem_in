@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/24 10:56:16 by abourbou          #+#    #+#             */
-/*   Updated: 2023/02/24 13:23:15 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/03/01 15:02:23 by sbaranes          #+#    #+#             */
+/*   Updated: 2023/03/03 12:55:41 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	print_map(t_map *list_map)
 		ft_putstrln(list_map->line);
 		list_map = list_map->next;
 	}
+	ft_putstr("\n");
 }
 
 void	free_map(t_data *data)

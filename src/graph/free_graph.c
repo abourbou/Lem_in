@@ -6,18 +6,11 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:17:25 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 14:32:02 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 22:00:44 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
-
-void	reset_graph(t_graph *graph)
-{
-	graph->l_node = 0;
-	graph->start_node = 0;
-	graph->end_node = 0;
-}
 
 void	free_graph(t_graph *graph)
 {
@@ -77,4 +70,12 @@ void	erase_node(t_node *node)
 	}
 	free(node->name);
 	free(node);
+}
+
+void	reset_graph(t_graph *graph)
+{
+	graph->l_node = 0;
+	graph->start_node = 0;
+	graph->end_node = 0;
+	graph->nb_ants = 0;
 }
