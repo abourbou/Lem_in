@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:30:53 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 22:28:51 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 08:19:13 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ short	path_insert(t_path *path, t_node *node)
 	return (EXIT_SUCCESS);
 }
 
-t_path	*create_path(t_node *start, t_node *end, t_node *current_node)
+t_path	*free_ret_path(t_path *path)
 {
-	t_path			*path;
-	t_node			*opp_node;
-	t_dlist			*llink;
-	t_link			*link;
-	unsigned int	length;
+	free(path);
+	return (0);
+}
+
+t_path	*init_path(t_node *start, t_node *end, t_node *current_node,
+					unsigned int *length)
+{
+	t_path	*path;
 
 	if (!start || !end || !current_node)
 		return (0);
@@ -61,45 +64,51 @@ t_path	*create_path(t_node *start, t_node *end, t_node *current_node)
 	path->l_start = 0;
 	path->l_end = 0;
 	if (path_insert(path, start))
-	{
-		free_path(path);
-		return (0);
-	}
+		return (free_ret_path(path));
 	if (path_insert(path, current_node))
+		return (free_ret_path(path));
+	*length = 1;
+	return (path);
+}
+
+t_node	*find_next_node(t_node *current_node)
+{
+	t_dlist	*llink;
+	t_link	*link;
+	t_node	*opp_node;
+
+	llink = current_node->l_links;
+	while (llink)
 	{
-		free_path(path);
-		return (0);
+		link = llink->content;
+		opp_node = find_opposite_node(link, current_node);
+		if (!is_node_accessible(link, current_node, opp_node))
+			return (opp_node);
+		llink = llink->next;
 	}
-	length = 1;
+	return (0);
+}
+
+t_path	*create_path(t_node *start, t_node *end, t_node *current_node)
+{
+	t_path			*path;
+	unsigned int	length;
+
+	path = init_path(start, end, current_node, &length);
+	if (!path)
+		return (0);
 	while (current_node != end)
 	{
-		llink = current_node->l_links;
-		while (llink)
-		{
-			link = llink->content;
-			opp_node = find_opposite_node(link, current_node);
-			if (!is_node_accessible(link, current_node, opp_node))
-			{
-				current_node = opp_node;
-				break ;
-			}
-			llink = llink->next;
-		}
+		current_node = find_next_node(current_node);
 		if (current_node != current_node->node_out)
 		{
 			++length;
 			if (path_insert(path, current_node))
-			{
-				free_path(path);
-				return (0);
-			}
+				return (free_ret_path(path));
 		}
 	}
 	if (path_insert(path, current_node))
-	{
-		free_path(path);
-		return (0);
-	}
+		return (free_ret_path(path));
 	path->length = length + 1;
 	path->capacity = path->length;
 	return (path);
@@ -135,8 +144,8 @@ void	display_flow(t_flow *tflow)
 	while (lpath)
 	{
 		t_path *path = lpath->content;
-		display_path(path);
-		// printf("path length : %u\n", path->length);
+		// display_path(path);
+		printf("path length : %u\n", path->length);
 		lpath = lpath->next;
 	}
 }
@@ -174,6 +183,6 @@ t_flow	*create_tflow(t_graph *graph, t_flow *tflow)
 		llink = llink->next;
 	}
 	// printf("nbr path : %lu\n", tflow->max_flow);
-	display_flow(tflow);
+	// display_flow(tflow);
 	return (tflow);
 }

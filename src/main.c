@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 21:51:57 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 08:11:19 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,13 +144,10 @@ int	main(void)
 		free_data(&data);
 		return (EXIT_FAILURE);
 	}
-	EVALUATE_CLOCK(start, "convert_data_graph");
-	// print_graph(&graph);
-	// print_data(&data);
-	// print_map(data.list_map);
+	free_data(&data);
 	graph.nb_ants = data.numb_ants;
-	// free_data(&data);
-	// free_graph(&graph);
+	EVALUATE_CLOCK(start, "convert_data_graph");
+
 	START_CLOCK(start);
 	if (check_path_exists(&graph))
 	{
@@ -158,17 +155,15 @@ int	main(void)
 		free_graph(&graph);
 		return (EXIT_FAILURE);
 	};
-
-	//Erase nodes with less or equal to 1 link for opti purpose
-	// free_graph(&graph);
-	// TODO debug it later
-	// erase_dead_end_nodes(&graph, true);
 	EVALUATE_CLOCK(start, "preprocessing algo");
 	// print_graph(&graph);
 
 	START_CLOCK(start);
 	t_flow *flow = dinic_algo(&graph);
 	EVALUATE_CLOCK(start, "Dinic algorithm");
+	free_tflow(flow);
+	free_graph(&graph);
+	return (0);
 
 	START_CLOCK(start);
 	flow->nb_prev = 0;
@@ -176,7 +171,8 @@ int	main(void)
 	run_ants_and_print_moove(flow, graph.nb_ants);
 	EVALUATE_CLOCK(start, "dispatch_ants");
 
-	free_graph(&graph);
 	printf("\n\n nb tour prevue = %d\n", flow->nb_prev);
+	// free_tflow(flow);
+	free_graph(&graph);
 	return (0);
 }
