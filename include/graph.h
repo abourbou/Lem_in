@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graph.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/03 10:48:06 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 11:17:52 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef struct s_flow
 {
 	t_dlist			*l_path;
 	int				max_flow;
+	int				nb_step;
 	int				nb_prev;
 	unsigned int	ants_distrub;
 	unsigned int	ants_left;
@@ -84,8 +85,6 @@ typedef struct s_flow
 }	t_flow;
 
 // Prototypes
-
-int		get_nb_laps(t_flow *flow);
 
 short	convert_data_graph(t_data *data, t_graph *graph);
 
@@ -113,5 +112,6 @@ void	print_graph(t_graph *graph);
 bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current);
 void	resize_capacity(t_flow *flow, t_dlist *cursor, t_path *current);
 int		get_nb_laps(t_flow *flow);
+void	distib_in_path(t_flow *flow, unsigned int nb_ants);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/03 11:05:47 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 12:23:37 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	main(void)
 		return (EXIT_FAILURE);
 	}
 	flow = dinic_algo(&graph);
-	dispatch_ants(flow, graph.nb_ants);
+	// dispatch_ants(flow, graph.nb_ants);
 	run_ants_and_print_moove(flow, graph.nb_ants);
 	free_tflow(flow);
 	free_graph(&graph);

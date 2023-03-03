@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_dispatch_ants.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/03 11:03:04 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 12:20:05 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ unsigned int	soustrack_ants(unsigned int rest_ant, unsigned int capacity)
 	return (res);
 }
 
-static void	distib_in_path(t_flow *flow, unsigned int nb_ants)
+void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 {
 	unsigned int		i;
 	t_dlist				*cursor;
@@ -50,7 +50,10 @@ static void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 			cursor = cursor->next;
 		}
 		if (!cursor->next)
+		{
+			current = cursor->content;
 			current->nbr_ants++;
+		}
 		i++;
 	}
 }
@@ -79,10 +82,26 @@ void	get_path_necessary(t_flow *flow)
 	}
 }
 
+void	reset_flow_nb_ant(t_flow *flow)
+{
+	t_dlist	*cursor;
+	t_path	*current;
+
+	cursor = flow->l_path;
+	while (cursor)
+	{
+		current = cursor->content;
+		current->nbr_ants = 0;
+		cursor = cursor->next;
+	}
+}
+
 void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 {
+	reset_flow_nb_ant(flow);
 	flow->ants_left = nb_ants;
 	distib_in_path(flow, nb_ants);
 	flow->nb_prev = get_nb_laps(flow);
 	get_path_necessary(flow);
+
 }

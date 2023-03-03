@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_simulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:03:24 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/03 11:05:38 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 12:20:33 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
