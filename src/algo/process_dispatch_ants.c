@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_dispatch_ants.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/03 12:20:05 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 12:43:39 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ unsigned int	soustrack_ants(unsigned int rest_ant, unsigned int capacity)
 
 void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 {
-	unsigned int		i;
-	t_dlist				*cursor;
-	t_path				*current;
-	t_path				*current_next;
+	unsigned int	i;
+	t_dlist			*cursor;
+	t_path			*current;
+	t_path			*current_next;
 
 	i = 0;
 	while (i < nb_ants)
@@ -41,12 +41,8 @@ void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 		{
 			current = cursor->content;
 			current_next = cursor->next->content;
-			if (current->nbr_ants + current->length < current_next->nbr_ants
-				+ current_next->length)
-			{
-				current->nbr_ants++;
+			if (distib_in_path_suite(current, current_next))
 				break ;
-			}
 			cursor = cursor->next;
 		}
 		if (!cursor->next)
@@ -56,14 +52,6 @@ void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 		}
 		i++;
 	}
-}
-
-int	get_nb_laps(t_flow *flow)
-{
-	t_path	*current;
-
-	current = flow->l_path->content;
-	return (current->nbr_ants + current->length);
 }
 
 void	get_path_necessary(t_flow *flow)
@@ -103,5 +91,4 @@ void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 	distib_in_path(flow, nb_ants);
 	flow->nb_prev = get_nb_laps(flow);
 	get_path_necessary(flow);
-
 }

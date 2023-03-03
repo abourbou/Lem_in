@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_simulation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:03:24 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/03 12:20:33 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 12:44:22 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb)
 	in_progress = true;
 	flow->ants_left = ants_nb;
 	flow->ants_distrub = 0;
-	int i = 0;
 	while (in_progress)
 	{
 		moove_other_ants(flow);
@@ -71,7 +70,5 @@ void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb)
 		if (flow->ants_distrub == ants_nb)
 			in_progress = false;
 		ft_putstr("\n");
-		i++;
 	}
-	printf("\ntotal turn is %d\n", i);
 }

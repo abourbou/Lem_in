@@ -6,28 +6,29 @@
 /*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:00:27 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/03 10:44:03 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 12:40:32 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-void	set_current_capasity(t_dlist *actual)
+bool	distib_in_path_suite(t_path *current, t_path *current_next)
 {
-	int		capacity_to_set;
-	t_dlist	*cursor;
+	if (current->nbr_ants + current->length < current_next->nbr_ants
+		+ current_next->length)
+	{
+		current->nbr_ants++;
+		return (true);
+	}
+	return (false);
+}
+
+int	get_nb_laps(t_flow *flow)
+{
 	t_path	*current;
 
-	cursor = actual;
-	current = cursor->content;
-	capacity_to_set = current->capacity;
-	while (cursor)
-	{
-		current = cursor->content;
-		current->capacity = capacity_to_set;
-		current->nbr_ants = 0;
-		cursor = cursor->prev;
-	}
+	current = flow->l_path->content;
+	return (current->nbr_ants + current->length);
 }
 
 void	ft_putchar(char c)
