@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fonction_dispatch.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:00:27 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/03 12:40:32 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 12:50:48 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

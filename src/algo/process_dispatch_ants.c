@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   process_dispatch_ants.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/03 12:43:39 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 12:49:57 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

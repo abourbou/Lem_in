@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/21 17:56:22 by faherrau          #+#    #+#             */
-/*   Updated: 2023/02/24 10:42:36 by abourbou         ###   ########lyon.fr   */
+/*   Created: 2023/03/03 12:51:02 by sbaranes          #+#    #+#             */
+/*   Updated: 2023/03/03 12:51:03 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

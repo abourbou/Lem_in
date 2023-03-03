@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/03 12:42:34 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 12:54:51 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	main(void)
 	pars_args(&data);
 	if (convert_data_graph(&data, &graph))
 		return (free_graph_data(&graph, &data));
-	free_data(&data);
 	graph.nb_ants = data.numb_ants;
 	if (check_path_exists(&graph))
 	{
@@ -54,8 +53,9 @@ int	main(void)
 		free_graph(&graph);
 		return (EXIT_FAILURE);
 	}
+	print_map(data.list_map);
+	free_data(&data);
 	flow = dinic_algo(&graph);
-	// dispatch_ants(flow, graph.nb_ants);
 	run_ants_and_print_moove(flow, graph.nb_ants);
 	free_tflow(flow);
 	free_graph(&graph);
