@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/22 16:38:52 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/03 12:40:56 by sachabarane      ###   ########.fr       */
+/*   Created: 2023/03/03 12:46:13 by sachabarane       #+#    #+#             */
+/*   Updated: 2023/03/03 12:46:14 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ short	create_unique_room_link(t_graph *graph, t_node *node1, t_node *node2);
 t_flow	*init_tflow(void);
 void	free_tflow(t_flow *tflow);
 short	tflow_insert_path(t_flow *tflow, t_path *path);
-
-//TODO delete it
-void	print_graph(t_graph *graph);
+void	free_path(t_path *path);
+short	path_insert(t_path *path, t_node *node);
+t_path	*free_ret_path(t_path *path);
 
 // utils or distrib ants in paths
 bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current);
