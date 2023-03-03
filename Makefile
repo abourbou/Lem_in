@@ -58,6 +58,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 				algo/preprocessing.c \
 				algo/dinic_algo.c \
 				algo/handle_tflow.c \
+				algo/handle_tflow2.c \
 				algo/level_graph.c \
 				algo/utils_algo.c \
 				algo/find_blocking_path.c \
