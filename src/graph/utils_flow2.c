@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 15:41:44 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 22:21:14 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:52:54 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ size_t	get_lpath_length(t_dlist *lpath)
 	return (path->length);
 }
 
-short	tflow_insert_it(t_dlist *lpath, t_dlist *new_lpath, t_dlist *last_lpath)
+short	tflow_insert_it(t_dlist **start, t_dlist *lpath,
+			t_dlist *new_lpath, t_dlist *last_lpath)
 {
 	if (lpath)
-		dlist_pushbefore(lpath, new_lpath);
+		dlist_pushbefore(start, lpath, new_lpath);
 	else
 	{
 		last_lpath->next = new_lpath;
@@ -67,5 +68,5 @@ short	tflow_insert_path(t_flow *tflow, t_path *new_path)
 			last_lpath = lpath;
 		lpath = lpath->next;
 	}
-	return (tflow_insert_it(lpath, new_lpath, last_lpath));
+	return (tflow_insert_it(&tflow->l_path, lpath, new_lpath, last_lpath));
 }

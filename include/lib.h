@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 10:53:02 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 21:57:28 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:47:16 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void		dlist_pushfront(t_dlist **start, t_dlist *new_elem);
 void		dlist_pushback(t_dlist **end, t_dlist *new_elem);
 void		dlist_erase(t_dlist **start, t_dlist *elem);
 void		dlist_pushafter(t_dlist *elem, t_dlist *new_elem);
-void		dlist_pushbefore(t_dlist *elem, t_dlist *new_elem);
+void		dlist_pushbefore(t_dlist **start, t_dlist *elem, t_dlist *new_elem);
 size_t		dlist_compt(t_dlist *list);
 
 #endif

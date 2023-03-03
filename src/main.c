@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/03 08:11:19 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:53:38 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,9 +161,6 @@ int	main(void)
 	START_CLOCK(start);
 	t_flow *flow = dinic_algo(&graph);
 	EVALUATE_CLOCK(start, "Dinic algorithm");
-	free_tflow(flow);
-	free_graph(&graph);
-	return (0);
 
 	START_CLOCK(start);
 	flow->nb_prev = 0;
@@ -172,7 +169,7 @@ int	main(void)
 	EVALUATE_CLOCK(start, "dispatch_ants");
 
 	printf("\n\n nb tour prevue = %d\n", flow->nb_prev);
-	// free_tflow(flow);
+	free_tflow(flow);
 	free_graph(&graph);
 	return (0);
 }
