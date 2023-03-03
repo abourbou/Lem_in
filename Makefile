@@ -2,7 +2,7 @@
 # Compilation
 NAME		=	lem_in
 CC			=	clang
-FLAGS		=	-Wall -Werror -Wextra -g3 #-fsanitize=address #-flto -march=native -Ofast
+FLAGS		=	-Wall -Werror -Wextra -g3 -fsanitize=address #-flto -march=native -Ofast
 HEADER		=	-I$(PATH_INC)
 
 # Color Code and template code

@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:45:10 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 21:32:02 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 08:02:08 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_flow	*dinic_algo(t_graph *graph)
 			break ;
 		find_blocking_path(graph, &current_flow, max_theor_flow);
 	}
-	printf("flow : %lu\n", current_flow);
+	printf("nbr paths found : %lu\n", current_flow);
 	tflow = create_tflow(graph, 0);
 	if (!tflow)
 	{
