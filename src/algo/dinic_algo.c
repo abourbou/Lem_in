@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 08:45:10 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/03 08:02:08 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:51:41 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_flow	*dinic_algo(t_graph *graph)
 	t_flow	*tflow;
 
 	max_theor_flow = find_theory_maxflow(graph);
-	printf("max theorical flow : %lu\n", max_theor_flow);
 	current_flow = 0;
 	while (!current_flow || current_flow < max_theor_flow)
 	{

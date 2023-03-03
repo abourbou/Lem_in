@@ -6,7 +6,7 @@
 /*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/03 10:53:48 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 10:58:55 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ int	main(void)
 {
 	t_data	data;
 	t_graph	graph;
-	clock_t	start;
 	t_flow *flow;
 
 	init_data(&data);

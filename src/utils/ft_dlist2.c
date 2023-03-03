@@ -6,13 +6,13 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 21:57:58 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 21:59:40 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:48:57 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib.h"
 
-void	dlist_pushbefore(t_dlist *elem, t_dlist *new_elem)
+void	dlist_pushbefore(t_dlist **start, t_dlist *elem, t_dlist *new_elem)
 {
 	t_dlist	*prev_elem;
 
@@ -22,6 +22,8 @@ void	dlist_pushbefore(t_dlist *elem, t_dlist *new_elem)
 	new_elem->prev = prev_elem;
 	if (prev_elem)
 		prev_elem->next = new_elem;
+	if (*start == elem)
+		*start = new_elem;
 }
 
 // Push new_elem after elem
