@@ -6,13 +6,13 @@
 /*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/03 10:53:41 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 11:03:04 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-unsigned int soustrack_ants(unsigned int rest_ant, unsigned int capacity)
+unsigned int	soustrack_ants(unsigned int rest_ant, unsigned int capacity)
 {
 	int	res;
 
@@ -23,19 +23,17 @@ unsigned int soustrack_ants(unsigned int rest_ant, unsigned int capacity)
 		res = rest_ant - capacity;
 	if (res < 0)
 		res *= -1;
-	return res;
+	return (res);
 }
 
 static void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 {
 	unsigned int		i;
-	// unsigned int		nb_path_used;
 	t_dlist				*cursor;
 	t_path				*current;
 	t_path				*current_next;
 
 	i = 0;
-
 	while (i < nb_ants)
 	{
 		cursor = flow->l_path;
@@ -43,10 +41,11 @@ static void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 		{
 			current = cursor->content;
 			current_next = cursor->next->content;
-			if (current->nbr_ants + current->length < current_next->nbr_ants + current_next->length)
+			if (current->nbr_ants + current->length < current_next->nbr_ants
+				+ current_next->length)
 			{
 				current->nbr_ants++;
-				break;
+				break ;
 			}
 			cursor = cursor->next;
 		}
@@ -79,7 +78,6 @@ void	get_path_necessary(t_flow *flow)
 		cursor = cursor->next;
 	}
 }
-
 
 void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 {

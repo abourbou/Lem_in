@@ -6,7 +6,7 @@
 /*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:03:24 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/03 10:48:45 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 11:05:38 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ static void	moove_other_ants(t_flow *flow)
 void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb)
 {
 	bool	in_progress;
-	int i = 0;
 
 	in_progress = true;
 	flow->ants_left = ants_nb;
 	flow->ants_distrub = 0;
+	int i = 0;
 	while (in_progress)
 	{
 		moove_other_ants(flow);
@@ -73,5 +73,5 @@ void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb)
 		ft_putstr("\n");
 		i++;
 	}
-	printf("nb boucle for get out = %d\n", i);
+	printf("\ntotal turn is %d\n", i);
 }
