@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fonction_dispatch.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:00:27 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/03 08:34:47 by sbaranes         ###   ########.fr       */
+/*   Updated: 2023/03/03 10:44:03 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
-
 
 void	set_current_capasity(t_dlist *actual)
 {
@@ -28,43 +27,6 @@ void	set_current_capasity(t_dlist *actual)
 		current->capacity = capacity_to_set;
 		current->nbr_ants = 0;
 		cursor = cursor->prev;
-	}
-}
-
-bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current)
-{
-	t_path	*prev;
-
-	if (cursor->prev != NULL)
-	{
-		prev = cursor->prev->content;
-		if (prev->capacity < current->capacity)
-		{
-			if (flow->ants_left >= (prev->capacity + current->capacity))
-			{
-				set_current_capasity(cursor);
-				return (true);
-			}
-		}
-	}
-	return (false);
-}
-
-void	resize_capacity(t_flow *flow, t_dlist *cursor, t_path *current)
-{
-	t_path	*next;
-
-	if (cursor->next != NULL)
-	{
-		next = cursor->next->content;
-		if (current->capacity != next->capacity)
-		{
-			if ((current->capacity + 1) != next->capacity
-				|| (current->capacity + 1) < flow->ants_left)
-				{
-					current->capacity = next->capacity;
-				}
-		}
 	}
 }
 

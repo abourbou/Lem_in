@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/03 08:11:19 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:53:48 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,6 @@
 #include "graph.h"
 #include "queue.h"
 #include "algo.h"
-
-void	print_flow(t_flow *flow)
-{
-	// int y = 1;
-	// for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
-	// {
-	// 	int i = 0;
-	// 	y++;
-	// 	t_path	*current = cursor->content;
-	// 	for (t_dlist *lst_room = current->l_start; lst_room ; lst_room = lst_room->next)
-	// 	{
-	// 		t_node *room = lst_room->content;
-	// 		printf("Room %d : %s have and num %d\n", i, room->name, room->ant_nb);
-	// 		i++;
-	// 	}
-	// 	puts("");
-	// }
-
-	int y = 1;
-	for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
-	{
-		int i = 0;
-		y++;
-		t_path	*current = cursor->content;
-		for (t_dlist *lst_room = current->l_end; lst_room ; lst_room = lst_room->prev)
-		{
-			t_node *room = lst_room->content;
-			printf("Room %d : %s have and num %d\n", i, room->name, room->ant_nb);
-			i++;
-		}
-		puts("");
-	}
-}
 
 void	init_data(t_data *data)
 {
@@ -121,23 +88,16 @@ void	print_graph(t_graph *graph)
 	printf("\n");
 }
 
-# define START_CLOCK(start) {start = clock();}
-# define EVALUATE_CLOCK(start, name) {double cpu_time_used = (double)(clock() - start) / CLOCKS_PER_SEC; \
-										printf("%s took %lfs\n", name, cpu_time_used);}
-
 int	main(void)
 {
 	t_data	data;
 	t_graph	graph;
 	clock_t	start;
+	t_flow *flow;
 
 	init_data(&data);
-
-	START_CLOCK(start);
+	flow = NULL;
 	pars_args(&data);
-	EVALUATE_CLOCK(start, "pars_args");
-
-	START_CLOCK(start);
 	if (convert_data_graph(&data, &graph))
 	{
 		free_graph(&graph);
@@ -146,33 +106,16 @@ int	main(void)
 	}
 	free_data(&data);
 	graph.nb_ants = data.numb_ants;
-	EVALUATE_CLOCK(start, "convert_data_graph");
-
-	START_CLOCK(start);
 	if (check_path_exists(&graph))
 	{
 		print_error("No path exists from start to end\n");
 		free_graph(&graph);
 		return (EXIT_FAILURE);
 	};
-	EVALUATE_CLOCK(start, "preprocessing algo");
-	// print_graph(&graph);
-
-	START_CLOCK(start);
-	t_flow *flow = dinic_algo(&graph);
-	EVALUATE_CLOCK(start, "Dinic algorithm");
-	free_tflow(flow);
-	free_graph(&graph);
-	return (0);
-
-	START_CLOCK(start);
-	flow->nb_prev = 0;
+	flow = dinic_algo(&graph);
 	dispatch_ants(flow, graph.nb_ants);
 	run_ants_and_print_moove(flow, graph.nb_ants);
-	EVALUATE_CLOCK(start, "dispatch_ants");
-
-	printf("\n\n nb tour prevue = %d\n", flow->nb_prev);
-	// free_tflow(flow);
+	free_tflow(flow);
 	free_graph(&graph);
 	return (0);
 }

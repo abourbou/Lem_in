@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_ants_simulation.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:18:05 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 19:44:11 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 10:43:40 by sachabarane      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
