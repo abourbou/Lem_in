@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 17:06:00 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/03 12:54:51 by sbaranes         ###   ########.fr       */
+/*   Updated: 2023/03/03 13:07:31 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(void)
 	print_map(data.list_map);
 	free_data(&data);
 	flow = dinic_algo(&graph);
-	run_ants_and_print_moove(flow, graph.nb_ants);
+	run_ants_and_print(flow, graph.nb_ants);
 	free_tflow(flow);
 	free_graph(&graph);
 	return (0);

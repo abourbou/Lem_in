@@ -6,7 +6,7 @@
 /*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/23 10:24:35 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 19:43:16 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 13:07:50 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ short	is_node_accessible(t_link *link, t_node *tail, t_node *head);
 
 // function for ants mooving
 void	dispatch_ants(t_flow *l_flow, unsigned int nb_ants);
-void	moove_all_by_one(t_flow *flow, t_path *path);
-void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb);
+void	move_all_by_one(t_flow *flow, t_path *path);
+void	run_ants_and_print(t_flow *flow, unsigned int ants_nb);
 void	print_path(t_path *path);
 void	print_node(t_node *node);
 

@@ -26,7 +26,7 @@ unsigned int	soustrack_ants(unsigned int rest_ant, unsigned int capacity)
 	return (res);
 }
 
-void	distib_in_path(t_flow *flow, unsigned int nb_ants)
+void	distrib_in_path(t_flow *flow, unsigned int nb_ants)
 {
 	unsigned int	i;
 	t_dlist			*cursor;
@@ -41,7 +41,7 @@ void	distib_in_path(t_flow *flow, unsigned int nb_ants)
 		{
 			current = cursor->content;
 			current_next = cursor->next->content;
-			if (distib_in_path_suite(current, current_next))
+			if (check_path_capacity(current, current_next))
 				break ;
 			cursor = cursor->next;
 		}
@@ -88,7 +88,7 @@ void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 {
 	reset_flow_nb_ant(flow);
 	flow->ants_left = nb_ants;
-	distib_in_path(flow, nb_ants);
+	distrib_in_path(flow, nb_ants);
 	flow->nb_prev = get_nb_laps(flow);
 	get_path_necessary(flow);
 }

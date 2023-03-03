@@ -12,7 +12,7 @@
 
 #include "graph.h"
 
-bool	distib_in_path_suite(t_path *current, t_path *current_next)
+bool	check_path_capacity(t_path *current, t_path *current_next)
 {
 	if (current->nbr_ants + current->length < current_next->nbr_ants
 		+ current_next->length)

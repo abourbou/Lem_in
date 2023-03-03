@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graph.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 12:46:13 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/03 12:46:14 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 13:10:26 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_path	*free_ret_path(t_path *path);
 bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current);
 void	resize_capacity(t_flow *flow, t_dlist *cursor, t_path *current);
 int		get_nb_laps(t_flow *flow);
-void	distib_in_path(t_flow *flow, unsigned int nb_ants);
-bool	distib_in_path_suite(t_path *current, t_path *current_next);
+void	distrib_in_path(t_flow *flow, unsigned int nb_ants);
+bool	check_path_capacity(t_path *current, t_path *current_next);
 
 #endif

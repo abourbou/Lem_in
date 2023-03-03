@@ -39,7 +39,7 @@ static void	put_new_ant(t_flow *flow)
 	}
 }
 
-static void	moove_other_ants(t_flow *flow)
+static void	move_other_ants(t_flow *flow)
 {
 	int		nb_path_used;
 	t_dlist	*cursor;
@@ -50,13 +50,13 @@ static void	moove_other_ants(t_flow *flow)
 	while (cursor && nb_path_used != 0)
 	{
 		current = cursor->content;
-		moove_all_by_one(flow, current);
+		move_all_by_one(flow, current);
 		nb_path_used--;
 		cursor = cursor->next;
 	}
 }
 
-void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb)
+void	run_ants_and_print(t_flow *flow, unsigned int ants_nb)
 {
 	bool	in_progress;
 
@@ -65,7 +65,7 @@ void	run_ants_and_print_moove(t_flow *flow, unsigned int ants_nb)
 	flow->ants_distrub = 0;
 	while (in_progress)
 	{
-		moove_other_ants(flow);
+		move_other_ants(flow);
 		put_new_ant(flow);
 		if (flow->ants_distrub == ants_nb)
 			in_progress = false;

@@ -49,7 +49,7 @@ void	process_last_node(t_flow *flow, t_node *node, t_node *prev)
 	}
 }
 
-void	moove_all_by_one(t_flow *flow, t_path *path)
+void	move_all_by_one(t_flow *flow, t_path *path)
 {
 	t_dlist	*cursor;
 	t_node	*node;
