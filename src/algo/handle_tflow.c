@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_tflow.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 09:30:53 by abourbou          #+#    #+#             */
-/*   Updated: 2023/03/02 22:28:51 by abourbou         ###   ########lyon.fr   */
+/*   Updated: 2023/03/03 07:51:17 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ t_path	*create_path(t_node *start, t_node *end, t_node *current_node)
 	}
 	path->length = length + 1;
 	path->capacity = path->length;
+	path->nbr_ants = 0;
 	return (path);
 }
 

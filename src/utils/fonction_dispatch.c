@@ -3,25 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   fonction_dispatch.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:00:27 by sachabarane       #+#    #+#             */
-/*   Updated: 2023/03/02 20:18:57 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 08:34:47 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
 
-void	resize_capacity(t_flow *flow, t_dlist *cursor, t_path *current)
-{
-	t_path	*next;
 
-	if (cursor->next != NULL)
+void	set_current_capasity(t_dlist *actual)
+{
+	int		capacity_to_set;
+	t_dlist	*cursor;
+	t_path	*current;
+
+	cursor = actual;
+	current = cursor->content;
+	capacity_to_set = current->capacity;
+	while (cursor)
 	{
-		next = cursor->next->content;
-		if ((current->capacity + 1) != next->capacity
-			|| (current->capacity + 1) != flow->ants_left)
-			current->capacity = next->capacity;
+		current = cursor->content;
+		current->capacity = capacity_to_set;
+		current->nbr_ants = 0;
+		cursor = cursor->prev;
 	}
 }
 
@@ -36,12 +42,30 @@ bool	set_roolback(t_flow *flow, t_dlist *cursor, t_path *current)
 		{
 			if (flow->ants_left >= (prev->capacity + current->capacity))
 			{
-				prev->capacity = current->capacity;
+				set_current_capasity(cursor);
 				return (true);
 			}
 		}
 	}
 	return (false);
+}
+
+void	resize_capacity(t_flow *flow, t_dlist *cursor, t_path *current)
+{
+	t_path	*next;
+
+	if (cursor->next != NULL)
+	{
+		next = cursor->next->content;
+		if (current->capacity != next->capacity)
+		{
+			if ((current->capacity + 1) != next->capacity
+				|| (current->capacity + 1) < flow->ants_left)
+				{
+					current->capacity = next->capacity;
+				}
+		}
+	}
 }
 
 void	ft_putchar(char c)

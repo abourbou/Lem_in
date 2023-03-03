@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   process_dispatch_ants.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:45 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/02 21:18:00 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/03 08:33:31 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.h"
+
+void	zeub(t_flow *flow)
+{
+	int i = 0;
+	printf("nb fourmie = %d\n", flow->ants_left);
+	puts("");
+	for (t_dlist *cursor = flow->l_path; cursor; cursor = cursor->next)
+	{
+		t_path	*current = cursor->content;
+		printf("path %d = %d ants | size %d | capasity%d", i, current->nbr_ants,
+				current->length, current->capacity);
+		puts("");
+		i++;
+	}
+	puts("");
+}
 
 static void	dispatch_last_ants(t_flow *flow, unsigned int nb_ants)
 {
@@ -30,6 +46,20 @@ static void	dispatch_last_ants(t_flow *flow, unsigned int nb_ants)
 	}
 }
 
+unsigned int soustrack_ants(unsigned int a, unsigned int b)
+{
+	int	res;
+
+	res = 0;
+	if (a >= b)
+		res = b - a ;
+	else if (b < a)
+		res = a - b ;
+	if (res < 0)
+		res *= -1;
+	return res;
+}
+
 static int	check_path_to_use(t_flow *flow, unsigned int nb_ants)
 {
 	int				path_necessary;
@@ -40,6 +70,7 @@ static int	check_path_to_use(t_flow *flow, unsigned int nb_ants)
 	path_necessary = 0;
 	rest_ant = nb_ants;
 	cursor = flow->l_path;
+	zeub(flow);
 	while (cursor && rest_ant != 0)
 	{
 		current = cursor->content;
@@ -48,10 +79,10 @@ static int	check_path_to_use(t_flow *flow, unsigned int nb_ants)
 			resize_capacity(flow, cursor, current);
 		if (set_roolback(flow, cursor, current))
 			check_path_to_use(flow, nb_ants);
-		if (current->capacity <= rest_ant)
-			rest_ant = rest_ant - current->capacity;
+		rest_ant = soustrack_ants(rest_ant, current->capacity);
 		cursor = cursor->next;
 	}
+	zeub(flow);
 	return (path_necessary);
 }
 
@@ -87,6 +118,8 @@ int	get_nb_laps(t_flow *flow)
 	return (current->nbr_ants + current->length - 1);
 }
 
+
+
 void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 {
 	flow->ants_left = nb_ants;
@@ -104,6 +137,7 @@ void	dispatch_ants(t_flow *flow, unsigned int nb_ants)
 		i++;
 	}
 	printf("resulte nb tour  = %d\n", get_nb_laps(flow));
+	zeub(flow);
 }
 
 	/**
