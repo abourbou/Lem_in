@@ -2,7 +2,7 @@
 *.d
 
 #executable
-lem_in
+lem-in
 
 # Object files
 *.o

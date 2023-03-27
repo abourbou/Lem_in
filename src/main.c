@@ -31,8 +31,8 @@ void	init_data(t_data *data)
 
 int	free_graph_data(t_graph *graph, t_data *data)
 {
-	free(graph);
-	free(data);
+	free_data(data);
+	free_graph(graph);
 	return (EXIT_FAILURE);
 }
 
@@ -50,7 +50,7 @@ int	main(void)
 	if (check_path_exists(&graph))
 	{
 		print_error("No path exists from start to end\n");
-		free_graph(&graph);
+		free_graph_data(&graph, &data);
 		return (EXIT_FAILURE);
 	}
 	print_map(data.list_map);

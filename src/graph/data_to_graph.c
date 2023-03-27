@@ -104,7 +104,10 @@ short	convert_data_graph(t_data *data, t_graph *graph)
 		return (EXIT_FAILURE);
 	add_start_end(data, graph);
 	if (create_links(data, graph))
+	{
+		add_node_out(graph);
 		return (EXIT_FAILURE);
+	}
 	if (add_node_out(graph))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

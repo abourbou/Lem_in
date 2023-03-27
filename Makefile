@@ -1,6 +1,6 @@
 
 # Compilation
-NAME		=	lem_in
+NAME		=	lem-in
 CC			=	clang
 FLAGS		=	-Wall -Werror -Wextra -g3 -flto -march=native -Ofast
 HEADER		=	-I$(PATH_INC)
@@ -69,7 +69,7 @@ SRC			=	$(addprefix $(PATH_SRC)/, main.c \
 OBJ			=	$(addprefix $(PATH_OBJ)/, $(SRC:.c=.o))
 
 # Headers
-INC_FILES	= lib.h
+INC_FILES	= lib.h algo.h graph.h queue.h
 
 INC			=	$(addprefix $(PATH_INC)/, $(INC_FILES))
 
