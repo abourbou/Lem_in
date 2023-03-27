@@ -12,13 +12,13 @@
 
 #include "algo.h"
 
-void	print_node(t_node *node)
+void    print_node(t_node *node)
 {
-	ft_putstr("L");
-	ft_putnbr(node->ant_nb);
-	ft_putstr("-");
-	ft_putstr(node->name);
-	ft_putstr(" ");
+    ft_putstr("\033[0mL\033[1;1;31m");
+    ft_putnbr(node->ant_nb);
+    ft_putstr("\033[0m-\033[3;1;36m");
+    ft_putstr(node->name);
+    ft_putstr(" ");
 }
 
 void	print_path(t_path *path)
