@@ -83,7 +83,7 @@ int	normv2_sucks_2(char **backup, int fd, int read_result)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*backup;
+	static char	*backup = 0;
 	int			read_result;
 
 	*line = NULL;
@@ -100,5 +100,10 @@ int	get_next_line(int fd, char **line)
 	if (normv2_sucks(read_result, &backup) == 0)
 		return (0);
 	backup = get_second_part(backup);
+	if (ft_strlen(backup) == 0)
+	{
+		free(backup);
+		backup = 0;
+	}
 	return (1);
 }

@@ -22,8 +22,8 @@ static void	process_ants(t_data *data, char *line)
 	data->numb_ants = atoi_sp(line, &i);
 	if (check_space_end(line, &i))
 		free_exit(data, "Error : numbers of ants incorrect format.\n", NULL);
-	if (data->numb_ants == 0)
-		free_exit(data, "Error : numbers of ants cant be 0.\n", NULL);
+	if (data->numb_ants <= 0)
+		free_exit(data, "Error : invalid numbers of ants.\n", NULL);
 }
 
 void	process_vertex(t_data *data, char *line)

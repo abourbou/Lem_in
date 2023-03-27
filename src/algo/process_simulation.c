@@ -56,19 +56,25 @@ static void	move_other_ants(t_flow *flow)
 	}
 }
 
-void	run_ants_and_print(t_flow *flow, unsigned int ants_nb)
+void    run_ants_and_print(t_flow *flow, unsigned int ants_nb)
 {
-	bool	in_progress;
+    bool    in_progress;
+    int        number_line_printed;
 
-	in_progress = true;
-	flow->ants_left = ants_nb;
-	flow->ants_distrub = 0;
-	while (in_progress)
-	{
-		move_other_ants(flow);
-		put_new_ant(flow);
-		if (flow->ants_distrub == ants_nb)
-			in_progress = false;
-		ft_putstr("\n");
-	}
+    in_progress = true;
+    number_line_printed = 0;
+    flow->ants_left = ants_nb;
+    flow->ants_distrub = 0;
+    while (in_progress)
+    {
+        move_other_ants(flow);
+        put_new_ant(flow);
+        if (flow->ants_distrub == ants_nb)
+            in_progress = false;
+        ft_putstr("\n\033[0m");
+        number_line_printed++;
+    }
+    ft_putstr("\033[3;34m\nNumbers laps : \033[1;32m");
+    ft_putnbr(number_line_printed);
+    ft_putstr("\n\033[0m");
 }

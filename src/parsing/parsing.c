@@ -47,6 +47,7 @@ static void	read_stdin(t_data *data)
 		if (ft_strlen(line) == 0)
 		{
 			free(line);
+			line = 0;
 			free_exit(data, "Error : empty line\n", NULL);
 		}
 		lstadd_back_map(&data->list_map, lstnew_map(line));

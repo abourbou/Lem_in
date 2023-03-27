@@ -50,7 +50,7 @@ int	main(void)
 	if (check_path_exists(&graph))
 	{
 		print_error("No path exists from start to end\n");
-		free_graph(&graph);
+		free_graph_data(&graph, &data);
 		return (EXIT_FAILURE);
 	}
 	print_map(data.list_map);
