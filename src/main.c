@@ -31,8 +31,8 @@ void	init_data(t_data *data)
 
 int	free_graph_data(t_graph *graph, t_data *data)
 {
-	free(graph);
-	free(data);
+	free_data(data);
+	free_graph(graph);
 	return (EXIT_FAILURE);
 }
 
