@@ -6,7 +6,7 @@
 /*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:23 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/03 12:55:41 by sbaranes         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:12:23 by sbaranes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void	read_stdin(t_data *data)
 		lstadd_back_map(&data->list_map, lstnew_map(line));
 		free(line);
 	}
+	if (ft_strlen(line))
+		lstadd_back_map(&data->list_map, lstnew_map(line));
 	free(line);
 }
 
