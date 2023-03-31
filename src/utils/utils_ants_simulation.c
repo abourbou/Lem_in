@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_ants_simulation.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sachabaranes <sachabaranes@student.42.f    +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:18:05 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/03 10:43:40 by sachabarane      ###   ########.fr       */
+/*   Updated: 2023/03/31 11:03:20 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 void    print_node(t_node *node)
 {
-    ft_putstr("\033[0mL\033[1;1;31m");
+    ft_putstr("\033[0mL\e[1;34m");
+    // ft_putstr("\033[0mL\u001b[32;1m");
     ft_putnbr(node->ant_nb);
-    ft_putstr("\033[0m-\033[3;1;36m");
+    ft_putstr("\033[0m-\e[1;36m");
     ft_putstr(node->name);
     ft_putstr(" ");
 }
