@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: abourbou <abourbou@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 15:02:23 by sbaranes          #+#    #+#             */
-/*   Updated: 2023/03/31 17:12:23 by sbaranes         ###   ########.fr       */
+/*   Updated: 2023/04/02 21:33:27 by abourbou         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ void	free_map(t_data *data)
 	data->list_map = NULL;
 }
 
+void	finish_gnl(char *line)
+{
+	while (get_next_line(0, &line))
+	{
+		free(line);
+		line = 0;
+	}
+	if (line)
+		free(line);
+}
+
 static void	read_stdin(t_data *data)
 {
 	char	*line;
@@ -48,6 +59,7 @@ static void	read_stdin(t_data *data)
 		{
 			free(line);
 			line = 0;
+			finish_gnl(line);
 			free_exit(data, "Error : empty line\n", NULL);
 		}
 		lstadd_back_map(&data->list_map, lstnew_map(line));
